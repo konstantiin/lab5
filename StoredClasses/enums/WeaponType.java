@@ -1,3 +1,5 @@
+package StoredClasses.enums;
+
 public enum WeaponType {
     PISTOL,
     SHOTGUN,

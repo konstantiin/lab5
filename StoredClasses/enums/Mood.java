@@ -1,2 +1,10 @@
-package PACKAGE_NAME;public class Mood {
+package StoredClasses.enums;
+
+public enum Mood {
+    SORROW,
+    LONGING,
+    GLOOM,
+    CALM,
+    FRENZY;
+
 }
