@@ -7,4 +7,8 @@ public class PrintUniqueNationality implements Command {
     public PrintUniqueNationality(Iterable<?> col){
         collection = col;
     }
+    @Override
+    public String getName(){
+        return "print_unique_nationality";
+    }
 }

@@ -9,12 +9,11 @@ public class Show implements Command {
         collection = col;
     }
     @Override
-    public boolean execute() {
+    public void execute() {
         for (Object i: collection){
             System.out.println(i);
             System.out.println("_________________________________________________________");
         }
-        return true;
     }
     @Override
     public String getName(){

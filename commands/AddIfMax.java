@@ -7,4 +7,8 @@ public class AddIfMax implements Command {
     public AddIfMax(Iterable<?> col){
         collection = col;
     }
+    @Override
+    public String getName(){
+        return "add_if_max";
+    }
 }

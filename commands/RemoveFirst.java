@@ -7,4 +7,8 @@ public class RemoveFirst implements Command {
     public RemoveFirst(Iterable<?> col){
         collection = col;
     }
+    @Override
+    public String getName(){
+        return "remove_first";
+    }
 }

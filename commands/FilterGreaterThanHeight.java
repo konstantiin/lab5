@@ -7,4 +7,8 @@ public class FilterGreaterThanHeight implements Command {
     public FilterGreaterThanHeight(Iterable<?> col){
         collection = col;
     }
+    @Override
+    public String getName(){
+        return "filter_greater_than_height";
+    }
 }

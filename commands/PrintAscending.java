@@ -7,4 +7,8 @@ public class PrintAscending implements Command {
     public PrintAscending(Iterable<?> col){
         collection = col;
     }
+    @Override
+    public String getName(){
+        return "print_ascending";
+    }
 }

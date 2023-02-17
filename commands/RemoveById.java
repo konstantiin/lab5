@@ -7,4 +7,8 @@ public class RemoveById implements Command {
     public RemoveById(Iterable<?> col){
         collection = col;
     }
+    @Override
+    public String getName(){
+        return "remove_by_id";
+    }
 }
