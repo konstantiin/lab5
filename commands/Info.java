@@ -11,8 +11,5 @@ public class Info implements Command {
     public void execute(){
         System.out.println(collection);
     }
-    @Override
-    public String getName(){
-        return "info";
-    }
+
 }

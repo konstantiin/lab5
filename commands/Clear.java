@@ -13,8 +13,5 @@ public class Clear implements Command {
     public void execute(){
         collection.clear();
     }
-    @Override
-    public String getName(){
-        return "clear";
-    }
+
 }

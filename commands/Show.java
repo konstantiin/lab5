@@ -15,8 +15,5 @@ public class Show implements Command {
             System.out.println("_________________________________________________________");
         }
     }
-    @Override
-    public String getName(){
-        return "show";
-    }
+
 }

@@ -2,9 +2,9 @@ package commands;
 
 import commands.interfaces.Command;
 
-public class RemoveById implements Command {
+public class SumOfImpactSpeed implements Command {
     private final Iterable<?> collection;
-    public RemoveById(Iterable<?> col){
+    public SumOfImpactSpeed(Iterable<?> col){
         collection = col;
     }
 

@@ -53,17 +53,17 @@ public class Reader {
             case "exit":
                 return historyUpd(new Exit());
             case "remove_first":
-                return historyUpd(new RemoveFirst(collection));
+                return historyUpd(new SumOfImpactSpeed(collection));
             case "add_if_max":
-                return historyUpd(new AddIfMax(collection));
+                return historyUpd(new AddIfMin(collection));
             case "history":
-                return historyUpd(new History(this));
+                return historyUpd(new RemoveGreater(this));
             case "filter_greater_than_command":
-                return historyUpd(new FilterGreaterThanHeight(collection));
+                return historyUpd(new FilterContainsName(collection));
             case "print_ascending":
-                return historyUpd(new PrintAscending(collection));
+                return historyUpd(new RemoveLower(collection));
             case "print_unique_nationality":
-                return historyUpd(new PrintUniqueNationality(collection));
+                return historyUpd(new GroupCountingByCoordinates(collection));
         }
         throw new UnknownCommandException("Command not found");
     }

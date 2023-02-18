@@ -7,8 +7,4 @@ public class Save implements Command {
     public Save(Iterable<?> col){
         collection = col;
     }
-    @Override
-    public String getName(){
-        return "save";
-    }
 }

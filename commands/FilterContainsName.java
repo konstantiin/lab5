@@ -2,10 +2,9 @@ package commands;
 
 import commands.interfaces.Command;
 
-public class RemoveById implements Command {
+public class FilterContainsName implements Command {
     private final Iterable<?> collection;
-    public RemoveById(Iterable<?> col){
+    public FilterContainsName(Iterable<?> col){
         collection = col;
     }
-
 }

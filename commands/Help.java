@@ -7,8 +7,4 @@ public class Help implements Command {
     public void execute() {
         System.out.println("Help"); // insert documentation
     }
-    @Override
-    public String getName(){
-        return "help";
-    }
 }

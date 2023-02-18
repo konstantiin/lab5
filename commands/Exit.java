@@ -7,8 +7,4 @@ public class Exit implements Command {
     public void execute(){
         System.exit(0);
     }
-    @Override
-    public String getName(){
-        return "exit";
-    }
 }

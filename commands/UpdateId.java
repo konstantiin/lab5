@@ -7,8 +7,5 @@ public class UpdateId implements Command {
     public UpdateId(Iterable<?> col){
         collection = col;
     }
-    @Override
-    public String getName(){
-        return "update_id";
-    }
+
 }

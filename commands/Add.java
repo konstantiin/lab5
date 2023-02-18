@@ -7,8 +7,4 @@ public class Add implements Command {
     public Add(Iterable<?> col){
         collection = col;
     }
-    @Override
-    public String getName(){
-        return "add";
-    }
 }
