@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<elements>
+    <item>
+        <name>Petya</name>
+        <coordinates>
+            <x>10</x>
+            <y>100</y>
+        </coordinates>
+        <realHero>false</realHero>
+        <hasToothpick>true</hasToothpick>
+        <impactSpeed>2</impactSpeed>
+        <weaponType>RIFLE</weaponType>
+        <mood>CALM</mood>
+        <car>
+            <name>Shiguli</name>
+            <cool>true</cool>
+        </car>
+    </item>
+
+    <item>
+        <name>Vasya</name>
+        <coordinates>
+            <x>12</x>
+            <y>100</y>
+        </coordinates>
+        <realHero>true</realHero>
+        <hasToothpick>false</hasToothpick>
+        <impactSpeed>100</impactSpeed>
+        <weaponType>PISTOL</weaponType>
+        <mood>GLOOM</mood>
+        <car>
+            <name>traktor</name>
+            <cool>false</cool>
+        </car>
+    </item>
+
+    <item>
+        <name>Ivan</name>
+        <coordinates>
+            <x>100</x>
+            <y>200</y>
+        </coordinates>
+        <realHero>false</realHero>
+        <hasToothpick>false</hasToothpick>
+        <impactSpeed>7</impactSpeed>
+        <weaponType>MACHINE_GUN</weaponType>
+        <mood>FRENZY</mood>
+        <car>
+            <name>moped</name>
+            <cool>true</cool>
+        </car>
+    </item>
+
+</elements>

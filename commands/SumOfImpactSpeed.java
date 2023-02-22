@@ -8,4 +8,8 @@ public class SumOfImpactSpeed implements Command {
         collection = col;
     }
 
+    @Override
+    public void execute() {
+
+    }
 }

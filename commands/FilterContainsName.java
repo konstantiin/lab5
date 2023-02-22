@@ -7,4 +7,9 @@ public class FilterContainsName implements Command {
     public FilterContainsName(Iterable<?> col){
         collection = col;
     }
+
+    @Override
+    public void execute() {
+
+    }
 }

@@ -8,4 +8,8 @@ public class RemoveLower implements Command {
         collection = col;
     }
 
+    @Override
+    public void execute() {
+
+    }
 }

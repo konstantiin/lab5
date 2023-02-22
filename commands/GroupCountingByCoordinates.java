@@ -7,4 +7,9 @@ public class GroupCountingByCoordinates implements Command {
     public GroupCountingByCoordinates(Iterable<?> col){
         collection = col;
     }
+
+    @Override
+    public void execute() {
+
+    }
 }

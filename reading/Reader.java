@@ -13,57 +13,49 @@ import java.util.TreeSet;
 
 public class Reader {
     private final Scanner scan;
-    private final Deque<Command> history = new ArrayDeque<>();
+
     private final TreeSet<HumanBeing> collection;
     public Reader (Scanner scan, TreeSet<HumanBeing> col){
         this.scan = scan;
         collection =col;
     }
-    private Command historyUpd(Command c){
-        history.addFirst(c);
-        if (history.size() > 9) history.removeLast();
-        return c;
-    }
 
-    public Deque<Command> getHistory() {
-        return history;
-    }
 
     public Command ReadCommand() throws Exception {
         String metName = this.scan.nextLine();
         switch (metName){
             case "help":
-                return historyUpd(new Help());
+                return new Help();
             case "info":
-                return historyUpd(new Info(collection));
+                return new Info(collection);
             case "show":
-                return historyUpd(new Show(collection));
+                return new Show(collection);
             case "add":
-                return historyUpd(new Add(collection));
+                return new Add(collection);
             case "update_id":
-                return historyUpd(new UpdateId(collection));
+                return new UpdateId(collection);
             case "remove_by_id":
-                return historyUpd(new RemoveById(collection));
+                return new RemoveById(collection);
             case "clear":
-                return historyUpd(new Clear(collection));
+                return new Clear(collection);
             case "save":
-                return historyUpd(new Save(collection));
+                return new Save(collection);
             case "execute_script":
-                return historyUpd(new ExecuteScript());
+                return new ExecuteScript();
             case "exit":
-                return historyUpd(new Exit());
-            case "remove_first":
-                return historyUpd(new SumOfImpactSpeed(collection));
-            case "add_if_max":
-                return historyUpd(new AddIfMin(collection));
-            case "history":
-                return historyUpd(new RemoveGreater(this));
-            case "filter_greater_than_command":
-                return historyUpd(new FilterContainsName(collection));
-            case "print_ascending":
-                return historyUpd(new RemoveLower(collection));
-            case "print_unique_nationality":
-                return historyUpd(new GroupCountingByCoordinates(collection));
+                return new Exit();
+            case "sum_of_impact_speed":
+                return new SumOfImpactSpeed(collection);
+            case "add_if_min":
+                return new AddIfMin(collection);
+            case "remove_greater":
+                return new RemoveGreater(collection);
+            case "filter_contains_name":
+                return new FilterContainsName(collection);
+            case "remove_lower":
+                return new RemoveLower(collection);
+            case "group_counting_by_coordinates":
+                return new GroupCountingByCoordinates(collection);
         }
         throw new UnknownCommandException("Command not found");
     }

@@ -8,4 +8,8 @@ public class AddIfMin implements Command {
         collection = col;
     }
 
+    @Override
+    public void execute() {
+
+    }
 }

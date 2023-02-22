@@ -8,4 +8,8 @@ public class RemoveById implements Command {
         collection = col;
     }
 
+    @Override
+    public void execute() {
+
+    }
 }
