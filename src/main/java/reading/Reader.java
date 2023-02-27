@@ -6,8 +6,6 @@ import commands.*;
 import commands.interfaces.Command;
 
 
-import java.util.ArrayDeque;
-import java.util.Deque;
 import java.util.Scanner;
 import java.util.TreeSet;
 

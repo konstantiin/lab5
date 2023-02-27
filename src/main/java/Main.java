@@ -1,3 +1,4 @@
+
 import StoredClasses.HumanBeing;
 import commands.interfaces.Command;
 import parse.ParseXml;
@@ -10,7 +11,7 @@ public class Main{
 
     static String getPath(){
         //get path
-        return "input.xml";
+        return "1.xml";
     }
     public static void main(String[] args) throws Exception {
         TreeSet<HumanBeing> set = new TreeSet<>();

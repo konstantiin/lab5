@@ -1,5 +1,8 @@
 package parse;
 
+import StoredClasses.HumanBeing;
+import com.thoughtworks.xstream.XStream;
+
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,9 +18,10 @@ public class ParseXml {
     }
     public Map<String, Object> parseToMap() throws IOException {
         Map<String, Object> result = new HashMap<>();
-        StringBuilder res = new StringBuilder();
-        while(input.ready()) res.append((char)input.read());
-        String xml = res.toString();
+        XStream stream = new XStream();
+        HumanBeing ob = (HumanBeing) stream.fromXML(input);
+        System.out.println(ob);
+
         return result;
     }
 }
