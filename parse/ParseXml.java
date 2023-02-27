@@ -5,20 +5,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ParseXml {
-    private final BufferedReader input;
+    private final InputStreamReader input;
     public ParseXml(String path){
         try {
-            input = new BufferedReader(new InputStreamReader(new FileInputStream(path)));
+            input = new InputStreamReader(new FileInputStream(path));
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);//change rights
         }
     }
     public Map<String, Object> parseToMap() throws IOException {
         Map<String, Object> result = new HashMap<>();
-        while(input.ready()){
-            String nextLine = input.readLine();
-            System.out.println(nextLine);
-        }
+        StringBuilder res = new StringBuilder();
+        while(input.ready()) res.append((char)input.read());
+        String xml = res.toString();
         return result;
     }
 }
