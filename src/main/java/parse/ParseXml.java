@@ -6,13 +6,16 @@ import StoredClasses.HumanBeing;
 import StoredClasses.enums.Mood;
 import StoredClasses.enums.WeaponType;
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.security.AnyTypePermission;
 import com.thoughtworks.xstream.security.PrimitiveTypePermission;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.concurrent.locks.Condition;
+
 
 public class ParseXml {
     private final InputStreamReader input;
@@ -23,14 +26,21 @@ public class ParseXml {
             throw new RuntimeException(e);//change rights
         }
     }
-    public Map<String, Object> parseToMap() throws IOException {
-        Map<String, Object> result = new HashMap<>();
+    public List<SmallHumanBeing> parseToMap() {
+        @XStreamAlias("elements")
+        class HumanVec {
+            private List<SmallHumanBeing> arr = new ArrayList<>();
+            public List<SmallHumanBeing> getArr(){return arr;}
+        }
+
         XStream stream = new XStream();
-
-        stream.addPermission(AnyTypePermission.ANY);//разобраться с исключениями
-        SmallHumanBeing ob = (SmallHumanBeing) stream.fromXML(input);
-        System.out.println(ob);
-
+        stream.alias("human", SmallHumanBeing.class);
+        stream.addPermission(AnyTypePermission.ANY);//разобраться с разрешениями
+        stream.processAnnotations(SmallHumanBeing.class);
+        stream.processAnnotations(HumanVec.class);
+        stream.addImplicitCollection(HumanVec.class, "arr");
+        List<SmallHumanBeing> result = ((HumanVec)stream.fromXML(input)).getArr();
+        System.out.println(result);
         return result;
     }
 }

@@ -11,7 +11,7 @@ public class Main{
 
     static String getPath(){
         //get path
-        return "1.xml";
+        return "input.xml";
     }
     public static void main(String[] args) throws Exception {
         TreeSet<HumanBeing> set = new TreeSet<>();
