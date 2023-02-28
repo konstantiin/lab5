@@ -2,6 +2,7 @@ package parse;
 
 import StoredClasses.Car;
 import StoredClasses.Coordinates;
+import StoredClasses.HumanBeing;
 import StoredClasses.enums.Mood;
 import StoredClasses.enums.WeaponType;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
@@ -16,6 +17,14 @@ public class SmallHumanBeing {
     private WeaponType weaponType = WeaponType.SHOTGUN; //Поле не может быть null
     private Mood mood = Mood.CALM; //Поле не может быть null
     private Car car = new Car("машина"); //Поле может быть null
+    public String getName(){return name;}
+    public Coordinates getCoordinates(){return coordinates;}
+    public boolean getRealHero(){return realHero;}
+    public boolean getHasToothPick(){return hasToothpick;}
+    public WeaponType getWeaponType(){return weaponType;}
+    public Mood getMood(){return mood;}
+    public Car getCar(){return car;}
+    public int getImpactSpeed(){return impactSpeed;};
     @Override
     public String toString(){
         return name;

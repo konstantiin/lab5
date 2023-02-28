@@ -15,13 +15,8 @@ public class Main{
     }
     public static void main(String[] args) throws Exception {
         TreeSet<HumanBeing> set = new TreeSet<>();
-        new ParseXml(getPath()).parseToMap();
-        set.add(new HumanBeing());
-        set.add(new HumanBeing());
-        set.add(new HumanBeing());
-        set.add(new HumanBeing());
-        set.add(new HumanBeing());
-        set.add(new HumanBeing());
+        new ParseXml(getPath()).parseToArr();
+
 
 
         Reader console = new Reader(new Scanner(System.in), set);

@@ -1,23 +1,34 @@
 package StoredClasses;
 
 import StoredClasses.enums.*;
+import parse.SmallHumanBeing;
 
 import java.time.LocalDateTime;
+import java.util.Random;
 
 public class HumanBeing implements Comparable<HumanBeing> {
-    public HumanBeing(){
-
+    public HumanBeing(SmallHumanBeing h){
+        this.name = h.getName();
+        this.mood = h.getMood();
+        this.weaponType = h.getWeaponType();
+        this.impactSpeed = h.getImpactSpeed();
+        this.hasToothpick = h.getHasToothPick();
+        this.realHero = h.getRealHero();
+        this.coordinates = h.getCoordinates();
+        this.car = h.getCar();
+        this.id = (new Random()).nextInt();     /// переделать
+        this.creationDate = LocalDateTime.now();
     }
-    private int id = 10; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
-    private String name = "Petya"; //Поле не может быть null, Строка не может быть пустой
-    private Coordinates coordinates = new Coordinates(1,2.0); //Поле не может быть null
-    private LocalDateTime creationDate = LocalDateTime.now(); //Поле не может быть null, Значение этого поля должно генерироваться автоматически
-    private Boolean realHero = true; //Поле не может быть null
-    private Boolean hasToothpick = true; //Поле может быть null
-    private Integer impactSpeed = 10; //Поле может быть null
-    private WeaponType weaponType = WeaponType.SHOTGUN; //Поле не может быть null
-    private Mood mood = Mood.CALM; //Поле не может быть null
-    private Car car = new Car("машина"); //Поле может быть null
+    private final int id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
+    private final String name; //Поле не может быть null, Строка не может быть пустой
+    private final Coordinates coordinates; //Поле не может быть null
+    private final LocalDateTime creationDate;  //Поле не может быть null, Значение этого поля должно генерироваться автоматически
+    private final Boolean realHero; //Поле не может быть null
+    private final Boolean hasToothpick; //Поле может быть null
+    private final Integer impactSpeed; //Поле может быть null
+    private final WeaponType weaponType; //Поле не может быть null
+    private final Mood mood; //Поле не может быть null
+    private final Car car; //Поле может быть null
     @Override
     public String toString(){
         return "HumanBeing {\n" +

@@ -26,7 +26,7 @@ public class ParseXml {
             throw new RuntimeException(e);//change rights
         }
     }
-    public List<SmallHumanBeing> parseToMap() {
+    public List<HumanBeing> parseToArr() {
         @XStreamAlias("elements")
         class HumanVec {
             private List<SmallHumanBeing> arr = new ArrayList<>();
@@ -39,7 +39,11 @@ public class ParseXml {
         stream.processAnnotations(SmallHumanBeing.class);
         stream.processAnnotations(HumanVec.class);
         stream.addImplicitCollection(HumanVec.class, "arr");
-        List<SmallHumanBeing> result = ((HumanVec)stream.fromXML(input)).getArr();
+        List<SmallHumanBeing> beings = ((HumanVec)stream.fromXML(input)).getArr();
+        List<HumanBeing> result = new ArrayList<>();
+        for (SmallHumanBeing i: beings){
+            result.add(new HumanBeing(i));
+        }
         System.out.println(result);
         return result;
     }
