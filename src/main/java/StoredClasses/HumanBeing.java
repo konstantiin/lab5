@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.util.Random;
 
 public class HumanBeing implements Comparable<HumanBeing> {
+    public static int idCounter = 1;
     public HumanBeing(SmallHumanBeing h){
         this.name = h.getName();
         this.mood = h.getMood();
@@ -16,7 +17,8 @@ public class HumanBeing implements Comparable<HumanBeing> {
         this.realHero = h.getRealHero();
         this.coordinates = h.getCoordinates();
         this.car = h.getCar();
-        this.id = (new Random()).nextInt();     /// переделать
+        this.id = idCounter;     /// возможно стоит переделать
+        idCounter++;
         this.creationDate = LocalDateTime.now();
     }
     private final int id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически

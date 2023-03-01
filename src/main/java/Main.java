@@ -18,10 +18,9 @@ public class Main{
         new ParseXml(getPath()).parseToArr();
 
 
-
         Reader console = new Reader(new Scanner(System.in), set);
         while (true){
-            Command met = console.ReadCommand();
+            Command met = console.readCommand();
             met.execute();
         }
     }
