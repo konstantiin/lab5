@@ -1,11 +1,18 @@
 package StoredClasses;
 
-public class Car {
-    public Car(String name){
+import parse.Copyable;
+
+public class Car implements Copyable {
+    public Car(String name, boolean cool){
         this.name = name;
+        this.cool = cool;
     }
-    private String name; //Поле не может быть null
-    private Boolean cool = true; //Поле не может быть null
+    private final String name; //Поле не может быть null
+    private final Boolean cool; //Поле не может быть null
+    @Override
+    public Car deepCopy(){
+        return new Car(this.name, this.cool);
+    }
     @Override
     public String toString(){
         if (cool){

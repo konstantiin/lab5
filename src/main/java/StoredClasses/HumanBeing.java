@@ -1,14 +1,13 @@
 package StoredClasses;
 
 import StoredClasses.enums.*;
-import parse.SmallHumanBeing;
+import parse.HumanBeingForm;
 
 import java.time.LocalDateTime;
-import java.util.Random;
 
 public class HumanBeing implements Comparable<HumanBeing> {
-    public static int idCounter = 1;
-    public HumanBeing(SmallHumanBeing h){
+    public static long idCounter = 1;
+    public HumanBeing(HumanBeingForm h){
         this.name = h.getName();
         this.mood = h.getMood();
         this.weaponType = h.getWeaponType();
@@ -21,13 +20,13 @@ public class HumanBeing implements Comparable<HumanBeing> {
         idCounter++;
         this.creationDate = LocalDateTime.now();
     }
-    private final int id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
+    private final long id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private final String name; //Поле не может быть null, Строка не может быть пустой
     private final Coordinates coordinates; //Поле не может быть null
     private final LocalDateTime creationDate;  //Поле не может быть null, Значение этого поля должно генерироваться автоматически
     private final Boolean realHero; //Поле не может быть null
     private final Boolean hasToothpick; //Поле может быть null
-    private final Integer impactSpeed; //Поле может быть null
+    private final Float impactSpeed; //Поле может быть null
     private final WeaponType weaponType; //Поле не может быть null
     private final Mood mood; //Поле не может быть null
     private final Car car; //Поле может быть null
@@ -50,6 +49,6 @@ public class HumanBeing implements Comparable<HumanBeing> {
 
     @Override
     public int compareTo(HumanBeing o) {
-        return o.id - this.id;
-    }
+        return (int)(o.id - this.id);
+    }//переписать
 }

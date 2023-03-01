@@ -1,14 +1,9 @@
 package parse;
 
-import StoredClasses.Car;
-import StoredClasses.Coordinates;
 import StoredClasses.HumanBeing;
-import StoredClasses.enums.Mood;
-import StoredClasses.enums.WeaponType;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.security.AnyTypePermission;
-import com.thoughtworks.xstream.security.PrimitiveTypePermission;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -28,19 +23,19 @@ public class ParseXml {
     public List<HumanBeing> parseToArr() {
         @XStreamAlias("elements")
         class HumanVec {
-            private List<SmallHumanBeing> arr = new ArrayList<>();
-            public List<SmallHumanBeing> getArr(){return arr;}
+            private List<HumanBeingForm> arr = new ArrayList<>();
+            public List<HumanBeingForm> getArr(){return arr;}
         }
 
         XStream stream = new XStream();
-        stream.alias("human", SmallHumanBeing.class);
+        stream.alias("human", HumanBeingForm.class);
         stream.addPermission(AnyTypePermission.ANY);//разобраться с разрешениями
-        stream.processAnnotations(SmallHumanBeing.class);
+        stream.processAnnotations(HumanBeingForm.class);
         stream.processAnnotations(HumanVec.class);
         stream.addImplicitCollection(HumanVec.class, "arr");
-        List<SmallHumanBeing> beings = ((HumanVec)stream.fromXML(input)).getArr();
+        List<HumanBeingForm> beings = ((HumanVec)stream.fromXML(input)).getArr();
         List<HumanBeing> result = new ArrayList<>();
-        for (SmallHumanBeing i: beings){
+        for (HumanBeingForm i: beings){
             result.add(new HumanBeing(i));
         }
         System.out.println(result);
