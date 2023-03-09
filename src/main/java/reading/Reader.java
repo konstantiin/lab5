@@ -9,10 +9,13 @@ import parse.Copyable;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.Scanner;
-import java.util.TreeSet;
+import java.util.*;
 
 public class Reader <T extends Copyable>{
+    public static List<Class<?>> numbers = new ArrayList<>(Arrays.asList(Long.class, long.class, Integer.class, int.class,
+                                                                        Float.class, float.class, Double.class, double.class,
+                                                                        Short.class, short.class));
+
     private final Scanner scan;
     private final Node objectTree;
 

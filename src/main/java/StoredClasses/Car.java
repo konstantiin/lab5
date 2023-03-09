@@ -8,8 +8,8 @@ public class Car implements Copyable {
         this.name = name;
         this.cool = cool;
     }
-    private final @NotNull String name; //Поле не может быть null
-    private final @NotNull Boolean cool; //Поле не может быть null
+    private final @NotNull String name;
+    private final @NotNull Boolean cool;
     @Override
     public Car deepCopy(){
         return new Car(this.name, this.cool);

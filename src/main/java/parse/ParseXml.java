@@ -38,7 +38,7 @@ public class ParseXml {
         for (HumanBeingForm i: beings){
             result.add(new HumanBeing(i));
         }
-        System.out.println(result);
+
         return result;
     }
 }

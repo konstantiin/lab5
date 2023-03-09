@@ -1,6 +1,7 @@
 package StoredClasses;
 
 import StoredClasses.annotations.Boundaries;
+import StoredClasses.annotations.NotNull;
 import parse.Copyable;
 
 public class Coordinates implements Copyable {

@@ -1,30 +1,76 @@
 package reading;
 
+import StoredClasses.annotations.Boundaries;
+import StoredClasses.annotations.NotNull;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Node {
-    public static Node generateTree(Object o){
-        Node root = new Node(o.getClass(), o, o.getClass().getName(), null, null, false);
+    public static Node generateTree(Object storage){
+        return create(new Node(storage.getClass(), storage));
+    }
+    private static Node create(Node root){
+        for (var field: root.getStorage().getClass().getDeclaredFields()) {
+            field.setAccessible(true);
+            Node next;
+            try {
+                next = new Node(field.getType(), field.get(root.getStorage()));
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException(e);
+            }
+            if (field.isAnnotationPresent(NotNull.class) || field.getType().isPrimitive()) next.setNullable(false);
+            if (field.isAnnotationPresent(Boundaries.class) || Reader.numbers.contains(field.getType())){
+                var b = field.getAnnotation(Boundaries.class);
+                BigDecimal l = new BigDecimal(b.lowerBound());
+                BigDecimal u = new BigDecimal(b.upperBound());
+                if (b.lowerBound().equals("")){
+                    if (field.getType() == Long.class || field.getType() == long.class) l = BigDecimal.valueOf(Long.MIN_VALUE);
+                    if (field.getType() == Float.class || field.getType()==float.class) l = BigDecimal.valueOf(Float.MIN_VALUE);
+                    if (field.getType() == Integer.class || field.getType() == int.class) l = BigDecimal.valueOf(Integer.MIN_VALUE);
+                    if (field.getType() == Short.class || field.getType() == short.class) l = BigDecimal.valueOf(Short.MIN_VALUE);
+                }
+                if (b.upperBound().equals("")){
+                    if (field.getType() == Long.class || field.getType() == long.class) l = BigDecimal.valueOf(Long.MAX_VALUE);
+                    if (field.getType() == Float.class || field.getType()==float.class) l = BigDecimal.valueOf(Float.MAX_VALUE);
+                    if (field.getType() == Integer.class || field.getType() == int.class) l = BigDecimal.valueOf(Integer.MAX_VALUE);
+                    if (field.getType() == Short.class || field.getType() == short.class) l = BigDecimal.valueOf(Short.MAX_VALUE);
+                }
+                next.setLowerBound(l);
+                next.setUpperBound(u);
+            }
+            root.addField(next);
+            if(next.getStorage() == null) {
+                System.out.println(next.getName());
+                continue;
+            }
+            create(next);
 
+        }
         return root;
 
     }
     private final String name;
     private final Class<?> type;
     private final Object storage;
-    private final BigDecimal lowerBound;
-    private final BigDecimal upperBound;
-    private final boolean nullable;
+    private BigDecimal lowerBound= null;
+    private BigDecimal upperBound=null;
+    private  boolean nullable = false;
     private final List<Node> fields = new ArrayList<>();
-    public Node(Class<?> type, Object storage, String name, BigDecimal l, BigDecimal u, boolean nullable){
+    public Node(Class<?> type, Object storage){
         this.type = type;
         this.storage = storage;
-        this.name = name;
-        this.lowerBound = l;
-        this.upperBound = u;
+        this.name = type.getName();
+    }
+    public void setLowerBound(BigDecimal lowerBound){
+        this.lowerBound = lowerBound;
+    }
+    public void setUpperBound(BigDecimal upperBound){
+        this.upperBound = upperBound;
+    }
+    public void setNullable(boolean nullable){
         this.nullable = nullable;
     }
     public void addField(Node field){
