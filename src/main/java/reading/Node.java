@@ -6,6 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Node {
+    public static Node generateTree(Object o){
+        Node root = new Node(o.getClass(), o, o.getClass().getName(), null, null, false);
+
+        return root;
+
+    }
     private final String name;
     private final Class<?> type;
     private final Object storage;
@@ -38,5 +44,6 @@ public class Node {
     public BigDecimal getUpperBound(){
         return this.upperBound;
     }
+    public boolean ifNullable(){return nullable;}
 
 }

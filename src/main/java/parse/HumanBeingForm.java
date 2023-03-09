@@ -2,20 +2,21 @@ package parse;
 
 import StoredClasses.Car;
 import StoredClasses.Coordinates;
+import StoredClasses.annotations.NotNull;
 import StoredClasses.enums.Mood;
 import StoredClasses.enums.WeaponType;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @XStreamAlias("human")
 public class HumanBeingForm implements Copyable{
-    private String name = "Petya"; //Поле не может быть null, Строка не может быть пустой
-    private Coordinates coordinates ;
-    private Boolean realHero = true; //Поле не может быть null
-    private Boolean hasToothpick = true; //Поле может быть null
-    private Float impactSpeed;//Поле может быть null
-    private WeaponType weaponType = WeaponType.SHOTGUN; //Поле не может быть null
-    private Mood mood = Mood.CALM; //Поле не может быть null
-    private Car car; //Поле может быть null
+    private @NotNull String name;
+    private @NotNull Coordinates coordinates ;
+    private @NotNull Boolean realHero = true;
+    private Boolean hasToothpick = true;
+    private Float impactSpeed;
+    private @NotNull WeaponType weaponType = WeaponType.SHOTGUN;
+    private @NotNull Mood mood = Mood.CALM;
+    private Car car;
     public String getName(){return name;}
     public Coordinates getCoordinates(){return coordinates;}
     public Boolean getRealHero(){return realHero;}

@@ -47,9 +47,19 @@ public class Reader <T extends Copyable>{
     private <E> E readEnum(Class<E> type){
         return type.cast(null);
     }
-    private void readTree(Node v){
+    private void mulTab(int x){
+        while (x != 0) {
+            System.out.println("\t");
+            x--;
+        }
+    }
+    private void readTree(Node v, int count){
         var storage = v.getType().cast(v.getStorage());
-        System.out.println("Type " + v.getName() + ":");
+        System.out.print(v.getName() + ": ");
+        if (v.ifNullable()){
+            System.out.println("Leave this field null?(y/n) ");
+            if(scan.nextLine().charAt(0) == 'y') return;
+        }
         Class<?> cls = storage.getClass();
         if (cls == Float.class){
             storage = this.readDec(v.getLowerBound(), v.getUpperBound()).floatValue();
@@ -68,12 +78,12 @@ public class Reader <T extends Copyable>{
         }
         else{
             for (Node i: v.getFields()){
-                readTree(i);
+                readTree(i, count+1);
             }
         }
     }
     private T readObject(){
-        readTree(objectTree);
+        readTree(objectTree, 0);
         return (T)((Copyable)objectTree.getStorage()).deepCopy();//hz chto delat
     }
 

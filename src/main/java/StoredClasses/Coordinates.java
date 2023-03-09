@@ -1,5 +1,6 @@
 package StoredClasses;
 
+import StoredClasses.annotations.Boundaries;
 import parse.Copyable;
 
 public class Coordinates implements Copyable {
@@ -7,8 +8,8 @@ public class Coordinates implements Copyable {
         this.x = x;
         this.y = y;
     }
-    private float x; //Максимальное значение поля: 570
-    private long y; //Максимальное значение поля: 294
+    private final @Boundaries(lowerBound = "0", upperBound = "570") float x; //Максимальное значение поля: 570
+    private final @Boundaries(lowerBound = "0", upperBound = "294") long y; //Максимальное значение поля: 294
     @Override
     public Coordinates deepCopy(){
         return new Coordinates(this.x, this.y);
