@@ -24,8 +24,9 @@ public class Main{
     public static void main(String[] args) throws Exception {
         TreeSet<HumanBeing> set = new TreeSet<>();
         new ParseXml(getPath()).parseToArr();
+        Node tree = Node.generateTree(new HumanBeingForm());
 
-        Reader<HumanBeingForm> console = new Reader<>(new Scanner(System.in), set, Node.generateTree(new HumanBeingForm()));
+        Reader<HumanBeingForm> console = new Reader<>(new Scanner(System.in), set, tree);
 
 
         while (true){

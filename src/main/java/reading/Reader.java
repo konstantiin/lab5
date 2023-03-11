@@ -63,7 +63,7 @@ public class Reader <T extends Copyable>{
             System.out.println("Leave this field null?(y/n) ");
             if(scan.nextLine().charAt(0) == 'y') return;
         }
-        Class<?> cls = storage.getClass();
+        Class<?> cls = v.getType();
         if (cls == Float.class){
             storage = this.readDec(v.getLowerBound(), v.getUpperBound()).floatValue();
         }

@@ -17,6 +17,10 @@ public class HumanBeingForm implements Copyable{
     private @NotNull WeaponType weaponType = WeaponType.SHOTGUN;
     private @NotNull Mood mood = Mood.CALM;
     private Car car;
+    public HumanBeingForm(){
+        this.coordinates = new Coordinates(0,0);
+        this.car = new Car("", false);
+    }
     public String getName(){return name;}
     public Coordinates getCoordinates(){return coordinates;}
     public Boolean getRealHero(){return realHero;}
@@ -35,7 +39,16 @@ public class HumanBeingForm implements Copyable{
     public void setCar(Car car){this.car = car;}
     @Override
     public String toString(){
-        return name;
+        return "HumanBeing {\n" +
+                "\tname = " + name + "\n"+
+                "\tcoordinates = " + coordinates + "\n"+
+                "\trealHero = " + realHero + "\n"+
+                "\thasToothpick = " + hasToothpick + "\n"+
+                "\timpactSpeed = " + impactSpeed + "\n" +
+                "\tweaponType = " + weaponType + "\n"+
+                "\tmood = " + mood + "\n"+
+                "\tcar = " + car + "\n" +
+                "}";
     }
     @Override
     public HumanBeingForm deepCopy(){

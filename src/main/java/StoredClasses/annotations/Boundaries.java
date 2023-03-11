@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.TYPE_USE, ElementType.TYPE_PARAMETER})
+@Target(ElementType.FIELD)
 public @interface Boundaries {
     String lowerBound();
     String upperBound();
