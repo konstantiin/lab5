@@ -1,4 +1,4 @@
-package parse;
+package StoredClasses.forms;
 
 import StoredClasses.Car;
 import StoredClasses.Coordinates;
@@ -8,18 +8,24 @@ import StoredClasses.enums.WeaponType;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @XStreamAlias("human")
-public class HumanBeingForm implements Copyable{
+public class HumanBeingForm {
     private @NotNull String name;
     private @NotNull Coordinates coordinates ;
-    private @NotNull Boolean realHero = true;
-    private Boolean hasToothpick = true;
+    private @NotNull Boolean realHero;
+    private Boolean hasToothpick;
     private Float impactSpeed;
-    private @NotNull WeaponType weaponType = WeaponType.SHOTGUN;
-    private @NotNull Mood mood = Mood.CALM;
+    private @NotNull WeaponType weaponType ;
+    private @NotNull Mood mood;
     private Car car;
-    public HumanBeingForm(){
-        this.coordinates = new Coordinates(0,0);
-        this.car = new Car("", false);
+    public HumanBeingForm(String name, Coordinates coordinates, Boolean realHero, Boolean hasToothpick,  Float impactSpeed, WeaponType weaponType,  Mood mood, Car car){
+        this.name = name;
+        this.coordinates = coordinates;
+        this.realHero = realHero;
+        this.hasToothpick = hasToothpick;
+        this.impactSpeed = impactSpeed;
+        this.weaponType = weaponType;
+        this.mood = mood;
+        this.car = car;
     }
     public String getName(){return name;}
     public Coordinates getCoordinates(){return coordinates;}
@@ -50,17 +56,5 @@ public class HumanBeingForm implements Copyable{
                 "\tcar = " + car + "\n" +
                 "}";
     }
-    @Override
-    public HumanBeingForm deepCopy(){
-        HumanBeingForm copy = new HumanBeingForm();
-        copy.setCar(car.deepCopy());
-        copy.setCoordinates(coordinates.deepCopy());
-        copy.setMood(this.mood);
-        copy.setName(this.name);
-        copy.setHasToothpick(this.hasToothpick);
-        copy.setImpactSpeed(this.impactSpeed);
-        copy.setRealHero(realHero);
-        copy.setWeaponType(this.weaponType);
-        return copy;
-    }
+
 }

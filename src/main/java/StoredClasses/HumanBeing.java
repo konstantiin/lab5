@@ -1,7 +1,7 @@
 package StoredClasses;
 
 import StoredClasses.enums.*;
-import parse.HumanBeingForm;
+import StoredClasses.forms.HumanBeingForm;
 
 import java.time.LocalDateTime;
 
