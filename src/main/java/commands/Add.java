@@ -15,6 +15,7 @@ public class Add extends AbstractCommand {
     @Override
     public void execute(){
         collection.add(input.readObject());
+        System.out.println("element added");
     }
 
 

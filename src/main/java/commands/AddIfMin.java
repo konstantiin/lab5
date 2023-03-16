@@ -12,6 +12,9 @@ public class AddIfMin extends AbstractCommand {
     }
     @Override
     public void execute() {
-        collection.addIfMin(input.readObject());
+        if(collection.addIfMin(input.readObject())){
+            System.out.println("element added");
+        }
+        else System.out.println("element not added");
     }
 }

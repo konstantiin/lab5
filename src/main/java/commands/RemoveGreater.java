@@ -13,5 +13,6 @@ public class RemoveGreater extends AbstractCommand {
     @Override
     public void execute(){
         collection.removeGreater(input.readObject());
+        System.out.println("Elements removed");             // mb print amount of deleted elements
     }
 }

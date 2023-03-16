@@ -18,6 +18,7 @@ public class RemoveById extends AbstractCommand {
     public void execute() {
         try {
             collection.removeById(input.readInt(BigInteger.ZERO, BigInteger.valueOf(Integer.MAX_VALUE)).longValue());
+            System.out.println("Element removed");
         } catch (IdException e) {
             System.out.println("Element with this id does not exist");
         }

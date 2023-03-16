@@ -48,7 +48,7 @@ public class HumanBeing implements Comparable<HumanBeing> {
     public boolean isRealHero(){
         return realHero;
     }
-    public boolean ifHasToothpick(){
+    public Boolean ifHasToothpick(){
         return hasToothpick;
     }
     public WeaponType getWeaponType(){
@@ -83,6 +83,6 @@ public class HumanBeing implements Comparable<HumanBeing> {
 
     @Override
     public int compareTo(HumanBeing o) {
-        return (int)(o.id - this.id);
-    }//переписать
+        return this.name.compareTo(o.name);
+    }
 }

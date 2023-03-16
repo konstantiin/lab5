@@ -12,6 +12,7 @@ public class Clear extends AbstractCommand {
     @Override
     public void execute(){
         collection.clear();
+        System.out.println("collection cleared");
     }
 
 }

@@ -1,8 +1,10 @@
 package commands;
 
-import Managers.CollectionManager;
+
+import StoredClasses.Coordinates;
+import StoredClasses.HumanBeing;
 import commands.interfaces.AbstractCommand;
-import commands.interfaces.Command;
+
 import reading.Reader;
 
 public class GroupCountingByCoordinates extends AbstractCommand {
@@ -12,6 +14,10 @@ public class GroupCountingByCoordinates extends AbstractCommand {
     }
     @Override
     public void execute() {
-        collection.groupCountingByCoordinates();
+        var groups = collection.groupCountingByCoordinates();
+        int count = 1;
+        for (Coordinates key: groups.keySet()) {
+            System.out.println("Group with coordinates " + key + " has " + groups.get(key).size() + " elements");
+        }
     }
 }

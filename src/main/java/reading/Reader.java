@@ -68,7 +68,9 @@ public class Reader {
         }
     }
     public String readString(){
-        return scan.nextLine();
+        String input = scan.nextLine().trim();
+        if (input.equals("")) return readString();
+        return input;
     }
 
     public Object readEnum(Class type){
@@ -163,7 +165,7 @@ public class Reader {
     }
 
     public Command readCommand() {
-        String metName = this.scan.nextLine().trim();
+        String metName = this.scan.next().trim();
         Command command = commands.get(metName);
         if (command == null){
             //System.out.println("Command does not Exist");

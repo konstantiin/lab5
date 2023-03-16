@@ -13,6 +13,7 @@ public class RemoveLower extends AbstractCommand {
 
     @Override
     public void execute() {
-        collection.removeLower(input.readObject());
+        collection.removeLower(input.readObject()); // mb print amount of deleted elements
+        System.out.println("Elements removed");
     }
 }

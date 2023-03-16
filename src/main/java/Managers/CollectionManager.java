@@ -15,20 +15,25 @@ public class CollectionManager<T extends Comparable<T>> {
     }
     public void add(Object element){
         collection.add((T)element);
-        System.out.println("element added");
     }
-    public void addIfMin(Object element){
+    public boolean addIfMin(Object element){
         T value = (T) element;
 
-        if (value.compareTo(collection.first()) < 0) this.add(value);
+        if (value.compareTo(collection.first()) < 0) {
+            this.add(value);
+            return true;
+        }
+        return false;
     }
-    public void filterContainsName(String pattern){
+    public List<HumanBeing> filterContainsName(String pattern){
+        List<HumanBeing> result= new ArrayList<>();
         for (T element: collection){
             HumanBeing human = (HumanBeing) element;
-            if (human.getName().contains(pattern)) System.out.println(human);
+            if (human.getName().contains(pattern)) result.add(human);
         }
+        return result;
     }
-    public void groupCountingByCoordinates(){
+    public HashMap<Coordinates, List<HumanBeing>> groupCountingByCoordinates(){
         HashMap<Coordinates, List<HumanBeing>> groups = new HashMap<>();
         for (T element: collection){
             HumanBeing human = (HumanBeing) element;
@@ -40,15 +45,8 @@ public class CollectionManager<T extends Comparable<T>> {
             value.add(human);
             groups.put(human.getCoordinates(), value);
         }
-        int count = 1;
-        for (Coordinates key: groups.keySet()){
-            System.out.println("Group №" + count + ":");
-            for (HumanBeing human: groups.get(key)){
-                System.out.println(human);
-                System.out.println();
-            }
-            System.out.println("Group №" + count + " ended");
-        }
+        return groups;
+
     }
     public void info(){
         System.out.println("TreeSet " + collection + " of size " + collection.size());// возможно стоит вывести еще какую-то информацию
@@ -73,13 +71,12 @@ public class CollectionManager<T extends Comparable<T>> {
     }
     public void removeGreater(Object obj){
         T element = (T)obj;
-        T greater = collection.lower(element);
+        T greater = collection.higher(element);
         while (greater != null) {
             collection.remove(greater);
             greater = collection.higher(element);
         }
     }
-    public void save(){}
     public void show(){
         System.out.println("Collection:");
         for (var item: collection){
@@ -87,13 +84,13 @@ public class CollectionManager<T extends Comparable<T>> {
         }
         System.out.println("Collection ended");
     }
-    public void sumOfImpactSpeed(){
-        Double sum = 0.0;
+    public double sumOfImpactSpeed(){
+        double sum = 0.0;
         for (var element: collection){
             HumanBeing human = (HumanBeing) element;
             sum += human.getImpactSpeed();
         }
-        System.out.println("sum of impactSpeed:" + sum);
+        return sum;
     }
     public void update(long id, Object element) throws IdException {
         for (var item: collection){
@@ -106,4 +103,5 @@ public class CollectionManager<T extends Comparable<T>> {
         throw new IdException("Not valid id");
     }
     public void clear(){collection.clear();}
+    public void save(){}
 }

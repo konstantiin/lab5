@@ -7,6 +7,7 @@ import parse.ParseXml;
 import reading.Node;
 import reading.Reader;
 
+import java.util.List;
 import java.util.Scanner;
 import java.util.TreeSet;
 
@@ -16,12 +17,12 @@ public class Main{
         return "input.xml";
     }
     public static void main(String[] args) {
-        TreeSet<HumanBeing> set = new TreeSet<>();
 
-        new ParseXml(getPath()).parseToArr();
+        List<HumanBeing> list = new ParseXml(getPath()).parseToArr();
+        TreeSet<HumanBeing> set = new TreeSet<>(list);
         Node tree = Node.generateTree(HumanBeing.class, "HumanBeing");
-        Reader console = new Reader(new Scanner(System.in), new CollectionManager<HumanBeing>(set), tree);
 
+        Reader console = new Reader(new Scanner(System.in), new CollectionManager<HumanBeing>(set), tree);
 
         while (true){
             Command met = console.readCommand();
