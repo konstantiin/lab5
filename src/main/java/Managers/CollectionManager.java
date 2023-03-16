@@ -5,10 +5,7 @@ import Exceptions.IdException;
 import StoredClasses.Coordinates;
 import StoredClasses.HumanBeing;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.function.DoubleToIntFunction;
 
 public class CollectionManager<T extends Comparable<T>> {
@@ -66,11 +63,47 @@ public class CollectionManager<T extends Comparable<T>> {
         }
         throw new IdException("Not valid id");
     }
-    public void removeLower(Object element){}
-    public void removeGreater(Object element){}
+    public void removeLower(Object obj){
+        T element = (T)obj;
+        T lower = collection.lower(element);
+        while (lower != null) {
+            collection.remove(lower);
+            lower = collection.lower(element);
+        }
+    }
+    public void removeGreater(Object obj){
+        T element = (T)obj;
+        T greater = collection.lower(element);
+        while (greater != null) {
+            collection.remove(greater);
+            greater = collection.higher(element);
+        }
+    }
     public void save(){}
-    public void show(){}
-    public void sumOfImpactSpeed(){}
-    public void update(int id, Object element){}
+    public void show(){
+        System.out.println("Collection:");
+        for (var item: collection){
+            System.out.println(item);
+        }
+        System.out.println("Collection ended");
+    }
+    public void sumOfImpactSpeed(){
+        Double sum = 0.0;
+        for (var element: collection){
+            HumanBeing human = (HumanBeing) element;
+            sum += human.getImpactSpeed();
+        }
+        System.out.println("sum of impactSpeed:" + sum);
+    }
+    public void update(long id, Object element) throws IdException {
+        for (var item: collection){
+            HumanBeing human = (HumanBeing) item;
+            if (human.getId() == id){
+                human.update((HumanBeing)element);
+                return;
+            }
+        }
+        throw new IdException("Not valid id");
+    }
     public void clear(){collection.clear();}
 }

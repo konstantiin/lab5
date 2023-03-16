@@ -1,5 +1,6 @@
 package commands;
 
+import Exceptions.IdException;
 import Managers.CollectionManager;
 import commands.interfaces.AbstractCommand;
 import commands.interfaces.Command;
@@ -14,6 +15,10 @@ public class Update extends AbstractCommand {
 
     @Override
     public void execute() {
-        collection.update(input.readInt(BigInteger.ZERO, BigInteger.valueOf(Integer.MAX_VALUE)).intValue(), input.readObject());
+        try {
+            collection.update(input.readInt(BigInteger.ZERO, BigInteger.valueOf(Integer.MAX_VALUE)).longValue(), input.readObject());
+        } catch (IdException e) {
+            System.out.println("Id not found");
+        }
     }
 }
