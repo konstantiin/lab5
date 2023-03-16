@@ -153,7 +153,7 @@ public class Reader {
         commands.put("clear", new Clear(this));
         commands.put("save", new Save(this));
         commands.put("execute_script", new ExecuteScript(this));
-        commands.put("exit", new Exit(this));
+        commands.put("exit", new Exit());
         commands.put("add_if_min", new AddIfMin(this));
         commands.put("remove_greater", new RemoveGreater(this));
         commands.put("remove_Lower", new RemoveLower(this));

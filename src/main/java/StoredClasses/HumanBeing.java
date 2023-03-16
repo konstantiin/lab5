@@ -32,6 +32,10 @@ public class HumanBeing implements Comparable<HumanBeing> {
     private final @NotNull WeaponType weaponType; //Поле не может быть null
     private final @NotNull Mood mood; //Поле не может быть null
     private final Car car; //Поле может быть null
+    public String getName(){return name;}
+    public Coordinates getCoordinates(){
+        return coordinates;
+    }
     @Override
     public String toString(){
         return "HumanBeing {\n" +
