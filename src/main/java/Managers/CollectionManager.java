@@ -1,6 +1,7 @@
 package Managers;
 
 
+import Exceptions.IdException;
 import StoredClasses.Coordinates;
 import StoredClasses.HumanBeing;
 
@@ -52,8 +53,19 @@ public class CollectionManager<T extends Comparable<T>> {
             System.out.println("Group №" + count + " ended");
         }
     }
-    public void info(){}
-    public void removeById(int id){}
+    public void info(){
+        System.out.println("TreeSet " + collection + " of size " + collection.size());// возможно стоит вывести еще какую-то информацию
+    }
+    public void removeById(long id) throws IdException {
+        for (var x: collection){
+            HumanBeing human = (HumanBeing) x;
+            if (human.getId() == id){
+                collection.remove(x);
+                return;
+            }
+        }
+        throw new IdException("Not valid id");
+    }
     public void removeLower(Object element){}
     public void removeGreater(Object element){}
     public void save(){}

@@ -1,5 +1,6 @@
 package commands;
 
+import Exceptions.IdException;
 import Managers.CollectionManager;
 import commands.interfaces.AbstractCommand;
 import commands.interfaces.Command;
@@ -15,6 +16,10 @@ public class RemoveById extends AbstractCommand {
 
     @Override
     public void execute() {
-        collection.removeById(input.readInt(BigInteger.ZERO, BigInteger.valueOf(Integer.MAX_VALUE)).intValue());
+        try {
+            collection.removeById(input.readInt(BigInteger.ZERO, BigInteger.valueOf(Integer.MAX_VALUE)).longValue());
+        } catch (IdException e) {
+            System.out.println("Element with this id does not exist");
+        }
     }
 }

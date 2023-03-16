@@ -36,6 +36,9 @@ public class HumanBeing implements Comparable<HumanBeing> {
     public Coordinates getCoordinates(){
         return coordinates;
     }
+    public long getId(){
+        return id;
+    }
     @Override
     public String toString(){
         return "HumanBeing {\n" +
