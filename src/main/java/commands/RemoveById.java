@@ -1,11 +1,14 @@
 package commands;
 
+import Managers.CollectionManager;
+import commands.interfaces.AbstractCommand;
 import commands.interfaces.Command;
+import reading.Reader;
 
-public class RemoveById implements Command {
-    private final Iterable<?> collection;
-    public RemoveById(Iterable<?> col){
-        collection = col;
+public class RemoveById extends AbstractCommand {
+
+    public RemoveById(Reader reader){
+        super(reader);
     }
 
     @Override

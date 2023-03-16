@@ -5,11 +5,11 @@ import commands.interfaces.AbstractCommand;
 import commands.interfaces.Command;
 import reading.Reader;
 
-public class GroupCountingByCoordinates extends AbstractCommand {
-
-    public GroupCountingByCoordinates(Reader reader){
-        super( reader);
+public class Update extends AbstractCommand {
+    public Update( Reader reader){
+        super(reader);
     }
+
     @Override
     public void execute() {
 

@@ -1,4 +1,5 @@
 
+import Managers.CollectionManager;
 import StoredClasses.HumanBeing;
 import commands.interfaces.Command;
 import StoredClasses.forms.HumanBeingForm;
@@ -14,11 +15,12 @@ public class Main{
         //get path
         return "input.xml";
     }
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         TreeSet<HumanBeing> set = new TreeSet<>();
+
         new ParseXml(getPath()).parseToArr();
-        Node tree = Node.generateTree(HumanBeingForm.class, "HumanBeing");
-        Reader<HumanBeingForm> console = new Reader<>(new Scanner(System.in), set, tree);
+        Node tree = Node.generateTree(HumanBeing.class, "HumanBeing");
+        Reader console = new Reader(new Scanner(System.in), new CollectionManager<HumanBeing>(set), tree);
 
 
         while (true){

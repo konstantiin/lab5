@@ -1,13 +1,15 @@
 package commands;
 
+import Managers.CollectionManager;
+import commands.interfaces.AbstractCommand;
 import commands.interfaces.Command;
+import reading.Reader;
 
-public class AddIfMin implements Command {
-    private final Iterable<?> collection;
-    public AddIfMin(Iterable<?> col){
-        collection = col;
+public class AddIfMin extends AbstractCommand {
+
+    public AddIfMin(Reader reader){
+        super( reader);
     }
-
     @Override
     public void execute() {
 

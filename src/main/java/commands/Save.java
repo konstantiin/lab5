@@ -1,11 +1,13 @@
 package commands;
 
+import Managers.CollectionManager;
+import commands.interfaces.AbstractCommand;
 import commands.interfaces.Command;
+import reading.Reader;
 
-public class Save implements Command {
-    private final Iterable<?> collection;
-    public Save(Iterable<?> col){
-        collection = col;
+public class Save extends AbstractCommand {
+    public Save(Reader reader){
+        super( reader);
     }
 
     @Override

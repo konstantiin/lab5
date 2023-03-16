@@ -1,11 +1,14 @@
 package commands;
 
-import commands.interfaces.Command;
 
-public class SumOfImpactSpeed implements Command {
-    private final Iterable<?> collection;
-    public SumOfImpactSpeed(Iterable<?> col){
-        collection = col;
+import Managers.CollectionManager;
+import commands.interfaces.AbstractCommand;
+import commands.interfaces.Command;
+import reading.Reader;
+
+public class SumOfImpactSpeed extends AbstractCommand {
+    public SumOfImpactSpeed(Reader reader){
+        super(reader);
     }
 
     @Override

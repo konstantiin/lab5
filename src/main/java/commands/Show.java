@@ -1,19 +1,18 @@
 package commands;
 
 
+import Managers.CollectionManager;
+import commands.interfaces.AbstractCommand;
 import commands.interfaces.Command;
+import reading.Reader;
 
-public class Show implements Command {
-    private final Iterable<?> collection;
-    public Show(Iterable<?> col){
-        collection = col;
+public class Show extends AbstractCommand {
+    public Show(Reader reader){
+        super(reader);
     }
     @Override
     public void execute() {
-        for (Object i: collection){
-            System.out.println(i);
-            System.out.println("_________________________________________________________");
-        }
+
     }
 
 }

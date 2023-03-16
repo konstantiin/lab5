@@ -1,7 +1,8 @@
 package reading;
 
-import Exceptions.UnknownCommandException;
+import Managers.CollectionManager;
 import StoredClasses.HumanBeing;
+import StoredClasses.forms.HumanBeingForm;
 import commands.*;
 import commands.interfaces.Command;
 import org.apache.commons.lang3.StringUtils;
@@ -11,22 +12,24 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.*;
 
-public class Reader <T>{
+public class Reader {
     public static List<Class<?>> numbers = new ArrayList<>(Arrays.asList(Long.class, long.class, Integer.class, int.class,
-                                                                        Float.class, float.class, Double.class, double.class,
-                                                                        Short.class, short.class));
+                                                                         Float.class, float.class, Double.class, double.class,
+                                                                         Short.class, short.class));
+    private final HashMap<String, Command> commands = new HashMap<>();
 
     private final Scanner scan;
     private final Node objectTree;
     private int tabs = 0;
 
-    private final TreeSet<HumanBeing> collection;
-    public Reader (Scanner scan, TreeSet<HumanBeing> col, Node tree){
+    private final CollectionManager<?> collection;
+    public Reader (Scanner scan, CollectionManager<?> col, Node tree){
         this.scan = scan;
         collection =col;
         objectTree = tree;
+        this.initCommands();
     }
-    private BigInteger readInt(BigInteger lowerBound, BigInteger upperBound){
+    public BigInteger readInt(BigInteger lowerBound, BigInteger upperBound){
         BigInteger value;
         try{
             value = new Scanner(scan.nextLine()).nextBigInteger();
@@ -41,7 +44,7 @@ public class Reader <T>{
         }
         return value;
     }
-    private BigDecimal readDec(BigDecimal lowerBound, BigDecimal upperBound){
+    public BigDecimal readDec(BigDecimal lowerBound, BigDecimal upperBound){
         BigDecimal value;
         try{
             value = new Scanner(scan.nextLine()).nextBigDecimal();
@@ -56,7 +59,7 @@ public class Reader <T>{
         }
         return value;
     }
-    private Boolean readBool(){
+    public Boolean readBool(){
         try {
             return new Scanner(scan.nextLine()).nextBoolean();
         } catch (NoSuchElementException e){
@@ -64,15 +67,14 @@ public class Reader <T>{
             return readBool();
         }
     }
-    private String readString(){
+    public String readString(){
         return scan.nextLine();
     }
 
-    private Enum readEnum(Class type){ // говнокод и я хз как его исправить
+    public Object readEnum(Class type){
         String name = scan.nextLine();
         Enum<?> value;
         try{
-
             value = Enum.valueOf(type, name);
         } catch (IllegalArgumentException e){
             System.out.print(StringUtils.repeat("\t",tabs) + "Type one of " + type.getName() + " values\n" + StringUtils.repeat("\t",tabs));
@@ -133,53 +135,41 @@ public class Reader <T>{
         return result;
 
     }
-    private T readObject(){
+    public Object readObject(){
         tabs = -1;
         System.out.println("Type object");
-        T result = (T)readTree(objectTree); // hz chto delat
+        var result = readTree(objectTree);
         System.out.println("Input ended");
-
         return result;
     }
+    public CollectionManager<?> getCollection(){return collection;}
+    public void initCommands(){
+        commands.put("help", new Help());
+        commands.put("info", new Info(this));
+        commands.put("show", new Show(this));
+        commands.put("add", new Add(this));
+        commands.put("update", new Update(this));
+        commands.put("remove_by_id", new RemoveById(this));
+        commands.put("clear", new Clear(this));
+        commands.put("save", new Save(this));
+        commands.put("execute_script", new ExecuteScript(this));
+        commands.put("exit", new Exit(this));
+        commands.put("add_if_min", new AddIfMin(this));
+        commands.put("remove_greater", new RemoveGreater(this));
+        commands.put("remove_Lower", new RemoveLower(this));
+        commands.put("sum_of_impact_speed", new SumOfImpactSpeed(this));
+        commands.put("group_counting_by_coordinates", new GroupCountingByCoordinates(this));
+        commands.put("filter_contains_name", new FilterContainsName(this));
+    }
 
-    public Command readCommand() throws Exception {
-        String metName = this.scan.nextLine();
-        switch (metName){
-            case "help":
-                return new Help();
-            case "info":
-                return new Info(collection);
-            case "show":
-                return new Show(collection);
-            case "add":
-                System.out.println(this.readObject());
-                return new Add(collection);
-            case "update_id":
-                return new UpdateId(collection);
-            case "remove_by_id":
-                return new RemoveById(collection);
-            case "clear":
-                return new Clear(collection);
-            case "save":
-                return new Save(collection);
-            case "execute_script":
-                return new ExecuteScript();
-            case "exit":
-                return new Exit();
-            case "sum_of_impact_speed":
-                return new SumOfImpactSpeed(collection);
-            case "add_if_min":
-                return new AddIfMin(collection);
-            case "remove_greater":
-                return new RemoveGreater(collection);
-            case "filter_contains_name":
-                return new FilterContainsName(collection);
-            case "remove_lower":
-                return new RemoveLower(collection);
-            case "group_counting_by_coordinates":
-                return new GroupCountingByCoordinates(collection);
+    public Command readCommand() {
+        String metName = this.scan.nextLine().trim();
+        Command command = commands.get(metName);
+        if (command == null){
+            //System.out.println("Command does not Exist");
+            throw new RuntimeException("Not valid command");
         }
-        throw new UnknownCommandException("Command not found");
+        return command;
     }
     public void closeStream(){
         scan.close();

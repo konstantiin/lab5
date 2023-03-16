@@ -1,11 +1,14 @@
 package commands;
 
+import Managers.CollectionManager;
+import commands.interfaces.AbstractCommand;
 import commands.interfaces.Command;
+import reading.Reader;
 
-public class RemoveLower implements Command {
-    private final Iterable<?> collection;
-    public RemoveLower(Iterable<?> col){
-        collection = col;
+public class RemoveLower extends AbstractCommand {
+
+    public RemoveLower(Reader reader){
+        super(reader);
     }
 
     @Override

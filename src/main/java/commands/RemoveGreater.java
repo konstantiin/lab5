@@ -1,14 +1,14 @@
 package commands;
 
+
+import Managers.CollectionManager;
+import commands.interfaces.AbstractCommand;
 import commands.interfaces.Command;
+import reading.Reader;
 
-import java.util.TreeSet;
-
-
-public class RemoveGreater implements Command {
-    private final TreeSet<?> collection;
-    public RemoveGreater(TreeSet<?> col){
-        this.collection = col;
+public class RemoveGreater extends AbstractCommand {
+    public RemoveGreater(Reader reader){
+        super(reader);
     }
     @Override
     public void execute(){

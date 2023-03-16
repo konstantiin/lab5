@@ -1,17 +1,21 @@
 package commands;
 
+import Managers.CollectionManager;
+import commands.interfaces.AbstractCommand;
 import commands.interfaces.Command;
+import reading.Reader;
 
-import java.util.TreeSet;
 
-public class Add implements Command {
-    private final TreeSet<?> collection;
+public class Add extends AbstractCommand {
 
-    public Add(TreeSet<?> col){
-        collection = col;
+
+    public Add( Reader reader){
+        super(reader);
     }
     @Override
     public void execute(){
-
+        collection.Add(input.readObject());
     }
+
+
 }
