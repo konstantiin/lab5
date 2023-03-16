@@ -12,6 +12,6 @@ public class GroupCountingByCoordinates extends AbstractCommand {
     }
     @Override
     public void execute() {
-
+        collection.groupCountingByCoordinates();
     }
 }

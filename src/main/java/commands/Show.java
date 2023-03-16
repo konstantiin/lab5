@@ -12,7 +12,7 @@ public class Show extends AbstractCommand {
     }
     @Override
     public void execute() {
-
+        collection.show();
     }
 
 }

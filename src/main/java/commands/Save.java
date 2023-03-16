@@ -12,6 +12,6 @@ public class Save extends AbstractCommand {
 
     @Override
     public void execute() {
-
+        collection.save();
     }
 }

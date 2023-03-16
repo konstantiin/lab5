@@ -12,7 +12,7 @@ public class Info extends AbstractCommand {
     }
     @Override
     public void execute(){
-        System.out.println(collection);
+        collection.info();
     }
 
 }

@@ -12,5 +12,6 @@ public class RemoveGreater extends AbstractCommand {
     }
     @Override
     public void execute(){
+        collection.removeGreater(input.readObject());
     }
 }

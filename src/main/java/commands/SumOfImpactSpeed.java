@@ -13,6 +13,6 @@ public class SumOfImpactSpeed extends AbstractCommand {
 
     @Override
     public void execute() {
-
+        collection.sumOfImpactSpeed();
     }
 }

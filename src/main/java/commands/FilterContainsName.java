@@ -13,6 +13,6 @@ public class FilterContainsName extends AbstractCommand {
 
     @Override
     public void execute() {
-
+        collection.filterContainsName(input.readString());
     }
 }

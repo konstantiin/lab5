@@ -6,11 +6,8 @@ import commands.interfaces.Command;
 import reading.Reader;
 
 public class Exit extends AbstractCommand {
-    public Exit(Reader reader){
-        super( reader);
-    }
     @Override
     public void execute(){
-        System.exit(0);
+        System.exit(0); // говно
     }
 }

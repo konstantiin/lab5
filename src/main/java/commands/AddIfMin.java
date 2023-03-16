@@ -12,6 +12,6 @@ public class AddIfMin extends AbstractCommand {
     }
     @Override
     public void execute() {
-
+        collection.addIfMin(input.readObject());
     }
 }

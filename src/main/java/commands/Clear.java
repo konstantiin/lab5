@@ -11,7 +11,7 @@ public class Clear extends AbstractCommand {
     }
     @Override
     public void execute(){
-        collection.Clear();
+        collection.clear();
     }
 
 }
