@@ -1,13 +1,20 @@
 package commands.interfaces;
 
+import Managers.CollectionManager;
+import reading.Reader;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.TreeSet;
-
-public interface Command {
-    public void execute();
-
-
+public abstract class Command {
+    protected final CollectionManager<?> collection;
+    protected final Reader input;
+    public Command(Reader reader){
+        collection = reader.getCollection();
+        input = reader;
+    }
+    public Command(){
+        collection = null;
+        input = null;
+    }
+    public void execute(){
+        throw new RuntimeException("not implemented");
+    }
 }

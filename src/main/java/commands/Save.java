@@ -1,11 +1,9 @@
 package commands;
 
-import Managers.CollectionManager;
-import commands.interfaces.AbstractCommand;
 import commands.interfaces.Command;
 import reading.Reader;
 
-public class Save extends AbstractCommand {
+public class Save extends Command {
     public Save(Reader reader){
         super( reader);
     }

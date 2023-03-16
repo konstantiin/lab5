@@ -1,4 +1,4 @@
-package reading;
+package reading.generators;
 
 import java.util.HashMap;
 

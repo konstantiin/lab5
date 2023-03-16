@@ -1,8 +1,8 @@
 
+import Exceptions.UnknownCommandException;
 import Managers.CollectionManager;
 import StoredClasses.HumanBeing;
 import commands.interfaces.Command;
-import StoredClasses.forms.HumanBeingForm;
 import parse.ParseXml;
 import reading.Node;
 import reading.Reader;
@@ -22,11 +22,16 @@ public class Main{
         TreeSet<HumanBeing> set = new TreeSet<>(list);
         Node tree = Node.generateTree(HumanBeing.class, "HumanBeing");
 
-        Reader console = new Reader(new Scanner(System.in), new CollectionManager<HumanBeing>(set), tree);
+        Reader console = new Reader(new Scanner(System.in), new CollectionManager<>(set), tree);
 
         while (true){
-            Command met = console.readCommand();
-            met.execute();
+            Command met = null;
+            try {
+                met = console.readCommand();
+            } catch (UnknownCommandException e) {
+                System.out.println("Command not found, type help for more info");
+            }
+            if(met != null) met.execute();
         }
 
     }

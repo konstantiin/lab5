@@ -1,8 +1,7 @@
 package reading;
 
+import Exceptions.UnknownCommandException;
 import Managers.CollectionManager;
-import StoredClasses.HumanBeing;
-import StoredClasses.forms.HumanBeingForm;
 import commands.*;
 import commands.interfaces.Command;
 import org.apache.commons.lang3.StringUtils;
@@ -164,12 +163,12 @@ public class Reader {
         commands.put("filter_contains_name", new FilterContainsName(this));
     }
 
-    public Command readCommand() {
+    public Command readCommand() throws UnknownCommandException {
         String metName = this.scan.next().trim();
         Command command = commands.get(metName);
         if (command == null){
             //System.out.println("Command does not Exist");
-            throw new RuntimeException("Not valid command");
+            throw new UnknownCommandException("Not valid command");
         }
         return command;
     }

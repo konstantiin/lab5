@@ -1,11 +1,9 @@
 package commands;
 
-import Managers.CollectionManager;
-import commands.interfaces.AbstractCommand;
 import commands.interfaces.Command;
 import reading.Reader;
 
-public class AddIfMin extends AbstractCommand {
+public class AddIfMin extends Command {
 
     public AddIfMin(Reader reader){
         super( reader);

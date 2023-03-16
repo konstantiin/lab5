@@ -24,7 +24,7 @@ public class ParseXml {
     public List<HumanBeing> parseToArr() {
         @XStreamAlias("elements")
         class HumanVec {
-            private List<HumanBeingForm> arr = new ArrayList<>();
+            private final List<HumanBeingForm> arr = new ArrayList<>();
             public List<HumanBeingForm> getArr(){return arr;}
         }
 

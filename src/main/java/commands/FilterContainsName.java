@@ -1,12 +1,10 @@
 package commands;
 
-import Managers.CollectionManager;
 import StoredClasses.HumanBeing;
-import commands.interfaces.AbstractCommand;
 import commands.interfaces.Command;
 import reading.Reader;
 
-public class FilterContainsName extends AbstractCommand {
+public class FilterContainsName extends Command {
 
     public FilterContainsName(Reader reader){
         super( reader);

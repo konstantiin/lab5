@@ -1,14 +1,12 @@
 package commands;
 
 import Exceptions.IdException;
-import Managers.CollectionManager;
-import commands.interfaces.AbstractCommand;
 import commands.interfaces.Command;
 import reading.Reader;
 
 import java.math.BigInteger;
 
-public class Update extends AbstractCommand {
+public class Update extends Command {
     public Update( Reader reader){
         super(reader);
     }

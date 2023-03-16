@@ -1,14 +1,12 @@
 package commands;
 
 import Exceptions.IdException;
-import Managers.CollectionManager;
-import commands.interfaces.AbstractCommand;
 import commands.interfaces.Command;
 import reading.Reader;
 
 import java.math.BigInteger;
 
-public class RemoveById extends AbstractCommand {
+public class RemoveById extends Command {
 
     public RemoveById(Reader reader){
         super(reader);

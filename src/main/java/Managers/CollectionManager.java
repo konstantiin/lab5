@@ -6,7 +6,7 @@ import StoredClasses.Coordinates;
 import StoredClasses.HumanBeing;
 
 import java.util.*;
-import java.util.function.DoubleToIntFunction;
+
 
 public class CollectionManager<T extends Comparable<T>> {
     TreeSet<T> collection;

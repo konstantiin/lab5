@@ -9,14 +9,14 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @XStreamAlias("human")
 public class HumanBeingForm {
-    private @NotNull String name;
-    private @NotNull Coordinates coordinates ;
-    private @NotNull Boolean realHero;
-    private Boolean hasToothpick;
-    private Float impactSpeed;
-    private @NotNull WeaponType weaponType ;
-    private @NotNull Mood mood;
-    private Car car;
+    private final @NotNull String name;
+    private final @NotNull Coordinates coordinates ;
+    private final @NotNull Boolean realHero;
+    private final Boolean hasToothpick;
+    private final Float impactSpeed;
+    private final @NotNull WeaponType weaponType ;
+    private final @NotNull Mood mood;
+    private final Car car;
     public HumanBeingForm(String name, Coordinates coordinates, Boolean realHero, Boolean hasToothpick,  Float impactSpeed, WeaponType weaponType,  Mood mood, Car car){
         this.name = name;
         this.coordinates = coordinates;
@@ -35,14 +35,6 @@ public class HumanBeingForm {
     public Mood getMood(){return mood;}
     public Car getCar(){return car;}
     public Float getImpactSpeed(){return impactSpeed;}
-    public void setName(String name){this.name = name;}
-    public void setCoordinates(Coordinates coordinates){this.coordinates = coordinates;}
-    public void setRealHero(Boolean realHero){this.realHero = realHero;}
-    public void setHasToothpick(Boolean hasToothpick){this.hasToothpick = hasToothpick;}
-    public void setImpactSpeed(Float impactSpeed){this.impactSpeed = impactSpeed;}
-    public void setWeaponType(WeaponType type){this.weaponType = type;}
-    public void setMood(Mood mood){this.mood = mood;}
-    public void setCar(Car car){this.car = car;}
     @Override
     public String toString(){
         return "HumanBeing {\n" +

@@ -1,12 +1,10 @@
 package commands;
 
 
-import Managers.CollectionManager;
-import commands.interfaces.AbstractCommand;
 import commands.interfaces.Command;
 import reading.Reader;
 
-public class RemoveGreater extends AbstractCommand {
+public class RemoveGreater extends Command {
     public RemoveGreater(Reader reader){
         super(reader);
     }
