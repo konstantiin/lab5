@@ -162,13 +162,19 @@ public class Reader {
         commands.put("group_counting_by_coordinates", new GroupCountingByCoordinates(this));
         commands.put("filter_contains_name", new FilterContainsName(this));
     }
+    public Node getObjectTree(){
+        return this.objectTree;
+    }
+    public boolean hasNext(){
+        return scan.hasNext();
+    }
 
     public Command readCommand() throws UnknownCommandException {
         String metName = this.scan.next().trim();
         Command command = commands.get(metName);
         if (command == null){
             //System.out.println("Command does not Exist");
-            throw new UnknownCommandException("Not valid command");
+            throw new UnknownCommandException(metName);
         }
         return command;
     }

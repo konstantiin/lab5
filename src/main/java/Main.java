@@ -24,7 +24,7 @@ public class Main{
 
         Reader console = new Reader(new Scanner(System.in), new CollectionManager<>(set), tree);
 
-        while (true){
+        while (console.hasNext()){
             Command met = null;
             try {
                 met = console.readCommand();
