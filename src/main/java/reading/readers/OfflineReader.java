@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 
 public class OfflineReader extends Reader {
     private final Pattern skipPattern = Pattern.compile("\\s*\\w*:");
-    private String currentLine = null, nextLine = null;
+    private String currentLine, nextLine;
 
     public OfflineReader(FileInputStream file, CommandsLauncher<?> col, Node tree) {
         super(file, col, tree);
@@ -55,6 +55,13 @@ public class OfflineReader extends Reader {
     public boolean hasNext() {
         return currentLine != null;
     }
+    public void skipTillNextCommand(){
+        if (currentLine == null) return;
+        if (!commands.containsKey(currentLine.trim())) {
+            this.readLine();
+            skipTillNextCommand();
+        }
+    }
 
     @Override
     protected boolean readNull(Node v) {
@@ -69,6 +76,7 @@ public class OfflineReader extends Reader {
         boolean y = nextLine.startsWith(StringUtils.repeat("\t", tabs + 1));
         return x && !y;
     }
+
 
     @Override
     public Object readObject() {

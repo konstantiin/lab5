@@ -1,5 +1,5 @@
 package Exceptions;
 
-public class OutOfBoundsException extends RuntimeException {
+public class OutOfBoundsException extends InputException {
 
 }

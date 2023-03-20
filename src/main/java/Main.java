@@ -6,7 +6,7 @@ import parse.ParseXml;
 import reading.objectTree.Node;
 import reading.readers.OnlineReader;
 
-import java.io.FileNotFoundException;
+
 import java.util.List;
 import java.util.TreeSet;
 
@@ -16,7 +16,7 @@ public class Main {
         return "input.xml";
     }
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) {
         List<HumanBeing> list = new ParseXml(getPath()).parseToArr();
         TreeSet<HumanBeing> set = new TreeSet<>(list);
         Node tree = Node.generateTree(HumanBeing.class, "HumanBeing");

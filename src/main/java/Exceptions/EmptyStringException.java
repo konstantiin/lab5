@@ -1,5 +1,5 @@
 package Exceptions;
 
-public class EmptyStringException extends RuntimeException {
+public class EmptyStringException extends InputException {
 
 }

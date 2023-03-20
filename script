@@ -13,3 +13,19 @@ HumanBeing:
 		name: VAS
 		cool: true
 show
+add
+HumanBeing:
+	name: Vitya
+	coordinates:
+		x: 12
+		y: 13
+	realHero: true
+	hasToothpick: true
+	impactSpeed:
+	weaponType: PISTOL
+	mood: CAM
+	car:
+		name: VAS
+		cool: true
+show
+help

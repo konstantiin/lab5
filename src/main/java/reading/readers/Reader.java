@@ -1,14 +1,13 @@
 package reading.readers;
 
-import Exceptions.EmptyStringException;
-import Exceptions.OutOfBoundsException;
-import Exceptions.UnknownCommandException;
+import Exceptions.*;
 import commands.launcher.CommandsLauncher;
 import commands.abstraction.Command;
 import commands.concreteCommands.*;
 import reading.objectTree.Node;
 
 import java.io.InputStream;
+import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.*;
@@ -30,9 +29,7 @@ public abstract class Reader {
         this.initCommands();
     }
 
-    protected String getNext() {
-        return scan.next();
-    }
+    protected abstract String getNext();
 
     public String readString() {
         String input = getNext().trim();
@@ -60,16 +57,22 @@ public abstract class Reader {
 
     public Boolean readBool() {
         return new Scanner(getNext()).nextBoolean();//NoSuchElementException
-
     }
 
     public abstract Object readObject();
 
-    public Object readEnum(Class type) {
+    public Object readEnum(Class<?> type) {
         String name = getNext();
-        Enum<?> value;
+        try {
+            return type.getMethod("valueOf", String.class).invoke(null, name);
+        } catch (IllegalAccessException | NoSuchMethodException e) {
+            throw new RuntimeException(e);
+        } catch (InvocationTargetException e){
+            throw new EnumInputException(e);
+        }
+        /*Enum<?> value;
         value = Enum.valueOf(type, name); // IllegalArgumentException
-        return value;
+        return value;*/
     }
 
     public CommandsLauncher<?> getCollection() {
@@ -99,51 +102,56 @@ public abstract class Reader {
         return this.objectTree;
     }
 
-    public boolean hasNext() {
-        return scan.hasNext();
-    }
+    public abstract boolean hasNext();
 
 
     protected abstract boolean readNull(Node v);
 
     protected Object readTree(Node v) {
-        tabs++;
-
-        if (v.ifNullable()) {
-            if (readNull(v)) {
+        try {
+            tabs++;
+            if (v.ifNullable()) {
+                if (readNull(v)) {
+                    this.readLine();
+                    tabs--;
+                    return null;
+                }
+            }
+            Class<?> cls = v.getType();
+            Object result;
+            if (cls == Float.class || cls == float.class) {
+                result = this.readDec(v.getLowerBound(), v.getUpperBound()).floatValue();
+            } else if (cls == Long.class || cls == long.class) {
+                result = this.readInt(v.getLowerBound().toBigInteger(), v.getUpperBound().toBigInteger()).longValue();
+            } else if (cls == Integer.class || cls == int.class) {
+                result = this.readInt(v.getLowerBound().toBigInteger(), v.getUpperBound().toBigInteger()).intValue();
+            } else if (cls == Boolean.class) {
+                result = this.readBool();
+            } else if (cls == String.class) {
+                result = this.readString();
+            } else if (cls.isEnum()) {
+                result = this.readEnum(cls);
+            } else {
                 this.readLine();
-                tabs--;
-                return null;
-            }
-        }
-        Class<?> cls = v.getType();
-        Object result = null;
-        if (cls == Float.class || cls == float.class) {
-            result = this.readDec(v.getLowerBound(), v.getUpperBound()).floatValue();
-        } else if (cls == Long.class || cls == long.class) {
-            result = this.readInt(v.getLowerBound().toBigInteger(), v.getUpperBound().toBigInteger()).longValue();
-        } else if (cls == Integer.class || cls == int.class) {
-            result = this.readInt(v.getLowerBound().toBigInteger(), v.getUpperBound().toBigInteger()).intValue();
-        } else if (cls == Boolean.class) {
-            result = this.readBool();
-        } else if (cls == String.class) {
-            result = this.readString();
-        } else if (cls.isEnum()) {
-            result = this.readEnum(cls);
-        } else {
-            this.readLine();
-            HashMap<String, Object> fields = new HashMap<>();
-            for (Node i : v.getFields()) {
-                fields.put(i.getName(), readTree(i));
-            }
-            result = v.getObjectGenerator().generate(fields);
+                HashMap<String, Object> fields = new HashMap<>();
+                for (Node i : v.getFields()) {
+                    fields.put(i.getName(), readTree(i));
+                }
+                result = v.getObjectGenerator().generate(fields);
 
+            }
+            tabs--;
+            return result;
+        } catch (EmptyStringException e){
+            throw new InputException(v.getName() + " should not be empty!");
+        } catch (EnumInputException e){
+            throw new InputException(v.getName() + " should be one of " + v.getType() + " values!");
+        } catch (OutOfBoundsException e){
+            throw new InputException(v.getName() + "should be between " + v.getLowerBound() + " and " + v.getUpperBound() + "!");
         }
-        tabs--;
-        return result;
     }
 
-    public void readLine() {
+    public void readLine() { // мб стоит с этим что-то сделать, но пока что пусть будет так
     }
 
     public Command readCommand() {

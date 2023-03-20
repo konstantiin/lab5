@@ -1,6 +1,6 @@
 package Exceptions;
 
-public class UnknownCommandException extends RuntimeException {
+public class UnknownCommandException extends InputException {
 
     public UnknownCommandException(String command_not_found) {
         super(command_not_found);
