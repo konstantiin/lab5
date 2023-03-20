@@ -38,7 +38,7 @@ public class Node {
             Node next = new Node(field.getType(), field.getName());
 
             next.setNullable(!field.isAnnotationPresent(NotNull.class) && !field.getType().isPrimitive());
-            if (field.isAnnotationPresent(Boundaries.class) || Reader.numbers.contains(field.getType())){
+            if (field.isAnnotationPresent(Boundaries.class) || OnlineReader.numbers.contains(field.getType())){
                 var b = field.getAnnotation(Boundaries.class);
                 BigDecimal l = null, u = null;
                 if (b != null) {

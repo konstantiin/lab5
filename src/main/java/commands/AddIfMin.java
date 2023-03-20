@@ -1,12 +1,13 @@
 package commands;
 
 import commands.interfaces.Command;
+
 import reading.Reader;
 
 public class AddIfMin extends Command {
 
-    public AddIfMin(Reader reader){
-        super( reader);
+    public AddIfMin(Reader Reader){
+        super(Reader);
     }
     @Override
     public void execute() {

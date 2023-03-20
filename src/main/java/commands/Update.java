@@ -2,12 +2,13 @@ package commands;
 
 import Exceptions.IdException;
 import commands.interfaces.Command;
+
 import reading.Reader;
 
 import java.math.BigInteger;
 
 public class Update extends Command {
-    public Update( Reader reader){
+    public Update(Reader reader){
         super(reader);
     }
 

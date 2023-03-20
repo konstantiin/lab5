@@ -5,8 +5,10 @@ import StoredClasses.HumanBeing;
 import commands.interfaces.Command;
 import parse.ParseXml;
 import reading.Node;
-import reading.Reader;
+import reading.OnlineReader;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.TreeSet;
@@ -16,13 +18,12 @@ public class Main{
         //get path
         return "input.xml";
     }
-    public static void main(String[] args) {
-
+    public static void main(String[] args) throws FileNotFoundException {
         List<HumanBeing> list = new ParseXml(getPath()).parseToArr();
         TreeSet<HumanBeing> set = new TreeSet<>(list);
         Node tree = Node.generateTree(HumanBeing.class, "HumanBeing");
 
-        Reader console = new Reader(new Scanner(System.in), new CollectionManager<>(set), tree);
+        OnlineReader console = new OnlineReader(System.in, new CollectionManager<>(set), tree);
 
         while (console.hasNext()){
             Command met = null;

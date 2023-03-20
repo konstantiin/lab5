@@ -2,11 +2,13 @@ package commands;
 
 import Exceptions.UnknownCommandException;
 import commands.interfaces.Command;
+import reading.OfflineReader;
+import reading.OnlineReader;
 import reading.Reader;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.io.File;
 import java.util.List;
 import java.util.Scanner;
@@ -23,11 +25,11 @@ public class ExecuteScript extends Command {
         File script = new File(input.readString());
         currentScripts.add(script);
         try {
-            Reader reader = new Reader(new Scanner(script), collection, input.getObjectTree());
-            while (reader.hasNext()){
+            Reader offlineReader = new OfflineReader(new FileInputStream(script), collection, input.getObjectTree());
+            while (offlineReader.hasNext()){
                 Command met = null;
                 try {
-                    met = reader.readCommand();
+                    met = offlineReader.readCommand();
                 } catch (UnknownCommandException e) {
                     System.out.println("No such command: " + e.getMessage() + "command was skipped");
                 }

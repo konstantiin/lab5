@@ -1,5 +1,7 @@
 package reading;
 
+import Exceptions.EmptyStringException;
+import Exceptions.OutOfBoundsException;
 import Exceptions.UnknownCommandException;
 import Managers.CollectionManager;
 import commands.*;
@@ -7,141 +9,63 @@ import commands.interfaces.Command;
 import org.apache.commons.lang3.StringUtils;
 
 
+import java.io.InputStream;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.*;
 
-public class Reader {
+public abstract class Reader {
+    protected int tabs = 0;
     public static List<Class<?>> numbers = new ArrayList<>(Arrays.asList(Long.class, long.class, Integer.class, int.class,
-                                                                         Float.class, float.class, Double.class, double.class,
-                                                                         Short.class, short.class));
-    private final HashMap<String, Command> commands = new HashMap<>();
+            Float.class, float.class, Double.class, double.class,
+            Short.class, short.class));
+    protected final HashMap<String, Command> commands = new HashMap<>();
 
-    private final Scanner scan;
-    private final Node objectTree;
-    private int tabs = 0;
+    protected final Scanner scan;
+    protected final Node objectTree;
 
-    private final CollectionManager<?> collection;
-    public Reader (Scanner scan, CollectionManager<?> col, Node tree){
-        this.scan = scan;
+    protected final CollectionManager<?> collection;
+    protected String getNext(){
+        return scan.next();
+    }
+    public String readString(){
+        String input = getNext().trim();
+        if (input.equals("")) throw new EmptyStringException();
+        return input;
+    }
+    public Reader(InputStream source, CollectionManager<?> col, Node tree){
+        this.scan = new Scanner(source);
         collection =col;
         objectTree = tree;
         this.initCommands();
     }
-    public BigInteger readInt(BigInteger lowerBound, BigInteger upperBound){
+    public BigInteger readInt(BigInteger lowerBound, BigInteger upperBound) throws OutOfBoundsException {
         BigInteger value;
-        try{
-            value = new Scanner(scan.nextLine()).nextBigInteger();
-        } catch (NoSuchElementException e){
-            System.out.print(StringUtils.repeat("\t",tabs) + "Please enter integer number\n" + StringUtils.repeat("\t",tabs));
-            return readInt(lowerBound, upperBound);
-        }
+        value = new Scanner(getNext()).nextBigInteger(); // NoSuchElementException
         if (value.compareTo(lowerBound) < 0 || value.compareTo(upperBound) > 0){
-            System.out.print(StringUtils.repeat("\t",tabs) +"This field should be between " + lowerBound + " and "
-                    + upperBound + " please type it correctly\n" + StringUtils.repeat("\t",tabs) );
-            value = readInt(lowerBound, upperBound);
+            throw new OutOfBoundsException();
         }
         return value;
     }
-    public BigDecimal readDec(BigDecimal lowerBound, BigDecimal upperBound){
+    public BigDecimal readDec(BigDecimal lowerBound, BigDecimal upperBound) throws OutOfBoundsException {
         BigDecimal value;
-        try{
-            value = new Scanner(scan.nextLine()).nextBigDecimal();
-        } catch (NoSuchElementException e){
-            System.out.print(StringUtils.repeat("\t",tabs) +"Please enter decimal number\n" + StringUtils.repeat("\t",tabs));
-            return readDec(lowerBound, upperBound);
-        }
+        value = new Scanner(getNext()).nextBigDecimal(); // NoSuchElementException
         if (value.compareTo(lowerBound) < 0 || value.compareTo(upperBound) > 0){
-            System.out.print(StringUtils.repeat("\t",tabs) +"This field should be between " + lowerBound + " and "
-                    + upperBound + " please type it correctly\n" + StringUtils.repeat("\t",tabs));
-            value = readDec(lowerBound, upperBound);
+            throw new OutOfBoundsException();
         }
         return value;
     }
     public Boolean readBool(){
-        try {
-            return new Scanner(scan.nextLine()).nextBoolean();
-        } catch (NoSuchElementException e){
-            System.out.print(StringUtils.repeat("\t",tabs) + "Type true/false\n" + StringUtils.repeat("\t",tabs) );
-            return readBool();
-        }
+        return new Scanner(getNext()).nextBoolean();//NoSuchElementException
+
     }
-    public String readString(){
-        String input = scan.nextLine().trim();
-        if (input.equals("")) return readString();
-        return input;
-    }
+    public abstract Object readObject();
 
     public Object readEnum(Class type){
-        String name = scan.nextLine();
+        String name = getNext();
         Enum<?> value;
-        try{
-            value = Enum.valueOf(type, name);
-        } catch (IllegalArgumentException e){
-            System.out.print(StringUtils.repeat("\t",tabs) + "Type one of " + type.getName() + " values\n" + StringUtils.repeat("\t",tabs));
-            return readEnum(type);
-        }
+        value = Enum.valueOf(type, name); // IllegalArgumentException
         return value;
-    }
-
-    private Object readTree(Node v){
-        tabs++;
-        System.out.print(StringUtils.repeat("\t",tabs) + v.getName() + ": ");
-        if (v.ifNullable()){
-            System.out.print(StringUtils.repeat("\t",tabs) +"Leave this field null?(y/n) ");
-            String l = scan.nextLine();
-            if(l.charAt(0) == 'y'){
-                tabs--;
-                return null;
-            }
-            if (Node.leavesClasses.contains(v.getType()) || v.getType().isPrimitive() || v.getType().isEnum()){
-                System.out.print(StringUtils.repeat("\t",tabs));
-            }
-
-        }
-        Class<?> cls = v.getType();
-        Object result = null;
-        if (cls == Float.class || cls == float.class){
-            result = this.readDec(v.getLowerBound(), v.getUpperBound()).floatValue();
-        }
-        else if ( cls == Long.class || cls == long.class ){
-            result = this.readInt(v.getLowerBound().toBigInteger(), v.getUpperBound().toBigInteger()).longValue();
-        }
-        else if (cls == Integer.class || cls == int.class){
-            result = this.readInt(v.getLowerBound().toBigInteger(), v.getUpperBound().toBigInteger()).intValue();
-        }
-        else if (cls == Boolean.class){
-            result =  this.readBool();
-        }
-        else if (cls == String.class){
-            result = this.readString();
-        }
-        else if (cls.isEnum()){
-            result = this.readEnum(cls);
-        }
-        else{
-            if (!v.ifNullable())System.out.println();
-            HashMap<String, Object> fields = new HashMap<>();
-            for (Node i: v.getFields()){
-                fields.put(i.getName(), readTree(i));
-            }
-
-            try{
-                result =  v.getObjectGenerator().generate(fields);
-            } catch (NullPointerException e){
-                System.out.println(v.getObjectGenerator());
-            }
-        }
-        tabs--;
-        return result;
-
-    }
-    public Object readObject(){
-        tabs = -1;
-        System.out.println("Type object");
-        var result = readTree(objectTree);
-        System.out.println("Input ended");
-        return result;
     }
     public CollectionManager<?> getCollection(){return collection;}
     public void initCommands(){
@@ -169,11 +93,55 @@ public class Reader {
         return scan.hasNext();
     }
 
-    public Command readCommand() throws UnknownCommandException {
-        String metName = this.scan.next().trim();
+
+    protected abstract boolean readNull(Node v);
+    protected Object readTree(Node v){
+        tabs++;
+
+        if (v.ifNullable()){
+            if(readNull(v)) {
+                this.readLine();
+                tabs--;
+                return null;
+            }
+        }
+        Class<?> cls = v.getType();
+        Object result = null;
+        if (cls == Float.class || cls == float.class){
+            result = this.readDec(v.getLowerBound(), v.getUpperBound()).floatValue();
+        }
+        else if ( cls == Long.class || cls == long.class ){
+            result = this.readInt(v.getLowerBound().toBigInteger(), v.getUpperBound().toBigInteger()).longValue();
+        }
+        else if (cls == Integer.class || cls == int.class){
+            result = this.readInt(v.getLowerBound().toBigInteger(), v.getUpperBound().toBigInteger()).intValue();
+        }
+        else if (cls == Boolean.class){
+            result =  this.readBool();
+        }
+        else if (cls == String.class){
+            result = this.readString();
+        }
+        else if (cls.isEnum()){
+            result = this.readEnum(cls);
+        }
+        else{
+            this.readLine();
+            HashMap<String, Object> fields = new HashMap<>();
+            for (Node i: v.getFields()){
+                fields.put(i.getName(), readTree(i));
+            }
+            result =  v.getObjectGenerator().generate(fields);
+
+        }
+        tabs--;
+        return result;
+    }
+    public void readLine(){}
+    public Command readCommand() {
+        String metName = getNext().trim();
         Command command = commands.get(metName);
         if (command == null){
-            //System.out.println("Command does not Exist");
             throw new UnknownCommandException(metName);
         }
         return command;

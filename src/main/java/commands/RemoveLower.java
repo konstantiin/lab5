@@ -1,6 +1,7 @@
 package commands;
 
 import commands.interfaces.Command;
+
 import reading.Reader;
 
 public class RemoveLower extends Command {

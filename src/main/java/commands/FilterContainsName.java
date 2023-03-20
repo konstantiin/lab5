@@ -2,12 +2,13 @@ package commands;
 
 import StoredClasses.HumanBeing;
 import commands.interfaces.Command;
+
 import reading.Reader;
 
 public class FilterContainsName extends Command {
 
     public FilterContainsName(Reader reader){
-        super( reader);
+        super(reader);
     }
 
     @Override

@@ -9,7 +9,7 @@ import reading.Reader;
 public class GroupCountingByCoordinates extends Command {
 
     public GroupCountingByCoordinates(Reader reader){
-        super( reader);
+        super(reader);
     }
     @Override
     public void execute() {

@@ -5,7 +5,7 @@ import reading.Reader;
 
 public class Clear extends Command {
     public Clear( Reader reader){
-        super( reader);
+        super(reader);
     }
     @Override
     public void execute(){
