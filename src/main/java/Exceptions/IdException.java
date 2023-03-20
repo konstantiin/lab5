@@ -1,7 +1,7 @@
 package Exceptions;
 
-public class IdException extends Exception{
-    public IdException(String message){
+public class IdException extends Exception {
+    public IdException(String message) {
         super(message);
     }
 }

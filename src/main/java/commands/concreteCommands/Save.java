@@ -1,11 +1,10 @@
-package commands;
+package commands.concreteCommands;
 
-import commands.interfaces.Command;
-
-import reading.Reader;
+import commands.abstraction.Command;
+import reading.readers.Reader;
 
 public class Save extends Command {
-    public Save(Reader reader){
+    public Save(Reader reader) {
         super(reader);
     }
 

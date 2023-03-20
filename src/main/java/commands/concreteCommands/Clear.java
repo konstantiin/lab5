@@ -1,14 +1,15 @@
-package commands;
+package commands.concreteCommands;
 
-import commands.interfaces.Command;
-import reading.Reader;
+import commands.abstraction.Command;
+import reading.readers.Reader;
 
 public class Clear extends Command {
-    public Clear( Reader reader){
+    public Clear(Reader reader) {
         super(reader);
     }
+
     @Override
-    public void execute(){
+    public void execute() {
         collection.clear();
         System.out.println("collection cleared");
     }

@@ -1,6 +1,6 @@
-package commands;
+package commands.concreteCommands;
 
-import commands.interfaces.Command;
+import commands.abstraction.Command;
 
 public class Help extends Command {
     @Override

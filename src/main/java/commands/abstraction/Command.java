@@ -1,20 +1,23 @@
-package commands.interfaces;
+package commands.abstraction;
 
-import Managers.CollectionManager;
-import reading.Reader;
+import commands.launcher.CommandsLauncher;
+import reading.readers.Reader;
 
 public abstract class Command {
-    protected final CollectionManager<?> collection;
+    protected final CommandsLauncher<?> collection;
     protected final Reader input;
-    public Command(Reader onlineReader){
+
+    public Command(Reader onlineReader) {
         collection = onlineReader.getCollection();
         input = onlineReader;
     }
-    public Command(){
+
+    public Command() {
         collection = null;
         input = null;
     }
-    public void execute(){
+
+    public void execute() {
         throw new RuntimeException("not implemented");
     }
 }

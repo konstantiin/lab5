@@ -1,14 +1,13 @@
-package commands;
+package commands.concreteCommands;
 
 import Exceptions.IdException;
-import commands.interfaces.Command;
-
-import reading.Reader;
+import commands.abstraction.Command;
+import reading.readers.Reader;
 
 import java.math.BigInteger;
 
 public class Update extends Command {
-    public Update(Reader reader){
+    public Update(Reader reader) {
         super(reader);
     }
 

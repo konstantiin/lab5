@@ -1,12 +1,11 @@
-package commands;
+package commands.concreteCommands;
 
-import commands.interfaces.Command;
-
-import reading.Reader;
+import commands.abstraction.Command;
+import reading.readers.Reader;
 
 public class RemoveLower extends Command {
 
-    public RemoveLower(Reader reader){
+    public RemoveLower(Reader reader) {
         super(reader);
     }
 

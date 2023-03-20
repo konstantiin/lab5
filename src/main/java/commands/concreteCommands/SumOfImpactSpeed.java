@@ -1,12 +1,11 @@
-package commands;
+package commands.concreteCommands;
 
 
-import commands.interfaces.Command;
-
-import reading.Reader;
+import commands.abstraction.Command;
+import reading.readers.Reader;
 
 public class SumOfImpactSpeed extends Command {
-    public SumOfImpactSpeed(Reader reader){
+    public SumOfImpactSpeed(Reader reader) {
         super(reader);
     }
 

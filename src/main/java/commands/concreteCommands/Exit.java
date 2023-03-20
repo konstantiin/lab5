@@ -1,10 +1,10 @@
-package commands;
+package commands.concreteCommands;
 
-import commands.interfaces.Command;
+import commands.abstraction.Command;
 
 public class Exit extends Command {
     @Override
-    public void execute(){
+    public void execute() {
         System.exit(0);                 // говно
     }
 }

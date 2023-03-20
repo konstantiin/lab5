@@ -1,15 +1,14 @@
-package commands;
+package commands.concreteCommands;
 
 import Exceptions.IdException;
-import commands.interfaces.Command;
-
-import reading.Reader;
+import commands.abstraction.Command;
+import reading.readers.Reader;
 
 import java.math.BigInteger;
 
 public class RemoveById extends Command {
 
-    public RemoveById(Reader reader){
+    public RemoveById(Reader reader) {
         super(reader);
     }
 

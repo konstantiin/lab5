@@ -1,18 +1,18 @@
-package commands;
+package commands.concreteCommands;
 
-import commands.interfaces.Command;
-
-import reading.Reader;
+import commands.abstraction.Command;
+import reading.readers.Reader;
 
 
 public class Add extends Command {
 
 
-    public Add( Reader Reader){
+    public Add(Reader Reader) {
         super(Reader);
     }
+
     @Override
-    public void execute(){
+    public void execute() {
         collection.add(input.readObject());
         System.out.println("element added");
     }
