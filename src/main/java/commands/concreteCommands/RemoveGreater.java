@@ -14,4 +14,12 @@ public class RemoveGreater extends Command {
         collection.removeGreater(input.readObject());
         System.out.println("Elements removed");             // mb print amount of deleted elements
     }
+    @Override
+    public String toString() {
+        String res = "remove_greater" ;
+        if (ExecuteScript.currentScripts.size() != 0) {
+            res += "(in " + ExecuteScript.currentScripts.get(ExecuteScript.currentScripts.size()-1) + " script)";
+        }
+        return res;
+    }
 }

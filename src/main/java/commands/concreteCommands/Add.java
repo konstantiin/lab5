@@ -17,5 +17,14 @@ public class Add extends Command {
         System.out.println("element added");
     }
 
+    @Override
+    public String toString() {
+        String res = "add" ;
+        if (ExecuteScript.currentScripts.size() != 0) {
+            res += "(in " + ExecuteScript.currentScripts.get(ExecuteScript.currentScripts.size()-1) + " script)";
+        }
+        return res;
+    }
+
 
 }

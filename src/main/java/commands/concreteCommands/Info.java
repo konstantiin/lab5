@@ -13,5 +13,12 @@ public class Info extends Command {
     public void execute() {
         collection.info();
     }
-
+    @Override
+    public String toString() {
+        String res = "info" ;
+        if (ExecuteScript.currentScripts.size() != 0) {
+            res += "(in " + ExecuteScript.currentScripts.get(ExecuteScript.currentScripts.size()-1) + " script)";
+        }
+        return res;
+    }
 }

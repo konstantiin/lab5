@@ -15,4 +15,12 @@ public class AddIfMin extends Command {
             System.out.println("element added");
         } else System.out.println("element not added");
     }
+    @Override
+    public String toString() {
+        String res = "add_if_min" ;
+        if (ExecuteScript.currentScripts.size() != 0) {
+            res += "(in " + ExecuteScript.currentScripts.get(ExecuteScript.currentScripts.size()-1) + " script)";
+        }
+        return res;
+    }
 }

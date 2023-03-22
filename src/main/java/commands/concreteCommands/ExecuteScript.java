@@ -9,10 +9,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class ExecuteScript extends Command {
-    public static List<File> currentScripts = new ArrayList<>();
+    public static ArrayList<File> currentScripts = new ArrayList<>();
 
     public ExecuteScript(Reader reader) {
         super(reader);
@@ -38,5 +37,13 @@ public class ExecuteScript extends Command {
             currentScripts.remove(script);
         }
         System.out.println("Script " + script + " has compiled");
+    }
+    @Override
+    public String toString() {
+        String res = "execute_script" ;
+        if (ExecuteScript.currentScripts.size() != 0) {
+            res += "(in " + ExecuteScript.currentScripts.get(ExecuteScript.currentScripts.size()-1) + " script)";
+        }
+        return res;
     }
 }

@@ -13,5 +13,12 @@ public class Clear extends Command {
         collection.clear();
         System.out.println("collection cleared");
     }
-
+    @Override
+    public String toString() {
+        String res = "clear" ;
+        if (ExecuteScript.currentScripts.size() != 0) {
+            res += "(in " + ExecuteScript.currentScripts.get(ExecuteScript.currentScripts.size()-1) + " script)";
+        }
+        return res;
+    }
 }

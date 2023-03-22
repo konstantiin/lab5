@@ -18,4 +18,12 @@ public class GroupCountingByCoordinates extends Command {
             System.out.println("Group with coordinates " + key + " has " + groups.get(key).size() + " elements");
         }
     }
+    @Override
+    public String toString() {
+        String res = "group_counting_by_coordinates" ;
+        if (ExecuteScript.currentScripts.size() != 0) {
+            res += "(in " + ExecuteScript.currentScripts.get(ExecuteScript.currentScripts.size()-1) + " script)";
+        }
+        return res;
+    }
 }

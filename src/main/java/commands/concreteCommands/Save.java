@@ -12,4 +12,12 @@ public class Save extends Command {
     public void execute() {
         collection.save();
     }
+    @Override
+    public String toString() {
+        String res = "save" ;
+        if (ExecuteScript.currentScripts.size() != 0) {
+            res += "(in " + ExecuteScript.currentScripts.get(ExecuteScript.currentScripts.size()-1) + " script)";
+        }
+        return res;
+    }
 }

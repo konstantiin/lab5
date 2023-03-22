@@ -16,4 +16,12 @@ public class FilterContainsName extends Command {
         for (HumanBeing item : list) System.out.println(item);
         if (list.size() == 0) System.out.println("Nothing matches pattern");
     }
+    @Override
+    public String toString() {
+        String res = "filter_contains_name" ;
+        if (ExecuteScript.currentScripts.size() != 0) {
+            res += "(in " + ExecuteScript.currentScripts.get(ExecuteScript.currentScripts.size()-1) + " script)";
+        }
+        return res;
+    }
 }
