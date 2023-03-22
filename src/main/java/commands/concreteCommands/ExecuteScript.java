@@ -1,7 +1,6 @@
 package commands.concreteCommands;
 
-import Exceptions.InputException;
-import Exceptions.UnknownCommandException;
+
 import commands.abstraction.Command;
 import reading.readers.OfflineReader;
 import reading.readers.Reader;
@@ -19,32 +18,25 @@ public class ExecuteScript extends Command {
         super(reader);
     }
 
+
     @Override
     public void execute() {
         File script = new File(input.readString());
+        if (currentScripts.contains(script)){
+            System.out.println("Script is already compiling. Command " + this + " was skipped");
+            return;
+        }
         currentScripts.add(script);
         OfflineReader offlineReader = null;
         try {
             offlineReader = new OfflineReader(new FileInputStream(script), collection, input.getObjectTree());
-            while (offlineReader.hasNext()) {
-                Command met = null;
-                try {
-                    met = offlineReader.readCommand();
-                } catch (UnknownCommandException e) {
-                    System.out.println("No such command: " + e.getMessage() + " command was skipped");
-                }
-                try{
-                    if (met != null) met.execute();
-                } catch (InputException e){
-                    System.out.println(e.getMessage() + " Command " + met + " was skipped");
-                    offlineReader.skipTillNextCommand();
-                }
-            }
+            collection.execute_script(offlineReader);
         } catch (FileNotFoundException e) {
-            System.out.println("file " + script + " does not exist, or can't be accessed");
+            System.out.println("File " + script + " does not exist, or can't be accessed");
         } finally {
             if (offlineReader != null) offlineReader.closeStream();
             currentScripts.remove(script);
         }
+        System.out.println("Script " + script + " has compiled");
     }
 }

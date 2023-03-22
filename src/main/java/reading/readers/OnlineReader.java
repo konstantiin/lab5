@@ -3,6 +3,7 @@ package reading.readers;
 import Exceptions.EnumInputException;
 import Exceptions.OutOfBoundsException;
 import Exceptions.UnknownCommandException;
+import Exceptions.WrongInputException;
 import commands.launcher.CommandsLauncher;
 import commands.abstraction.Command;
 import org.apache.commons.lang3.StringUtils;
@@ -33,7 +34,7 @@ public class OnlineReader extends Reader {
             print(StringUtils.repeat("\t", tabs) + "This field should be between " + lowerBound + " and "
                     + upperBound + " please type it correctly\n" + StringUtils.repeat("\t", tabs));
             return this.readInt(lowerBound, upperBound);
-        } catch (NoSuchElementException e) {
+        } catch (WrongInputException e) {
             print(StringUtils.repeat("\t", tabs) + "Please enter decimal number\n" + StringUtils.repeat("\t", tabs));
             return this.readInt(lowerBound, upperBound);
         }
@@ -73,6 +74,12 @@ public class OnlineReader extends Reader {
         lastPrintedChar = '\n';
         return false;
     }
+
+    @Override
+    protected boolean checkNotNullObject() {
+        return false;
+    }
+
     @Override
     public BigDecimal readDec(BigDecimal lowerBound, BigDecimal upperBound) {
         try {
@@ -82,7 +89,7 @@ public class OnlineReader extends Reader {
             print(StringUtils.repeat("\t", tabs) + "This field should be between " + lowerBound + " and "
                     + upperBound + " please type it correctly\n" + StringUtils.repeat("\t", tabs));
             return this.readDec(lowerBound, upperBound);
-        } catch (NoSuchElementException e) {
+        } catch (WrongInputException e) {
             print(StringUtils.repeat("\t", tabs) + "Please enter decimal number\n" + StringUtils.repeat("\t", tabs));
             return this.readDec(lowerBound, upperBound);
         }
@@ -92,7 +99,7 @@ public class OnlineReader extends Reader {
         try {
             lastPrintedChar = '\n';
             return super.readBool();
-        } catch (NoSuchElementException e) {
+        } catch (WrongInputException e) {
             print(StringUtils.repeat("\t", tabs) + "Type true/false\n" + StringUtils.repeat("\t", tabs));
             return this.readBool();
         }

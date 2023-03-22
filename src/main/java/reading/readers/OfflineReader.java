@@ -1,5 +1,6 @@
 package reading.readers;
 
+
 import commands.launcher.CommandsLauncher;
 import org.apache.commons.lang3.StringUtils;
 import reading.objectTree.Node;
@@ -11,25 +12,28 @@ import java.util.regex.Pattern;
 
 public class OfflineReader extends Reader {
     private final Pattern skipPattern = Pattern.compile("\\s*\\w*:");
-    private String currentLine, nextLine;
-
+    private String nextLine;
+    private Scanner currentLineScanner;
     public OfflineReader(FileInputStream file, CommandsLauncher<?> col, Node tree) {
         super(file, col, tree);
-        currentLine = scan.nextLine();
-        nextLine = scan.nextLine();
+        currentLineScanner = new Scanner(scan.nextLine());
+        try{
+            nextLine = scan.nextLine();
+        } catch (NoSuchElementException e) {
+            nextLine = null;
+        }
     }
 
     @Override
     protected String getNext() {
-        String buf = currentLine;
-        this.readLine();
-        Scanner s = new Scanner(buf);
-        skip(s);
-        try {
-            return s.next();
-        } catch (Exception e) {
-            System.out.println(buf);
-            throw e;
+        skip(currentLineScanner);//мб не надо
+        if (currentLineScanner.hasNext()) {
+            var res = currentLineScanner.next();
+            if (!currentLineScanner.hasNext()) readLine();
+            return res;
+        }
+        else{
+            return "";
         }
     }
 
@@ -43,38 +47,43 @@ public class OfflineReader extends Reader {
 
     @Override
     public void readLine() {
-        currentLine = nextLine;
+        try{
+            currentLineScanner = new Scanner(nextLine);
+        } catch (Exception e){
+            currentLineScanner = null;
+        }
         try {
             nextLine = scan.nextLine();
         } catch (NoSuchElementException e) {
             nextLine = null;
         }
+
     }
 
     @Override
     public boolean hasNext() {
-        return currentLine != null;
+        return currentLineScanner != null;
     }
     public void skipTillNextCommand(){
-        if (currentLine == null) return;
-        if (!commands.containsKey(currentLine.trim())) {
-            this.readLine();
-            skipTillNextCommand();
+        if (currentLineScanner == null) return;
+        for (String c: commands.keySet()){
+            if (currentLineScanner.hasNext(c)) return;
         }
+        this.readLine();
+        skipTillNextCommand();
     }
 
     @Override
     protected boolean readNull(Node v) {
-        Scanner s = new Scanner(currentLine);
-        s.skip(skipPattern);
-        boolean x;
-        try {
-            x = s.next().trim().equals("");
-        } catch (NoSuchElementException e) {
-            x = true;
-        }
-        boolean y = nextLine.startsWith(StringUtils.repeat("\t", tabs + 1));
-        return x && !y;
+        skip(currentLineScanner);//мб не надо
+        boolean x = currentLineScanner.hasNext();
+        boolean y = nextLine.replaceAll(" {4}", "\t").startsWith(StringUtils.repeat("\t", tabs + 1));
+        return !x && !y;
+    }
+
+    @Override
+    protected boolean checkNotNullObject() {
+        return !nextLine.replaceAll(" {4}", "\t").startsWith(StringUtils.repeat("\t", tabs + 1));
     }
 
 

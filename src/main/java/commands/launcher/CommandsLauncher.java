@@ -2,8 +2,13 @@ package commands.launcher;
 
 
 import Exceptions.IdException;
+import Exceptions.InputException;
+import Exceptions.UnknownCommandException;
 import StoredClasses.Coordinates;
 import StoredClasses.HumanBeing;
+import commands.abstraction.Command;
+import reading.readers.OfflineReader;
+import reading.readers.Reader;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -120,6 +125,22 @@ public class CommandsLauncher<T extends Comparable<T>> {
 
     public void clear() {
         collection.clear();
+    }
+    public void execute_script(OfflineReader reader){
+        while (reader.hasNext()) {
+            Command met = null;
+            try {
+                met = reader.readCommand();
+            } catch (UnknownCommandException e) {
+                System.out.println("No such command: " + e.getMessage() + " command was skipped");
+            }
+            try{
+                if (met != null) met.execute();
+            } catch (InputException e){
+                System.out.println(e.getMessage() + " Command " + met + " was skipped");
+                reader.skipTillNextCommand();
+            }
+        }
     }
 
     public void save() {

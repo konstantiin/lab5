@@ -17,7 +17,7 @@ public abstract class Command {
         input = null;
     }
 
-    public void execute() {
-        throw new RuntimeException("not implemented");
-    }
+    public abstract void execute();
+    //@Override
+    //public abstract String toString();
 }
