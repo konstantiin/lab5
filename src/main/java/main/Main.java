@@ -17,7 +17,7 @@ public class Main {
     public static ParseXml XMLInput;
     static String getPath() {
         //get path
-        return "inpt.xml";
+        return "input.xml";
     }
 
     public static void main(String[] args) {
@@ -37,9 +37,12 @@ public class Main {
                 path = new Scanner(System.in).next();
             }
         }
-        System.out.println("XML file was read successfully!");
+
         List<HumanBeing> list = XMLInput.getArr();
-        TreeSet<HumanBeing> set = new TreeSet<>(list);
+        System.out.println("XML file was read successfully!");
+        TreeSet<HumanBeing> set = new TreeSet<>();
+        if (list != null) set = new TreeSet<>(list);
+
         Node tree = Node.generateTree(HumanBeing.class, "HumanBeing");
 
         OnlineReader console = new OnlineReader(System.in, new CommandsLauncher<>(set), tree);

@@ -1,8 +1,11 @@
 package StoredClasses;
 
+import Exceptions.OutOfBoundsException;
 import StoredClasses.annotations.Boundaries;
 
-public class Coordinates {
+import java.math.BigDecimal;
+
+public class Coordinates implements Checkable{
     private final @Boundaries(lowerBound = "-570", upperBound = "570") float x; //Максимальное значение поля: 570
     private final @Boundaries(lowerBound = "-294", upperBound = "294") long y; //Максимальное значение поля: 294
     public Coordinates(float x, long y) {

@@ -1,8 +1,12 @@
 package StoredClasses;
 
+import Exceptions.EmptyStringException;
+import Exceptions.NullObjectException;
 import StoredClasses.annotations.NotNull;
 
-public class Car {
+import java.lang.reflect.Field;
+
+public class Car implements Checkable{
     private final @NotNull String name;
     private final @NotNull Boolean cool;
     public Car(String name, boolean cool) {

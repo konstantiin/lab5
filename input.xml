@@ -41,10 +41,6 @@
     <hasToothpick>false</hasToothpick>
     <impactSpeed>100.0</impactSpeed>
     <weaponType>PISTOL</weaponType>
-    <mood>GLOOM</mood>
-    <car>
-      <name>traktor</name>
-      <cool>false</cool>
-    </car>
+    <mood>GLOM</mood>
   </human>
 </elements>
