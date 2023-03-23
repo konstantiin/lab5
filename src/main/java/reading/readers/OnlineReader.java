@@ -105,7 +105,11 @@ public class OnlineReader extends Reader {
         }
     }
     public boolean hasNext() {
-        return scan.hasNext();
+        try{
+            return scan.hasNext();
+        } catch (IllegalStateException e){
+            return false;
+        }
     }
     @Override
     public Object readEnum(Class<?> type) {

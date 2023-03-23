@@ -2,12 +2,19 @@ package commands.concreteCommands;
 
 import commands.abstraction.Command;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 import static commands.launcher.CommandsLauncher.currentScripts;
 
 public class Help extends Command {
     @Override
     public void execute() {
-        System.out.println("Help"); // insert documentation
+        try {
+            Scanner help = new Scanner(new File("resources/help.txt"));
+            while (help.hasNextLine()) System.out.println(help.nextLine());
+        } catch (FileNotFoundException ignored) {}
     }
     @Override
     public String toString() {

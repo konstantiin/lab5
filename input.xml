@@ -41,6 +41,6 @@
     <hasToothpick>false</hasToothpick>
     <impactSpeed>100.0</impactSpeed>
     <weaponType>PISTOL</weaponType>
-    <mood>GLOM</mood>
+    <mood>GLOOM</mood>
   </human>
 </elements>

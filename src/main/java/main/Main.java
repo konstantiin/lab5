@@ -16,8 +16,7 @@ import java.util.TreeSet;
 public class Main {
     public static ParseXml XMLInput;
     static String getPath() {
-        //get path
-        return "input.xml";
+        return System.getenv("LAB5");
     }
 
     public static void main(String[] args) {
@@ -34,6 +33,9 @@ public class Main {
                 path = new Scanner(System.in).next();
             } catch (FileNotWritableException e) {
                 System.out.println("Your file isn't writable! Type correct file path");
+                path = new Scanner(System.in).next();
+            }catch (NullPointerException e){
+                System.out.println("File name hasn't been read! Please type it again");
                 path = new Scanner(System.in).next();
             }
         }
