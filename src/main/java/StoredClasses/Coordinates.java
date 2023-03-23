@@ -2,10 +2,16 @@ package StoredClasses;
 
 import Exceptions.OutOfBoundsException;
 import StoredClasses.annotations.Boundaries;
+import reading.generators.CarGenerator;
+import reading.generators.CoordinatesGenerator;
+import reading.generators.Generator;
 
 import java.math.BigDecimal;
 
 public class Coordinates implements Checkable{
+    public static Generator getGenerator(){
+        return new CoordinatesGenerator();
+    }
     private final @Boundaries(lowerBound = "-570", upperBound = "570") float x; //Максимальное значение поля: 570
     private final @Boundaries(lowerBound = "-294", upperBound = "294") long y; //Максимальное значение поля: 294
     public Coordinates(float x, long y) {

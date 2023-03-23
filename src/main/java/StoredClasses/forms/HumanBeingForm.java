@@ -6,9 +6,15 @@ import StoredClasses.annotations.NotNull;
 import StoredClasses.enums.Mood;
 import StoredClasses.enums.WeaponType;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
+import reading.generators.CarGenerator;
+import reading.generators.Generator;
+import reading.generators.HumanBeingFormGenerator;
 
 @XStreamAlias("human")
 public class HumanBeingForm {
+    public static Generator getGenerator(){
+        return new HumanBeingFormGenerator();
+    }
     private final @NotNull String name;
     private final @NotNull Coordinates coordinates;
     private final @NotNull Boolean realHero;

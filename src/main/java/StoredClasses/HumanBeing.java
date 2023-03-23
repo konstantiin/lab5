@@ -9,6 +9,9 @@ import StoredClasses.enums.WeaponType;
 import StoredClasses.forms.HumanBeingForm;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import reading.generators.CarGenerator;
+import reading.generators.Generator;
+import reading.generators.HumanBeingGenerator;
 
 import java.lang.reflect.Field;
 import java.time.LocalDateTime;
@@ -16,6 +19,9 @@ import java.util.Objects;
 
 @XStreamAlias("human")
 public class HumanBeing implements Comparable<HumanBeing>, Checkable{
+    public static Generator getGenerator(){
+        return new HumanBeingGenerator();
+    }
     @XStreamOmitField
     public static long idCounter = 1;
     @XStreamOmitField

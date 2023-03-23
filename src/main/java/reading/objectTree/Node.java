@@ -29,15 +29,10 @@ public class Node {
         this.name = name;
     }
 
-    private static Generator getGenerator(Class<?> type) {                                    //переписать, добавить инерфейс Generatable
-        String name;
-        var temp = type.getName().split("[.]");
-        name = "reading.generators." + temp[temp.length - 1] + "Generator";
+    private static Generator getGenerator(Class<?> type) {                                    
         try {
-            return (Generator) Class.forName(name).getConstructor().newInstance();
-        } catch (InstantiationException | IllegalAccessException | ClassNotFoundException | NoSuchMethodException |
-                 InvocationTargetException e) {
-            System.err.println(name);
+            return (Generator) type.getMethod("getGenerator").invoke(null);
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             throw new RuntimeException(e);
         }
     }
