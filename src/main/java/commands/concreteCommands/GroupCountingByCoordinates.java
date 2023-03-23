@@ -5,6 +5,8 @@ import StoredClasses.Coordinates;
 import commands.abstraction.Command;
 import reading.readers.Reader;
 
+import static commands.launcher.CommandsLauncher.currentScripts;
+
 public class GroupCountingByCoordinates extends Command {
 
     public GroupCountingByCoordinates(Reader reader) {
@@ -21,8 +23,8 @@ public class GroupCountingByCoordinates extends Command {
     @Override
     public String toString() {
         String res = "group_counting_by_coordinates" ;
-        if (ExecuteScript.currentScripts.size() != 0) {
-            res += "(in " + ExecuteScript.currentScripts.get(ExecuteScript.currentScripts.size()-1) + " script)";
+        if (currentScripts.size() != 0) {
+            res += "(in " + currentScripts.get(currentScripts.size()-1) + " script)";
         }
         return res;
     }

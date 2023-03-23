@@ -12,7 +12,7 @@ import reading.objectTree.Node;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.NoSuchElementException;
+
 
 public class OnlineReader extends Reader {
     private char lastPrintedChar;

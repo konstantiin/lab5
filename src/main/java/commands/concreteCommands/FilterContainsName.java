@@ -4,6 +4,8 @@ import StoredClasses.HumanBeing;
 import commands.abstraction.Command;
 import reading.readers.Reader;
 
+import static commands.launcher.CommandsLauncher.currentScripts;
+
 public class FilterContainsName extends Command {
 
     public FilterContainsName(Reader reader) {
@@ -19,8 +21,8 @@ public class FilterContainsName extends Command {
     @Override
     public String toString() {
         String res = "filter_contains_name" ;
-        if (ExecuteScript.currentScripts.size() != 0) {
-            res += "(in " + ExecuteScript.currentScripts.get(ExecuteScript.currentScripts.size()-1) + " script)";
+        if (currentScripts.size() != 0) {
+            res += "(in " + currentScripts.get(currentScripts.size()-1) + " script)";
         }
         return res;
     }

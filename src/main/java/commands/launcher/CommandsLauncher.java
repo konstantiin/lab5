@@ -6,18 +6,19 @@ import Exceptions.InputException;
 import Exceptions.UnknownCommandException;
 import StoredClasses.Coordinates;
 import StoredClasses.HumanBeing;
+
 import commands.abstraction.Command;
 import reading.readers.OfflineReader;
-import reading.readers.Reader;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.TreeSet;
+import java.io.File;
+import java.util.*;
+
+import main.Main;
 
 
 public class CommandsLauncher<T extends Comparable<T>> {
-    TreeSet<T> collection;
+    public static ArrayList<File> currentScripts = new ArrayList<>();
+    private final TreeSet<T> collection;
 
     public CommandsLauncher(TreeSet<T> collection) {
         this.collection = collection;
@@ -127,6 +128,7 @@ public class CommandsLauncher<T extends Comparable<T>> {
         collection.clear();
     }
     public void execute_script(OfflineReader reader){
+
         while (reader.hasNext()) {
             Command met = null;
             try {
@@ -144,5 +146,6 @@ public class CommandsLauncher<T extends Comparable<T>> {
     }
 
     public void save() {
+        Main.XMLInput.writeArr(new ArrayList<HumanBeing>((Collection<? extends HumanBeing>) collection));
     }
 }

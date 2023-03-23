@@ -8,10 +8,12 @@ import reading.readers.Reader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
+
+
+import static commands.launcher.CommandsLauncher.currentScripts;
 
 public class ExecuteScript extends Command {
-    public static ArrayList<File> currentScripts = new ArrayList<>();
+
 
     public ExecuteScript(Reader reader) {
         super(reader);
@@ -41,8 +43,8 @@ public class ExecuteScript extends Command {
     @Override
     public String toString() {
         String res = "execute_script" ;
-        if (ExecuteScript.currentScripts.size() != 0) {
-            res += "(in " + ExecuteScript.currentScripts.get(ExecuteScript.currentScripts.size()-1) + " script)";
+        if (currentScripts.size() != 0) {
+            res += "(in " + currentScripts.get(currentScripts.size()-1) + " script)";
         }
         return res;
     }

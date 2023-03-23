@@ -17,6 +17,7 @@ public class OfflineReader extends Reader {
     public OfflineReader(FileInputStream file, CommandsLauncher<?> col, Node tree) {
         super(file, col, tree);
         currentLineScanner = new Scanner(scan.nextLine());
+        skip(currentLineScanner);
         try{
             nextLine = scan.nextLine();
         } catch (NoSuchElementException e) {
@@ -26,7 +27,6 @@ public class OfflineReader extends Reader {
 
     @Override
     protected String getNext() {
-        skip(currentLineScanner);//мб не надо
         if (currentLineScanner.hasNext()) {
             var res = currentLineScanner.next();
             if (!currentLineScanner.hasNext()) readLine();
@@ -40,15 +40,14 @@ public class OfflineReader extends Reader {
     private void skip(Scanner s) {
         try {
             s.skip(skipPattern);
-        } catch (NoSuchElementException ignored) {
-            //ignored.printStackTrace();
-        }
+        } catch (NoSuchElementException ignored) {}
     }
 
     @Override
     public void readLine() {
         try{
             currentLineScanner = new Scanner(nextLine);
+            skip(currentLineScanner);
         } catch (Exception e){
             currentLineScanner = null;
         }
@@ -75,7 +74,6 @@ public class OfflineReader extends Reader {
 
     @Override
     protected boolean readNull(Node v) {
-        skip(currentLineScanner);//мб не надо
         boolean x = currentLineScanner.hasNext();
         boolean y = nextLine.replaceAll(" {4}", "\t").startsWith(StringUtils.repeat("\t", tabs + 1));
         return !x && !y;

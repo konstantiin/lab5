@@ -170,7 +170,7 @@ public abstract class Reader {
         }
     }
 
-    public void readLine() { // мб стоит с этим что-то сделать, но пока что пусть будет так
+    public void readLine() {                                // мб стоит с этим что-то сделать, но пока что пусть будет так
     }
 
     public Command readCommand() {

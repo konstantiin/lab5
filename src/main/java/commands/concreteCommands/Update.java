@@ -6,6 +6,8 @@ import reading.readers.Reader;
 
 import java.math.BigInteger;
 
+import static commands.launcher.CommandsLauncher.currentScripts;
+
 public class Update extends Command {
     public Update(Reader reader) {
         super(reader);
@@ -23,8 +25,8 @@ public class Update extends Command {
     @Override
     public String toString() {
         String res = "update" ;
-        if (ExecuteScript.currentScripts.size() != 0) {
-            res += "(in " + ExecuteScript.currentScripts.get(ExecuteScript.currentScripts.size()-1) + " script)";
+        if (currentScripts.size() != 0) {
+            res += "(in " + currentScripts.get(currentScripts.size()-1) + " script)";
         }
         return res;
     }
