@@ -1,6 +1,9 @@
 package main;
 
-import Exceptions.*;
+import Exceptions.fileExceptions.FIleDoesNotExistException;
+import Exceptions.fileExceptions.FileNotReadableException;
+import Exceptions.fileExceptions.FileNotWritableException;
+import Exceptions.inputExceptions.UnknownCommandException;
 import commands.launcher.CommandsLauncher;
 import StoredClasses.HumanBeing;
 import commands.abstraction.Command;
@@ -13,35 +16,31 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.TreeSet;
 
+/**
+ * main class
+ */
 public class Main {
     public static ParseXml XMLInput;
+
+    /**
+     * return path to input/output file
+     * @return xml file path
+     */
     static String getPath() {
         return System.getenv("LAB5");
     }
 
-    public static void main(String[] args) {
-        String path = getPath();
-        while (true) {
-            try {
-                XMLInput = new ParseXml(path);
-                break;
-            } catch (FIleDoesNotExistException e) {
-                System.out.println("Your file does not exist! Type correct file path");
-                path = new Scanner(System.in).next();
-            } catch (FileNotReadableException e) {
-                System.out.println("Your file can't be read! Type correct file path");
-                path = new Scanner(System.in).next();
-            } catch (FileNotWritableException e) {
-                System.out.println("Your file isn't writable! Type correct file path");
-                path = new Scanner(System.in).next();
-            }catch (NullPointerException e){
-                System.out.println("File name hasn't been read! Please type it again");
-                path = new Scanner(System.in).next();
-            }
-        }
 
+
+    /**
+     * main method
+     */
+    public static void main(String[] args) {
+        XMLInput = ParseXml.getXMLInput(getPath());
         List<HumanBeing> list = XMLInput.getArr();
         System.out.println("XML file was read successfully!");
+
+
         TreeSet<HumanBeing> set = new TreeSet<>();
         if (list != null) set = new TreeSet<>(list);
 
@@ -54,7 +53,7 @@ public class Main {
             try {
                 met = console.readCommand();
             } catch (UnknownCommandException e) {
-                System.out.println("Command not found, type help for more info");
+                System.out.println("Command not found, type \"help\" for more info");
             }
             if (met != null) met.execute();
         }

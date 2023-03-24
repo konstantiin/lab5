@@ -5,6 +5,9 @@ import reading.readers.Reader;
 
 import static commands.launcher.CommandsLauncher.currentScripts;
 
+/**
+ * info command
+ */
 public class Info extends Command {
 
     public Info(Reader reader) {

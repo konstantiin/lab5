@@ -12,6 +12,9 @@ import java.io.FileNotFoundException;
 
 import static commands.launcher.CommandsLauncher.currentScripts;
 
+/**
+ * execute_script command
+ */
 public class ExecuteScript extends Command {
 
 

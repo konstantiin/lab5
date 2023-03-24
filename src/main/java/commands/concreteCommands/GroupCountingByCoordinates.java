@@ -7,6 +7,9 @@ import reading.readers.Reader;
 
 import static commands.launcher.CommandsLauncher.currentScripts;
 
+/**
+ * group_counting_by_coordinates
+ */
 public class GroupCountingByCoordinates extends Command {
 
     public GroupCountingByCoordinates(Reader reader) {

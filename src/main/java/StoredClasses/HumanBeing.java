@@ -16,6 +16,10 @@ import java.time.LocalDateTime;
 
 @XStreamAlias("human")
 public class HumanBeing implements Comparable<HumanBeing>, Checkable{
+    /**
+     * returns HumanBeing generator
+     * @return Generator
+     */
     public static Generator getGenerator(){
         return new HumanBeingGenerator();
     }
@@ -33,6 +37,11 @@ public class HumanBeing implements Comparable<HumanBeing>, Checkable{
     private @NotNull WeaponType weaponType; //Поле не может быть null
     private @NotNull Mood mood; //Поле не может быть null
     private Car car; //Поле может быть null
+
+    /**
+     * generates HumanBeing from HumanBeingForm
+     * @param h - HumanBeingForm object
+     */
     public HumanBeing(HumanBeingForm h) {
         this.name = h.getName();
         this.mood = h.getMood();
@@ -51,38 +60,66 @@ public class HumanBeing implements Comparable<HumanBeing>, Checkable{
         this.check();
     }
 
+    /**
+     * @return string
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * @return Coordinates
+     */
     public Coordinates getCoordinates() {
         return coordinates;
     }
 
+    /**
+     * @return id
+     */
     public long getId() {
         return id;
     }
 
+    /**
+     * @return impactSpeed
+     */
     public Float getImpactSpeed() {
         return impactSpeed;
     }
 
+    /**
+     * @return mood
+     */
     public Mood getMood() {
         return mood;
     }
 
+    /**
+     * @return realHero
+     */
     public boolean isRealHero() {
         return realHero;
     }
 
+    /**
+     * @return hasToothPick
+     */
     public Boolean ifHasToothpick() {
         return hasToothpick;
     }
 
+    /**
+     * @return weaponType
+     */
     public WeaponType getWeaponType() {
         return weaponType;
     }
 
+    /**
+     * updates object (except id and creationDate)
+     * @param obj - new HumanBeing
+     */
     public void update(HumanBeing obj) {
         this.name = obj.getName();
         this.car = obj.car;

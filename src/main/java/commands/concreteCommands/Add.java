@@ -6,6 +6,9 @@ import reading.readers.Reader;
 import static commands.launcher.CommandsLauncher.currentScripts;
 
 
+/**
+ * add command
+ */
 public class Add extends Command {
 
 

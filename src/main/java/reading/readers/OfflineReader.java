@@ -14,6 +14,12 @@ public class OfflineReader extends Reader {
     private final Pattern skipPattern = Pattern.compile("\\s*\\w*:");
     private String nextLine;
     private Scanner currentLineScanner;
+
+    /**
+     * @param file - input file
+     * @param col - managed collection
+     * @param tree - object tree to read
+     */
     public OfflineReader(FileInputStream file, CommandsLauncher<?> col, Node tree) {
         super(file, col, tree);
         currentLineScanner = new Scanner(scan.nextLine());
@@ -44,7 +50,7 @@ public class OfflineReader extends Reader {
     }
 
     @Override
-    public void readLine() {
+    protected void readLine() {
         try{
             currentLineScanner = new Scanner(nextLine);
             skip(currentLineScanner);

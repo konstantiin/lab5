@@ -1,6 +1,6 @@
 package reading.readers;
 
-import Exceptions.*;
+import Exceptions.inputExceptions.*;
 import commands.launcher.CommandsLauncher;
 import commands.abstraction.Command;
 import commands.concreteCommands.*;
@@ -13,6 +13,9 @@ import java.math.BigInteger;
 import java.util.*;
 
 public abstract class Reader {
+    /**
+     * List of classes representing numbers
+     */
     public static List<Class<?>> numbers = new ArrayList<>(Arrays.asList(Long.class, long.class, Integer.class, int.class,
             Float.class, float.class, Double.class, double.class,
             Short.class, short.class));
@@ -22,6 +25,11 @@ public abstract class Reader {
     protected final CommandsLauncher<?> collection;
     protected int tabs = 0;
 
+    /**
+     * @param source - input stream
+     * @param col - managed collection
+     * @param tree - tree to read
+     */
     public Reader(InputStream source, CommandsLauncher<?> col, Node tree) {
         this.scan = new Scanner(source);
         collection = col;
@@ -31,12 +39,21 @@ public abstract class Reader {
 
     protected abstract String getNext();
 
+    /**
+     * reads string
+     * @return next string
+     */
     public String readString() {
         String input = getNext().trim();
         if (input.equals("")) throw new EmptyStringException();
         return input;
     }
 
+    /**
+     * reads integer
+     * @return integer value between lowerBound and upperBound
+     * @throws OutOfBoundsException - if input is out of bounds
+     */
     public BigInteger readInt(BigInteger lowerBound, BigInteger upperBound) throws OutOfBoundsException {
         BigInteger value;
         try{
@@ -49,7 +66,11 @@ public abstract class Reader {
         }
         return value;
     }
-
+    /**
+     * reads decimal
+     * @return decimal value between lowerBound and upperBound
+     * @throws OutOfBoundsException - if input is out of bounds
+     */
     public BigDecimal readDec(BigDecimal lowerBound, BigDecimal upperBound) throws OutOfBoundsException {
         BigDecimal value;
         try{
@@ -63,6 +84,10 @@ public abstract class Reader {
         return value;
     }
 
+    /**
+     * reads boolean
+     * @return next boolean value
+     */
     public Boolean readBool() {
         try{
             return new Scanner(getNext()).nextBoolean();
@@ -71,8 +96,17 @@ public abstract class Reader {
         }
     }
 
+    /**
+     * reads next object, represented by object tree
+     * @return next object
+     */
     public abstract Object readObject();
 
+    /**
+     * reads Enum value
+     * @param type - Enum to read
+     * @return next value of Enum type
+     */
     public Object readEnum(Class<?> type) {
         String name = getNext();
         try {
@@ -87,11 +121,15 @@ public abstract class Reader {
         return value;*/
     }
 
+    /**
+     * returns managed collection
+     * @return collection
+     */
     public CommandsLauncher<?> getCollection() {
         return collection;
     }
 
-    public void initCommands() {
+    private void initCommands() {
         commands.put("help", new Help());
         commands.put("info", new Info(this));
         commands.put("show", new Show(this));
@@ -110,10 +148,17 @@ public abstract class Reader {
         commands.put("filter_contains_name", new FilterContainsName(this));
     }
 
+    /**
+     * returns object tree
+     * @return tree root
+     */
     public Node getObjectTree() {
         return this.objectTree;
     }
 
+    /**
+     * @return checks if stream has next value
+     */
     public abstract boolean hasNext();
 
 
@@ -170,9 +215,13 @@ public abstract class Reader {
         }
     }
 
-    public void readLine() {                                // мб стоит с этим что-то сделать, но пока что пусть будет так
+    protected void readLine() {                                // мб стоит с этим что-то сделать, но пока что пусть будет так
     }
 
+    /**
+     * reads command
+     * @return next command
+     */
     public Command readCommand() {
         String metName = getNext().trim();
         Command command = commands.get(metName);
@@ -182,6 +231,9 @@ public abstract class Reader {
         return command;
     }
 
+    /**
+     * closes stream
+     */
     public void closeStream() {
         scan.close();
     }

@@ -1,9 +1,9 @@
 package commands.launcher;
 
 
-import Exceptions.IdException;
-import Exceptions.InputException;
-import Exceptions.UnknownCommandException;
+import Exceptions.inputExceptions.IdException;
+import Exceptions.inputExceptions.InputException;
+import Exceptions.inputExceptions.UnknownCommandException;
 import StoredClasses.Coordinates;
 import StoredClasses.HumanBeing;
 
@@ -16,18 +16,37 @@ import java.util.*;
 import main.Main;
 
 
+/**
+ * realizes all the commands
+ * @param <T> - stored class
+ */
 public class CommandsLauncher<T extends Comparable<T>> {
+    /**
+     * scripts that are currently executing
+     */
     public static ArrayList<File> currentScripts = new ArrayList<>();
     private final TreeSet<T> collection;
 
+    /**
+     * @param collection - managed collection
+     */
     public CommandsLauncher(TreeSet<T> collection) {
         this.collection = collection;
     }
 
+    /**
+     * adds element to collection
+     * @param element - element to add
+     */
     public void add(Object element) {
         collection.add((T) element);
     }
 
+    /**
+     * adds element if it is less than any element in collection
+     * @param element - element to add
+     * @return true if element was added
+     */
     public boolean addIfMin(Object element) {
         T value = (T) element;
 
@@ -38,6 +57,11 @@ public class CommandsLauncher<T extends Comparable<T>> {
         return false;
     }
 
+    /**
+     * returns elements with given substring in their names
+     * @param pattern - substring to search in names
+     * @return list of elements with give substring in names
+     */
     public List<HumanBeing> filterContainsName(String pattern) {
         List<HumanBeing> result = new ArrayList<>();
         for (T element : collection) {
@@ -47,6 +71,10 @@ public class CommandsLauncher<T extends Comparable<T>> {
         return result;
     }
 
+    /**
+     * groups HumanBeings by coordinates
+     * @return HumanBeings grouped by coordinates
+     */
     public HashMap<Coordinates, List<HumanBeing>> groupCountingByCoordinates() {
         HashMap<Coordinates, List<HumanBeing>> groups = new HashMap<>();
         for (T element : collection) {
@@ -63,10 +91,18 @@ public class CommandsLauncher<T extends Comparable<T>> {
 
     }
 
+    /**
+     * prints information about collection
+     */
     public void info() {
         System.out.println("TreeSet " + collection + " of size " + collection.size());// возможно стоит вывести еще какую-то информацию
     }
 
+    /**
+     * Deletes element with given id
+     * @param id - element with this id will be removed
+     * @throws IdException - if element with id does not exist
+     */
     public void removeById(long id) throws IdException {
         for (var x : collection) {
             HumanBeing human = (HumanBeing) x;
@@ -78,24 +114,34 @@ public class CommandsLauncher<T extends Comparable<T>> {
         throw new IdException("Not valid id");
     }
 
-    public void removeLower(Object obj) {
-        T element = (T) obj;
-        T lower = collection.lower(element);
+    /**
+     * removes all the elements that are less than given element
+     * @param element - element to compare
+     */
+    public void removeLower(Object element) {
+        T value = (T) element;
+        T lower = collection.lower(value );
         while (lower != null) {
             collection.remove(lower);
-            lower = collection.lower(element);
+            lower = collection.lower(value);
         }
     }
-
-    public void removeGreater(Object obj) {
-        T element = (T) obj;
-        T greater = collection.higher(element);
+    /**
+     * removes all the elements that are greater than given element
+     * @param element - element to compare
+     */
+    public void removeGreater(Object element) {
+        T value = (T) element;
+        T greater = collection.higher(value);
         while (greater != null) {
             collection.remove(greater);
-            greater = collection.higher(element);
+            greater = collection.higher(value);
         }
     }
 
+    /**
+     * shows elements of collection
+     */
     public void show() {
         System.out.println("Collection:");
         for (var item : collection) {
@@ -104,6 +150,9 @@ public class CommandsLauncher<T extends Comparable<T>> {
         System.out.println("Collection ended");
     }
 
+    /**
+     * @return sum of impactSpeed
+     */
     public double sumOfImpactSpeed() {
         double sum = 0.0;
         for (var element : collection) {
@@ -113,6 +162,12 @@ public class CommandsLauncher<T extends Comparable<T>> {
         return sum;
     }
 
+    /**
+     * updates element with given id
+     * @param id element id
+     * @param element new element
+     * @throws IdException - if element with id does not exist
+     */
     public void update(long id, Object element) throws IdException {
         for (var item : collection) {
             HumanBeing human = (HumanBeing) item;
@@ -124,9 +179,17 @@ public class CommandsLauncher<T extends Comparable<T>> {
         throw new IdException("Not valid id");
     }
 
+    /**
+     * clears collection
+     */
     public void clear() {
         collection.clear();
     }
+
+    /**
+     * executes script
+     * @param reader - Reader of script
+     */
     public void execute_script(OfflineReader reader){
 
         while (reader.hasNext()) {
@@ -145,6 +208,9 @@ public class CommandsLauncher<T extends Comparable<T>> {
         }
     }
 
+    /**
+     * saves collection
+     */
     public void save() {
         Main.XMLInput.writeArr(new ArrayList<>((Collection<? extends HumanBeing>) collection));
     }

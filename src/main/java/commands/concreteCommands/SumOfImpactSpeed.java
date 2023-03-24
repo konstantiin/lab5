@@ -6,6 +6,9 @@ import reading.readers.Reader;
 
 import static commands.launcher.CommandsLauncher.currentScripts;
 
+/**
+ * sum_of_impact_speed command
+ */
 public class SumOfImpactSpeed extends Command {
     public SumOfImpactSpeed(Reader reader) {
         super(reader);

@@ -6,6 +6,9 @@ import reading.readers.Reader;
 
 import static commands.launcher.CommandsLauncher.currentScripts;
 
+/**
+ * filter_contains_name
+ */
 public class FilterContainsName extends Command {
 
     public FilterContainsName(Reader reader) {

@@ -5,6 +5,9 @@ import reading.readers.Reader;
 
 import static commands.launcher.CommandsLauncher.currentScripts;
 
+/**
+ * clear command
+ */
 public class Clear extends Command {
     public Clear(Reader reader) {
         super(reader);

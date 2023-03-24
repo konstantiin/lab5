@@ -1,22 +1,60 @@
 package parse;
 
-import Exceptions.*;
+import Exceptions.fileExceptions.FIleDoesNotExistException;
+import Exceptions.fileExceptions.FileNotReadableException;
+import Exceptions.fileExceptions.FileNotWritableException;
+import Exceptions.inputExceptions.InputException;
 import StoredClasses.HumanBeing;
 import StoredClasses.forms.HumanBeingForm;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.converters.ConversionException;
+import com.thoughtworks.xstream.io.StreamException;
 import com.thoughtworks.xstream.security.AnyTypePermission;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Scanner;
 
 
+/**
+ * xml parser class
+ */
 public class ParseXml {
     private final File xml;
     private final XStream stream;
+    /**
+     * return parser to read file
+     * @param path - file  path
+     * @return xml parser
+     */
+    public static ParseXml getXMLInput(String path){
+        while (true) {
+            try {
+                return new ParseXml(path);
+            } catch (FIleDoesNotExistException e) {
+                System.out.println("Your file does not exist! Type correct file path");
+                path = new Scanner(System.in).next();
+            } catch (FileNotReadableException e) {
+                System.out.println("Your file can't be read! Type correct file path");
+                path = new Scanner(System.in).next();
+            } catch (FileNotWritableException e) {
+                System.out.println("Your file isn't writable! Type correct file path");
+                path = new Scanner(System.in).next();
+            }catch (NullPointerException e){
+                System.out.println("File name hasn't been read! Please type it again");
+                path = new Scanner(System.in).next();
+            }
+        }
+    }
 
+    /**
+     * @param path - file path
+     * @throws FIleDoesNotExistException - if file does not exist
+     * @throws FileNotReadableException - if file can't be read
+     * @throws FileNotWritableException - if file can't be modified
+     */
     public ParseXml(String path) throws FIleDoesNotExistException, FileNotReadableException, FileNotWritableException {
 
         xml = new File(path);
@@ -25,11 +63,17 @@ public class ParseXml {
         if (!xml.canWrite()) throw new FileNotWritableException();
         stream = new XStream();
 
+
         stream.addPermission(AnyTypePermission.ANY);                                //разобраться с разрешениями
 
 
         stream.alias("elements", List.class);
     }
+
+    /**
+     * writes List of HumanBeings in file
+     * @param out - List to write in file
+     */
     public void writeArr(List<HumanBeing> out){
         stream.processAnnotations(HumanBeing.class);
         String result = stream.toXML(out);
@@ -40,6 +84,10 @@ public class ParseXml {
         }
     }
 
+    /**
+     * reads file, returns array of elements
+     * @return array of HumanBeings
+     */
     public List<HumanBeing> getArr() {
         stream.processAnnotations(HumanBeingForm.class);
         List<HumanBeingForm> beings;
@@ -57,8 +105,13 @@ public class ParseXml {
                 }
                 System.out.println();
                 return null;
-            } else throw e;
-            //return null;
+            } else {
+                System.out.println("File is not correct. Collection was left empty");
+                return null;
+            }
+        } catch (StreamException e){
+            System.out.println("File is not correct. Collection was left empty");
+            return null;
         }
         List<HumanBeing> result = new ArrayList<>();
         int count = 1;

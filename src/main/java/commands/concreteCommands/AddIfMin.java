@@ -5,6 +5,9 @@ import reading.readers.Reader;
 
 import static commands.launcher.CommandsLauncher.currentScripts;
 
+/**
+ * add_if_min command
+ */
 public class AddIfMin extends Command {
 
     public AddIfMin(Reader Reader) {

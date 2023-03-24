@@ -1,5 +1,8 @@
-package Exceptions;
+package Exceptions.inputExceptions;
 
+/**
+ * indicates that value is out of bounds
+ */
 public class OutOfBoundsException extends InputException {
 
     public OutOfBoundsException(String s) {

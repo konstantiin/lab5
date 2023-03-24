@@ -1,6 +1,6 @@
 package commands.concreteCommands;
 
-import Exceptions.IdException;
+import Exceptions.inputExceptions.IdException;
 import commands.abstraction.Command;
 import reading.readers.Reader;
 
@@ -8,6 +8,9 @@ import java.math.BigInteger;
 
 import static commands.launcher.CommandsLauncher.currentScripts;
 
+/**
+ * remove_by_id command
+ */
 public class RemoveById extends Command {
 
     public RemoveById(Reader reader) {

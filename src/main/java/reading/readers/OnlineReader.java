@@ -1,9 +1,9 @@
 package reading.readers;
 
-import Exceptions.EnumInputException;
-import Exceptions.OutOfBoundsException;
-import Exceptions.UnknownCommandException;
-import Exceptions.WrongInputException;
+import Exceptions.inputExceptions.EnumInputException;
+import Exceptions.inputExceptions.OutOfBoundsException;
+import Exceptions.inputExceptions.UnknownCommandException;
+import Exceptions.inputExceptions.WrongInputException;
 import commands.launcher.CommandsLauncher;
 import commands.abstraction.Command;
 import org.apache.commons.lang3.StringUtils;

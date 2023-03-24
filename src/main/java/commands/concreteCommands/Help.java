@@ -2,19 +2,25 @@ package commands.concreteCommands;
 
 import commands.abstraction.Command;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Scanner;
 
 import static commands.launcher.CommandsLauncher.currentScripts;
 
+/**
+ * help command
+ */
 public class Help extends Command {
     @Override
     public void execute() {
-        try {
-            Scanner help = new Scanner(new File("resources/help.txt"));
+        try (InputStream inputStream = getClass().getResourceAsStream("/help.txt")){
+            assert inputStream != null;
+            Scanner help = new Scanner(inputStream);
             while (help.hasNextLine()) System.out.println(help.nextLine());
-        } catch (FileNotFoundException ignored) {}
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     @Override
     public String toString() {

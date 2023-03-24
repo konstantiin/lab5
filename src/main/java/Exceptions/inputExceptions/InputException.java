@@ -1,5 +1,8 @@
-package Exceptions;
+package Exceptions.inputExceptions;
 
+/**
+ * parent of all input exceptions
+ */
 public class InputException extends RuntimeException{
     public InputException(Exception e) {
         super(e);

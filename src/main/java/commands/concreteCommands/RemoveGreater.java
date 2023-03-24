@@ -6,6 +6,9 @@ import reading.readers.Reader;
 
 import static commands.launcher.CommandsLauncher.currentScripts;
 
+/**
+ * remove_greater command
+ */
 public class RemoveGreater extends Command {
     public RemoveGreater(Reader reader) {
         super(reader);

@@ -14,22 +14,38 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * class that is node of object tree
+ */
 public class Node {
+    /**
+     * classes that would be read directly
+     */
     public static List<Class<?>> leavesClasses = Arrays.asList(Boolean.class, Integer.class, Float.class, String.class, Double.class, Long.class, Short.class);
     private final String name;
     private final Class<?> type;
     private final List<Node> fields = new ArrayList<>();
     private Generator objectGenerator;
+    /**
+     * lowerBound of object represented by this Node
+     */
     private BigDecimal lowerBound = null;
+    /**
+     * upperBound of object represented by this Node
+     */
     private BigDecimal upperBound = null;
     private boolean nullable = false;
 
+    /**
+     * @param type - class, represented by this node
+     * @param name - name of object, represented by this node
+     */
     public Node(Class<?> type, String name) {
         this.type = type;
         this.name = name;
     }
 
-    private static Generator getGenerator(Class<?> type) {                                    
+    private static Generator getGenerator(Class<?> type) {
         try {
             return (Generator) type.getMethod("getGenerator").invoke(null);
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
@@ -37,12 +53,17 @@ public class Node {
         }
     }
 
+    /**
+     * generates object tree
+     * @param type class, which is root of generated object tree
+     * @param name name of object, that would be root of object tree
+     * @return generated object tree
+     */
     public static Node generateTree(Class<?> type, String name) {
         Node root = new Node(type, name);
         root.setObjectGenerator(getGenerator(type));
         return create(root);
     }
-
     private static void setBounds(Node node, Field field) {
         var b = field.getAnnotation(Boundaries.class);
         BigDecimal l = null, u = null;
@@ -98,50 +119,70 @@ public class Node {
 
     }
 
-    public void setNullable(boolean nullable) {
+    private void setNullable(boolean nullable) {
         this.nullable = nullable;
     }
 
-    public void addField(Node field) {
+    private void addField(Node field) {
         fields.add(field);
     }
 
+    /**
+     * @return List of Fields (related Nodes)
+     */
     public List<Node> getFields() {
         return fields;
     }
 
+    /**
+     * @return name of this Node
+     */
     public String getName() {
         return this.name;
     }
 
+    /**
+     * @return class represented by this Node
+     */
     public Class<?> getType() {
         return type;
     }
 
+    /**
+     * @return lowerBound of this Node
+     */
     public BigDecimal getLowerBound() {
         return this.lowerBound;
     }
 
-    public void setLowerBound(BigDecimal lowerBound) {
+    private void setLowerBound(BigDecimal lowerBound) {
         this.lowerBound = lowerBound;
     }
-
+    /**
+     * @return lowerBound of this Node
+     */
     public BigDecimal getUpperBound() {
         return this.upperBound;
     }
 
-    public void setUpperBound(BigDecimal upperBound) {
+    private void setUpperBound(BigDecimal upperBound) {
         this.upperBound = upperBound;
     }
 
+    /**
+     * @return Generator of object represented by this Node
+     */
     public Generator getObjectGenerator() {
         return objectGenerator;
     }
 
-    public void setObjectGenerator(Generator obj) {
+    private void setObjectGenerator(Generator obj) {
         this.objectGenerator = obj;
     }
 
+    /**
+     * @return true, if object, represented by this Node, can be null
+     */
     public boolean ifNullable() {
         return nullable;
     }

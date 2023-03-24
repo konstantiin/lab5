@@ -5,6 +5,9 @@ import reading.readers.Reader;
 
 import static commands.launcher.CommandsLauncher.currentScripts;
 
+/**
+ * exit
+ */
 public class Exit extends Command {
     public Exit(Reader input){super(input);}
     @Override

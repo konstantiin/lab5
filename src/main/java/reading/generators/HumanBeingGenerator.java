@@ -9,7 +9,14 @@ import StoredClasses.forms.HumanBeingForm;
 
 import java.util.HashMap;
 
+/**
+ * class to generate HumanBeing
+ */
 public class HumanBeingGenerator implements Generator {
+    /**
+     * @param fields - object fields
+     * @return new HumanBeing object
+     */
     @Override
     public Object generate(HashMap<String, Object> fields) {
         var form = new HumanBeingForm((String) fields.get("name"), (Coordinates) fields.get("coordinates"), (Boolean) fields.get("realHero"),

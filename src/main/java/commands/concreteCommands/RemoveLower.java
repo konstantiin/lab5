@@ -5,6 +5,9 @@ import reading.readers.Reader;
 
 import static commands.launcher.CommandsLauncher.currentScripts;
 
+/**
+ * remove_lower command
+ */
 public class RemoveLower extends Command {
 
     public RemoveLower(Reader reader) {

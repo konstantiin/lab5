@@ -1,14 +1,20 @@
 package StoredClasses;
 
-import Exceptions.NullObjectException;
-import Exceptions.OutOfBoundsException;
+import Exceptions.inputExceptions.NullObjectException;
+import Exceptions.inputExceptions.OutOfBoundsException;
 import StoredClasses.annotations.Boundaries;
 import StoredClasses.annotations.NotNull;
 
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
 
+/**
+ * checkable interface
+ */
 public interface Checkable {
+    /**
+     * check if all field are correct. If not throws Exceptions
+     */
     default void check(){
         for (Field f: this.getClass().getDeclaredFields()){
             if (f.isAnnotationPresent(NotNull.class)){

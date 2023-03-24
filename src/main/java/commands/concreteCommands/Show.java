@@ -6,6 +6,9 @@ import reading.readers.Reader;
 
 import static commands.launcher.CommandsLauncher.currentScripts;
 
+/**
+ * show command
+ */
 public class Show extends Command {
     public Show(Reader reader) {
         super(reader);

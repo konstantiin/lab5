@@ -5,6 +5,9 @@ import reading.readers.Reader;
 
 import static commands.launcher.CommandsLauncher.currentScripts;
 
+/**
+ * save command
+ */
 public class Save extends Command {
     public Save(Reader reader) {
         super(reader);
