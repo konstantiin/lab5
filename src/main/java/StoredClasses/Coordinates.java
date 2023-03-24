@@ -1,12 +1,9 @@
 package StoredClasses;
 
-import Exceptions.OutOfBoundsException;
 import StoredClasses.annotations.Boundaries;
-import reading.generators.CarGenerator;
 import reading.generators.CoordinatesGenerator;
 import reading.generators.Generator;
 
-import java.math.BigDecimal;
 
 public class Coordinates implements Checkable{
     public static Generator getGenerator(){

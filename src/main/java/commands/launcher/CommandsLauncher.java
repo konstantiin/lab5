@@ -146,6 +146,6 @@ public class CommandsLauncher<T extends Comparable<T>> {
     }
 
     public void save() {
-        Main.XMLInput.writeArr(new ArrayList<HumanBeing>((Collection<? extends HumanBeing>) collection));
+        Main.XMLInput.writeArr(new ArrayList<>((Collection<? extends HumanBeing>) collection));
     }
 }

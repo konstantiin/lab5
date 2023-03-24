@@ -6,7 +6,6 @@ import StoredClasses.annotations.NotNull;
 import StoredClasses.enums.Mood;
 import StoredClasses.enums.WeaponType;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
-import reading.generators.CarGenerator;
 import reading.generators.Generator;
 import reading.generators.HumanBeingFormGenerator;
 

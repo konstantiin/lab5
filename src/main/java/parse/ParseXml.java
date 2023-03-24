@@ -4,7 +4,6 @@ import Exceptions.*;
 import StoredClasses.HumanBeing;
 import StoredClasses.forms.HumanBeingForm;
 import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.converters.ConversionException;
 import com.thoughtworks.xstream.security.AnyTypePermission;
 
