@@ -6,18 +6,17 @@ import Exceptions.inputExceptions.InputException;
 import Exceptions.inputExceptions.UnknownCommandException;
 import StoredClasses.Coordinates;
 import StoredClasses.HumanBeing;
-
 import commands.abstraction.Command;
+import main.Main;
 import reading.readers.OfflineReader;
 
 import java.io.File;
 import java.util.*;
 
-import main.Main;
-
 
 /**
  * realizes all the commands
+ *
  * @param <T> - stored class
  */
 public class CommandsLauncher<T extends Comparable<T>> {
@@ -36,6 +35,7 @@ public class CommandsLauncher<T extends Comparable<T>> {
 
     /**
      * adds element to collection
+     *
      * @param element - element to add
      */
     public void add(Object element) {
@@ -44,6 +44,7 @@ public class CommandsLauncher<T extends Comparable<T>> {
 
     /**
      * adds element if it is less than any element in collection
+     *
      * @param element - element to add
      * @return true if element was added
      */
@@ -59,6 +60,7 @@ public class CommandsLauncher<T extends Comparable<T>> {
 
     /**
      * returns elements with given substring in their names
+     *
      * @param pattern - substring to search in names
      * @return list of elements with give substring in names
      */
@@ -73,6 +75,7 @@ public class CommandsLauncher<T extends Comparable<T>> {
 
     /**
      * groups HumanBeings by coordinates
+     *
      * @return HumanBeings grouped by coordinates
      */
     public HashMap<Coordinates, List<HumanBeing>> groupCountingByCoordinates() {
@@ -100,6 +103,7 @@ public class CommandsLauncher<T extends Comparable<T>> {
 
     /**
      * Deletes element with given id
+     *
      * @param id - element with this id will be removed
      * @throws IdException - if element with id does not exist
      */
@@ -116,18 +120,21 @@ public class CommandsLauncher<T extends Comparable<T>> {
 
     /**
      * removes all the elements that are less than given element
+     *
      * @param element - element to compare
      */
     public void removeLower(Object element) {
         T value = (T) element;
-        T lower = collection.lower(value );
+        T lower = collection.lower(value);
         while (lower != null) {
             collection.remove(lower);
             lower = collection.lower(value);
         }
     }
+
     /**
      * removes all the elements that are greater than given element
+     *
      * @param element - element to compare
      */
     public void removeGreater(Object element) {
@@ -164,7 +171,8 @@ public class CommandsLauncher<T extends Comparable<T>> {
 
     /**
      * updates element with given id
-     * @param id element id
+     *
+     * @param id      element id
      * @param element new element
      * @throws IdException - if element with id does not exist
      */
@@ -188,9 +196,10 @@ public class CommandsLauncher<T extends Comparable<T>> {
 
     /**
      * executes script
+     *
      * @param reader - Reader of script
      */
-    public void execute_script(OfflineReader reader){
+    public void execute_script(OfflineReader reader) {
 
         while (reader.hasNext()) {
             Command met = null;
@@ -199,9 +208,9 @@ public class CommandsLauncher<T extends Comparable<T>> {
             } catch (UnknownCommandException e) {
                 System.out.println("No such command: " + e.getMessage() + " command was skipped");
             }
-            try{
+            try {
                 if (met != null) met.execute();
-            } catch (InputException e){
+            } catch (InputException e) {
                 System.out.println(e.getMessage() + " Command " + met + " was skipped");
                 reader.skipTillNextCommand();
             }

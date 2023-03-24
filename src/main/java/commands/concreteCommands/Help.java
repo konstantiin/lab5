@@ -14,7 +14,7 @@ import static commands.launcher.CommandsLauncher.currentScripts;
 public class Help extends Command {
     @Override
     public void execute() {
-        try (InputStream inputStream = getClass().getResourceAsStream("/help.txt")){
+        try (InputStream inputStream = getClass().getResourceAsStream("/help.txt")) {
             assert inputStream != null;
             Scanner help = new Scanner(inputStream);
             while (help.hasNextLine()) System.out.println(help.nextLine());
@@ -22,11 +22,12 @@ public class Help extends Command {
             e.printStackTrace();
         }
     }
+
     @Override
     public String toString() {
-        String res = "help" ;
+        String res = "help";
         if (currentScripts.size() != 0) {
-            res += "(in " + currentScripts.get(currentScripts.size()-1) + " script)";
+            res += "(in " + currentScripts.get(currentScripts.size() - 1) + " script)";
         }
         return res;
     }

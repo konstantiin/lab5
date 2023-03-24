@@ -11,7 +11,9 @@ import com.thoughtworks.xstream.converters.ConversionException;
 import com.thoughtworks.xstream.io.StreamException;
 import com.thoughtworks.xstream.security.AnyTypePermission;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -24,36 +26,12 @@ import java.util.Scanner;
 public class ParseXml {
     private final File xml;
     private final XStream stream;
-    /**
-     * return parser to read file
-     * @param path - file  path
-     * @return xml parser
-     */
-    public static ParseXml getXMLInput(String path){
-        while (true) {
-            try {
-                return new ParseXml(path);
-            } catch (FIleDoesNotExistException e) {
-                System.out.println("Your file does not exist! Type correct file path");
-                path = new Scanner(System.in).next();
-            } catch (FileNotReadableException e) {
-                System.out.println("Your file can't be read! Type correct file path");
-                path = new Scanner(System.in).next();
-            } catch (FileNotWritableException e) {
-                System.out.println("Your file isn't writable! Type correct file path");
-                path = new Scanner(System.in).next();
-            }catch (NullPointerException e){
-                System.out.println("File name hasn't been read! Please type it again");
-                path = new Scanner(System.in).next();
-            }
-        }
-    }
 
     /**
      * @param path - file path
      * @throws FIleDoesNotExistException - if file does not exist
-     * @throws FileNotReadableException - if file can't be read
-     * @throws FileNotWritableException - if file can't be modified
+     * @throws FileNotReadableException  - if file can't be read
+     * @throws FileNotWritableException  - if file can't be modified
      */
     public ParseXml(String path) throws FIleDoesNotExistException, FileNotReadableException, FileNotWritableException {
 
@@ -71,13 +49,40 @@ public class ParseXml {
     }
 
     /**
+     * return parser to read file
+     *
+     * @param path - file  path
+     * @return xml parser
+     */
+    public static ParseXml getXMLInput(String path) {
+        while (true) {
+            try {
+                return new ParseXml(path);
+            } catch (FIleDoesNotExistException e) {
+                System.out.println("Your file does not exist! Type correct file path");
+                path = new Scanner(System.in).next();
+            } catch (FileNotReadableException e) {
+                System.out.println("Your file can't be read! Type correct file path");
+                path = new Scanner(System.in).next();
+            } catch (FileNotWritableException e) {
+                System.out.println("Your file isn't writable! Type correct file path");
+                path = new Scanner(System.in).next();
+            } catch (NullPointerException e) {
+                System.out.println("File name hasn't been read! Please type it again");
+                path = new Scanner(System.in).next();
+            }
+        }
+    }
+
+    /**
      * writes List of HumanBeings in file
+     *
      * @param out - List to write in file
      */
-    public void writeArr(List<HumanBeing> out){
+    public void writeArr(List<HumanBeing> out) {
         stream.processAnnotations(HumanBeing.class);
         String result = stream.toXML(out);
-        try (FileOutputStream o = new FileOutputStream(xml)){
+        try (FileOutputStream o = new FileOutputStream(xml)) {
             o.write(result.getBytes());
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -86,20 +91,21 @@ public class ParseXml {
 
     /**
      * reads file, returns array of elements
+     *
      * @return array of HumanBeings
      */
     public List<HumanBeing> getArr() {
         stream.processAnnotations(HumanBeingForm.class);
         List<HumanBeingForm> beings;
-        try{
-             beings = (List<HumanBeingForm>) stream.fromXML(xml);// хз, что делать
-        } catch (ConversionException e){
-            if (e.getCause() instanceof IllegalArgumentException){
+        try {
+            beings = (List<HumanBeingForm>) stream.fromXML(xml);// хз, что делать
+        } catch (ConversionException e) {
+            if (e.getCause() instanceof IllegalArgumentException) {
                 System.out.print("Collection was left empty, because of wrong input in line ");
                 var message = e.getMessage().split("\\s+");
-                for (int i = 0; i < message.length; i++){
-                    if (Objects.equals(message[i], "number")){
-                        System.out.println(message[i+2]);
+                for (int i = 0; i < message.length; i++) {
+                    if (Objects.equals(message[i], "number")) {
+                        System.out.println(message[i + 2]);
                         return null;
                     }
                 }
@@ -109,16 +115,16 @@ public class ParseXml {
                 System.out.println("File is not correct. Collection was left empty");
                 return null;
             }
-        } catch (StreamException e){
+        } catch (StreamException e) {
             System.out.println("File is not correct. Collection was left empty");
             return null;
         }
         List<HumanBeing> result = new ArrayList<>();
         int count = 1;
         for (HumanBeingForm i : beings) {
-            try{
+            try {
                 result.add(new HumanBeing(i));
-            } catch (InputException e){
+            } catch (InputException e) {
                 System.out.println("Element " + count + " is not correct, because " + e.getMessage() + " It was skipped");
             }
             count++;

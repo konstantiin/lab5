@@ -25,11 +25,12 @@ public class Update extends Command {
             System.out.println("Id not found");
         }
     }
+
     @Override
     public String toString() {
-        String res = "update" ;
+        String res = "update";
         if (currentScripts.size() != 0) {
-            res += "(in " + currentScripts.get(currentScripts.size()-1) + " script)";
+            res += "(in " + currentScripts.get(currentScripts.size() - 1) + " script)";
         }
         return res;
     }

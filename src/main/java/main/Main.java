@@ -1,19 +1,15 @@
 package main;
 
-import Exceptions.fileExceptions.FIleDoesNotExistException;
-import Exceptions.fileExceptions.FileNotReadableException;
-import Exceptions.fileExceptions.FileNotWritableException;
+
 import Exceptions.inputExceptions.UnknownCommandException;
-import commands.launcher.CommandsLauncher;
 import StoredClasses.HumanBeing;
 import commands.abstraction.Command;
+import commands.launcher.CommandsLauncher;
 import parse.ParseXml;
 import reading.objectTree.Node;
 import reading.readers.OnlineReader;
 
-
 import java.util.List;
-import java.util.Scanner;
 import java.util.TreeSet;
 
 /**
@@ -24,12 +20,12 @@ public class Main {
 
     /**
      * return path to input/output file
+     *
      * @return xml file path
      */
     static String getPath() {
         return System.getenv("LAB5");
     }
-
 
 
     /**

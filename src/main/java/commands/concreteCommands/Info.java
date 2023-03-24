@@ -18,11 +18,12 @@ public class Info extends Command {
     public void execute() {
         collection.info();
     }
+
     @Override
     public String toString() {
-        String res = "info" ;
+        String res = "info";
         if (currentScripts.size() != 0) {
-            res += "(in " + currentScripts.get(currentScripts.size()-1) + " script)";
+            res += "(in " + currentScripts.get(currentScripts.size() - 1) + " script)";
         }
         return res;
     }

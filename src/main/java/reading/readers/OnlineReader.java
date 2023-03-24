@@ -4,8 +4,8 @@ import Exceptions.inputExceptions.EnumInputException;
 import Exceptions.inputExceptions.OutOfBoundsException;
 import Exceptions.inputExceptions.UnknownCommandException;
 import Exceptions.inputExceptions.WrongInputException;
-import commands.launcher.CommandsLauncher;
 import commands.abstraction.Command;
+import commands.launcher.CommandsLauncher;
 import org.apache.commons.lang3.StringUtils;
 import reading.objectTree.Node;
 
@@ -20,10 +20,12 @@ public class OnlineReader extends Reader {
     public OnlineReader(InputStream source, CommandsLauncher<?> col, Node tree) {
         super(source, col, tree);
     }
+
     private void print(String s) {
         lastPrintedChar = s.charAt(s.length() - 1);
         System.out.print(s);
     }
+
     @Override
     public BigInteger readInt(BigInteger lowerBound, BigInteger upperBound) {
 
@@ -39,6 +41,7 @@ public class OnlineReader extends Reader {
             return this.readInt(lowerBound, upperBound);
         }
     }
+
     @Override
     protected Object readTree(Node v) {
         if (lastPrintedChar != '\n') {
@@ -47,6 +50,7 @@ public class OnlineReader extends Reader {
         print(StringUtils.repeat("\t", tabs + 1) + v.getName() + ": ");
         return super.readTree(v);
     }
+
     @Override
     public Object readObject() {
         tabs = -1;
@@ -55,11 +59,13 @@ public class OnlineReader extends Reader {
         print("Input ended\n");
         return result;
     }
+
     @Override
     public String readString() {
         lastPrintedChar = '\n';
         return super.readString();
     }
+
     @Override
     protected boolean readNull(Node v) {
         print(StringUtils.repeat("\t", tabs) + "Leave this field null?(y/n)");
@@ -94,6 +100,7 @@ public class OnlineReader extends Reader {
             return this.readDec(lowerBound, upperBound);
         }
     }
+
     @Override
     public Boolean readBool() {
         try {
@@ -104,13 +111,15 @@ public class OnlineReader extends Reader {
             return this.readBool();
         }
     }
+
     public boolean hasNext() {
-        try{
+        try {
             return scan.hasNext();
-        } catch (IllegalStateException e){
+        } catch (IllegalStateException e) {
             return false;
         }
     }
+
     @Override
     public Object readEnum(Class<?> type) {
         try {
@@ -121,6 +130,7 @@ public class OnlineReader extends Reader {
             return this.readEnum(type);
         }
     }
+
     @Override
     public Command readCommand() {
         try {
@@ -130,6 +140,7 @@ public class OnlineReader extends Reader {
             return null;
         }
     }
+
     @Override
     protected String getNext() {
         return scan.next();

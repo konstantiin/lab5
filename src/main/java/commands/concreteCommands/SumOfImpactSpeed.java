@@ -18,11 +18,12 @@ public class SumOfImpactSpeed extends Command {
     public void execute() {
         System.out.println(collection.sumOfImpactSpeed());
     }
+
     @Override
     public String toString() {
-        String res = "sum_of_impact_speed" ;
+        String res = "sum_of_impact_speed";
         if (currentScripts.size() != 0) {
-            res += "(in " + currentScripts.get(currentScripts.size()-1) + " script)";
+            res += "(in " + currentScripts.get(currentScripts.size() - 1) + " script)";
         }
         return res;
     }

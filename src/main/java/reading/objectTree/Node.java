@@ -55,6 +55,7 @@ public class Node {
 
     /**
      * generates object tree
+     *
      * @param type class, which is root of generated object tree
      * @param name name of object, that would be root of object tree
      * @return generated object tree
@@ -64,6 +65,7 @@ public class Node {
         root.setObjectGenerator(getGenerator(type));
         return create(root);
     }
+
     private static void setBounds(Node node, Field field) {
         var b = field.getAnnotation(Boundaries.class);
         BigDecimal l = null, u = null;
@@ -158,6 +160,7 @@ public class Node {
     private void setLowerBound(BigDecimal lowerBound) {
         this.lowerBound = lowerBound;
     }
+
     /**
      * @return lowerBound of this Node
      */

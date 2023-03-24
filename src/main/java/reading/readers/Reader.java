@@ -1,9 +1,9 @@
 package reading.readers;
 
 import Exceptions.inputExceptions.*;
-import commands.launcher.CommandsLauncher;
 import commands.abstraction.Command;
 import commands.concreteCommands.*;
+import commands.launcher.CommandsLauncher;
 import reading.objectTree.Node;
 
 import java.io.InputStream;
@@ -27,8 +27,8 @@ public abstract class Reader {
 
     /**
      * @param source - input stream
-     * @param col - managed collection
-     * @param tree - tree to read
+     * @param col    - managed collection
+     * @param tree   - tree to read
      */
     public Reader(InputStream source, CommandsLauncher<?> col, Node tree) {
         this.scan = new Scanner(source);
@@ -41,6 +41,7 @@ public abstract class Reader {
 
     /**
      * reads string
+     *
      * @return next string
      */
     public String readString() {
@@ -51,14 +52,15 @@ public abstract class Reader {
 
     /**
      * reads integer
+     *
      * @return integer value between lowerBound and upperBound
      * @throws OutOfBoundsException - if input is out of bounds
      */
     public BigInteger readInt(BigInteger lowerBound, BigInteger upperBound) throws OutOfBoundsException {
         BigInteger value;
-        try{
+        try {
             value = new Scanner(getNext()).nextBigInteger();
-        } catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             throw new WrongInputException("value should be an integer number!");
         }
         if (value.compareTo(lowerBound) < 0 || value.compareTo(upperBound) > 0) {
@@ -66,14 +68,16 @@ public abstract class Reader {
         }
         return value;
     }
+
     /**
      * reads decimal
+     *
      * @return decimal value between lowerBound and upperBound
      * @throws OutOfBoundsException - if input is out of bounds
      */
     public BigDecimal readDec(BigDecimal lowerBound, BigDecimal upperBound) throws OutOfBoundsException {
         BigDecimal value;
-        try{
+        try {
             value = new Scanner(getNext()).nextBigDecimal();
         } catch (NoSuchElementException e) {
             throw new WrongInputException("value should be a decimal number!");
@@ -86,24 +90,27 @@ public abstract class Reader {
 
     /**
      * reads boolean
+     *
      * @return next boolean value
      */
     public Boolean readBool() {
-        try{
+        try {
             return new Scanner(getNext()).nextBoolean();
-        } catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             throw new WrongInputException("value should be true or false!");
         }
     }
 
     /**
      * reads next object, represented by object tree
+     *
      * @return next object
      */
     public abstract Object readObject();
 
     /**
      * reads Enum value
+     *
      * @param type - Enum to read
      * @return next value of Enum type
      */
@@ -113,7 +120,7 @@ public abstract class Reader {
             return type.getMethod("valueOf", String.class).invoke(null, name);
         } catch (IllegalAccessException | NoSuchMethodException e) {
             throw new RuntimeException(type.getName() + " is not Enum");
-        } catch (InvocationTargetException e){
+        } catch (InvocationTargetException e) {
             throw new EnumInputException(e);
         }
         /*Enum<?> value;
@@ -123,6 +130,7 @@ public abstract class Reader {
 
     /**
      * returns managed collection
+     *
      * @return collection
      */
     public CommandsLauncher<?> getCollection() {
@@ -150,6 +158,7 @@ public abstract class Reader {
 
     /**
      * returns object tree
+     *
      * @return tree root
      */
     public Node getObjectTree() {
@@ -163,6 +172,7 @@ public abstract class Reader {
 
 
     protected abstract boolean readNull(Node v);
+
     protected abstract boolean checkNotNullObject();
 
     protected Object readTree(Node v) {
@@ -204,13 +214,13 @@ public abstract class Reader {
             }
             tabs--;
             return result;
-        } catch (EmptyStringException e){
+        } catch (EmptyStringException e) {
             throw new InputException("Field \"" + v.getName() + "\" should not be empty!");
-        } catch (EnumInputException e){
+        } catch (EnumInputException e) {
             throw new InputException("Field \"" + v.getName() + "\" should be one of " + v.getType() + " values!");
-        } catch (OutOfBoundsException e){
+        } catch (OutOfBoundsException e) {
             throw new InputException("Field \"" + v.getName() + "\" should be between " + v.getLowerBound() + " and " + v.getUpperBound() + "!");
-        } catch (WrongInputException e){
+        } catch (WrongInputException e) {
             throw new InputException("Field \"" + v.getName() + "\" " + e.getMessage());
         }
     }
@@ -220,6 +230,7 @@ public abstract class Reader {
 
     /**
      * reads command
+     *
      * @return next command
      */
     public Command readCommand() {

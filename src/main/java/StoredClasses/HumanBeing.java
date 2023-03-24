@@ -7,22 +7,13 @@ import StoredClasses.enums.WeaponType;
 import StoredClasses.forms.HumanBeingForm;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
-
 import reading.generators.Generator;
 import reading.generators.HumanBeingGenerator;
-
 
 import java.time.LocalDateTime;
 
 @XStreamAlias("human")
-public class HumanBeing implements Comparable<HumanBeing>, Checkable{
-    /**
-     * returns HumanBeing generator
-     * @return Generator
-     */
-    public static Generator getGenerator(){
-        return new HumanBeingGenerator();
-    }
+public class HumanBeing implements Comparable<HumanBeing>, Checkable {
     @XStreamOmitField
     public static long idCounter = 1;
     @XStreamOmitField
@@ -37,9 +28,9 @@ public class HumanBeing implements Comparable<HumanBeing>, Checkable{
     private @NotNull WeaponType weaponType; //Поле не может быть null
     private @NotNull Mood mood; //Поле не может быть null
     private Car car; //Поле может быть null
-
     /**
      * generates HumanBeing from HumanBeingForm
+     *
      * @param h - HumanBeingForm object
      */
     public HumanBeing(HumanBeingForm h) {
@@ -58,6 +49,15 @@ public class HumanBeing implements Comparable<HumanBeing>, Checkable{
         idCounter++;
         this.creationDate = LocalDateTime.now();
         this.check();
+    }
+
+    /**
+     * returns HumanBeing generator
+     *
+     * @return Generator
+     */
+    public static Generator getGenerator() {
+        return new HumanBeingGenerator();
     }
 
     /**
@@ -118,6 +118,7 @@ public class HumanBeing implements Comparable<HumanBeing>, Checkable{
 
     /**
      * updates object (except id and creationDate)
+     *
      * @param obj - new HumanBeing
      */
     public void update(HumanBeing obj) {

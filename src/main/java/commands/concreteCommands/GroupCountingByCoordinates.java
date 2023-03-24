@@ -23,11 +23,12 @@ public class GroupCountingByCoordinates extends Command {
             System.out.println("Group with coordinates " + key + " has " + groups.get(key).size() + " elements");
         }
     }
+
     @Override
     public String toString() {
-        String res = "group_counting_by_coordinates" ;
+        String res = "group_counting_by_coordinates";
         if (currentScripts.size() != 0) {
-            res += "(in " + currentScripts.get(currentScripts.size()-1) + " script)";
+            res += "(in " + currentScripts.get(currentScripts.size() - 1) + " script)";
         }
         return res;
     }

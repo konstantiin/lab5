@@ -9,7 +9,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-
 import static commands.launcher.CommandsLauncher.currentScripts;
 
 /**
@@ -26,7 +25,7 @@ public class ExecuteScript extends Command {
     @Override
     public void execute() {
         File script = new File(input.readString());
-        if (currentScripts.contains(script)){
+        if (currentScripts.contains(script)) {
             System.out.println("Script is already compiling. Command " + this + " was skipped");
             return;
         }
@@ -43,11 +42,12 @@ public class ExecuteScript extends Command {
         }
         System.out.println("Script " + script + " has compiled");
     }
+
     @Override
     public String toString() {
-        String res = "execute_script" ;
+        String res = "execute_script";
         if (currentScripts.size() != 0) {
-            res += "(in " + currentScripts.get(currentScripts.size()-1) + " script)";
+            res += "(in " + currentScripts.get(currentScripts.size() - 1) + " script)";
         }
         return res;
     }

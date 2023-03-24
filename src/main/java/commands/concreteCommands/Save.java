@@ -18,11 +18,12 @@ public class Save extends Command {
         collection.save();
         System.out.println("Collection was saved");
     }
+
     @Override
     public String toString() {
-        String res = "save" ;
+        String res = "save";
         if (currentScripts.size() != 0) {
-            res += "(in " + currentScripts.get(currentScripts.size()-1) + " script)";
+            res += "(in " + currentScripts.get(currentScripts.size() - 1) + " script)";
         }
         return res;
     }

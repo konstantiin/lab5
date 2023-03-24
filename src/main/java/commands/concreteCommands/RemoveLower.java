@@ -19,11 +19,12 @@ public class RemoveLower extends Command {
         collection.removeLower(input.readObject()); // mb print amount of deleted elements
         System.out.println("Elements removed");
     }
+
     @Override
     public String toString() {
-        String res = "remove_lower" ;
+        String res = "remove_lower";
         if (currentScripts.size() != 0) {
-            res += "(in " + currentScripts.get(currentScripts.size()-1) + " script)";
+            res += "(in " + currentScripts.get(currentScripts.size() - 1) + " script)";
         }
         return res;
     }

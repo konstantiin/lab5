@@ -15,9 +15,6 @@ import reading.generators.HumanBeingFormGenerator;
  */
 @XStreamAlias("human")
 public class HumanBeingForm {
-    public static Generator getGenerator(){
-        return new HumanBeingFormGenerator();
-    }
     private final @NotNull String name;
     private final @NotNull Coordinates coordinates;
     private final @NotNull Boolean realHero;
@@ -26,7 +23,6 @@ public class HumanBeingForm {
     private final @NotNull WeaponType weaponType;
     private final @NotNull Mood mood;
     private final Car car;
-
     public HumanBeingForm(String name, Coordinates coordinates, Boolean realHero, Boolean hasToothpick, Float impactSpeed, WeaponType weaponType, Mood mood, Car car) {
         this.name = name;
         this.coordinates = coordinates;
@@ -36,6 +32,10 @@ public class HumanBeingForm {
         this.weaponType = weaponType;
         this.mood = mood;
         this.car = car;
+    }
+
+    public static Generator getGenerator() {
+        return new HumanBeingFormGenerator();
     }
 
     public String getName() {

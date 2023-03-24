@@ -8,7 +8,8 @@ public class OutOfBoundsException extends InputException {
     public OutOfBoundsException(String s) {
         super(s);
     }
-    public OutOfBoundsException(){
+
+    public OutOfBoundsException() {
         super();
     }
 }

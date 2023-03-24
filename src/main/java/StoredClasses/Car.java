@@ -3,20 +3,13 @@ package StoredClasses;
 import StoredClasses.annotations.NotNull;
 import reading.generators.CarGenerator;
 import reading.generators.Generator;
+
 /**
  * stored class
  */
-public class Car implements Checkable{
+public class Car implements Checkable {
     private final @NotNull String name;
     private final @NotNull Boolean cool;
-
-    /**
-     * returns Car Generator
-     * @return Generator
-     */
-    public static Generator getGenerator(){
-        return new CarGenerator();
-    }
 
     /**
      * @param name name of car
@@ -25,6 +18,15 @@ public class Car implements Checkable{
     public Car(String name, boolean cool) {
         this.name = name;
         this.cool = cool;
+    }
+
+    /**
+     * returns Car Generator
+     *
+     * @return Generator
+     */
+    public static Generator getGenerator() {
+        return new CarGenerator();
     }
 
     @Override

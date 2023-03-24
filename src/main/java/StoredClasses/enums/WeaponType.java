@@ -1,4 +1,5 @@
 package StoredClasses.enums;
+
 /**
  * stored class
  */

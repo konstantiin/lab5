@@ -26,11 +26,12 @@ public class RemoveById extends Command {
             System.out.println("Element with this id does not exist");
         }
     }
+
     @Override
     public String toString() {
-        String res = "remove_by_id" ;
+        String res = "remove_by_id";
         if (currentScripts.size() != 0) {
-            res += "(in " + currentScripts.get(currentScripts.size()-1) + " script)";
+            res += "(in " + currentScripts.get(currentScripts.size() - 1) + " script)";
         }
         return res;
     }

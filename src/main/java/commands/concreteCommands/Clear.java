@@ -18,11 +18,12 @@ public class Clear extends Command {
         collection.clear();
         System.out.println("collection cleared");
     }
+
     @Override
     public String toString() {
-        String res = "clear" ;
+        String res = "clear";
         if (currentScripts.size() != 0) {
-            res += "(in " + currentScripts.get(currentScripts.size()-1) + " script)";
+            res += "(in " + currentScripts.get(currentScripts.size() - 1) + " script)";
         }
         return res;
     }

@@ -17,14 +17,14 @@ public class OfflineReader extends Reader {
 
     /**
      * @param file - input file
-     * @param col - managed collection
+     * @param col  - managed collection
      * @param tree - object tree to read
      */
     public OfflineReader(FileInputStream file, CommandsLauncher<?> col, Node tree) {
         super(file, col, tree);
         currentLineScanner = new Scanner(scan.nextLine());
         skip(currentLineScanner);
-        try{
+        try {
             nextLine = scan.nextLine();
         } catch (NoSuchElementException e) {
             nextLine = null;
@@ -37,8 +37,7 @@ public class OfflineReader extends Reader {
             var res = currentLineScanner.next();
             if (!currentLineScanner.hasNext()) readLine();
             return res;
-        }
-        else{
+        } else {
             return "";
         }
     }
@@ -46,15 +45,16 @@ public class OfflineReader extends Reader {
     private void skip(Scanner s) {
         try {
             s.skip(skipPattern);
-        } catch (NoSuchElementException ignored) {}
+        } catch (NoSuchElementException ignored) {
+        }
     }
 
     @Override
     protected void readLine() {
-        try{
+        try {
             currentLineScanner = new Scanner(nextLine);
             skip(currentLineScanner);
-        } catch (Exception e){
+        } catch (Exception e) {
             currentLineScanner = null;
         }
         try {
@@ -69,9 +69,10 @@ public class OfflineReader extends Reader {
     public boolean hasNext() {
         return currentLineScanner != null;
     }
-    public void skipTillNextCommand(){
+
+    public void skipTillNextCommand() {
         if (currentLineScanner == null) return;
-        for (String c: commands.keySet()){
+        for (String c : commands.keySet()) {
             if (currentLineScanner.hasNext(c)) return;
         }
         this.readLine();

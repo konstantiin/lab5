@@ -18,11 +18,12 @@ public class Show extends Command {
     public void execute() {
         collection.show();
     }
+
     @Override
     public String toString() {
-        String res = "show" ;
+        String res = "show";
         if (currentScripts.size() != 0) {
-            res += "(in " + currentScripts.get(currentScripts.size()-1) + " script)";
+            res += "(in " + currentScripts.get(currentScripts.size() - 1) + " script)";
         }
         return res;
     }

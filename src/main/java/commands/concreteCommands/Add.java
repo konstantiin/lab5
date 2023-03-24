@@ -24,9 +24,9 @@ public class Add extends Command {
 
     @Override
     public String toString() {
-        String res = "add" ;
+        String res = "add";
         if (currentScripts.size() != 0) {
-            res += "(in " + currentScripts.get(currentScripts.size()-1) + " script)";
+            res += "(in " + currentScripts.get(currentScripts.size() - 1) + " script)";
         }
         return res;
     }
