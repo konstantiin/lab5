@@ -1,15 +1,15 @@
 package parse;
 
-import Exceptions.fileExceptions.FIleDoesNotExistException;
-import Exceptions.fileExceptions.FileNotReadableException;
-import Exceptions.fileExceptions.FileNotWritableException;
-import Exceptions.inputExceptions.InputException;
 import StoredClasses.HumanBeing;
 import StoredClasses.forms.HumanBeingForm;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.converters.ConversionException;
 import com.thoughtworks.xstream.io.StreamException;
 import com.thoughtworks.xstream.security.AnyTypePermission;
+import exceptions.fileExceptions.FIleDoesNotExistException;
+import exceptions.fileExceptions.FileNotReadableException;
+import exceptions.fileExceptions.FileNotWritableException;
+import exceptions.inputExceptions.InputException;
 
 import java.io.File;
 import java.io.FileOutputStream;

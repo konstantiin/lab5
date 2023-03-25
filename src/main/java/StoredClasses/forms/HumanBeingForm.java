@@ -23,6 +23,7 @@ public class HumanBeingForm {
     private final @NotNull WeaponType weaponType;
     private final @NotNull Mood mood;
     private final Car car;
+
     public HumanBeingForm(String name, Coordinates coordinates, Boolean realHero, Boolean hasToothpick, Float impactSpeed, WeaponType weaponType, Mood mood, Car car) {
         this.name = name;
         this.coordinates = coordinates;

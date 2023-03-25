@@ -1,12 +1,12 @@
 package commands.launcher;
 
 
-import Exceptions.inputExceptions.IdException;
-import Exceptions.inputExceptions.InputException;
-import Exceptions.inputExceptions.UnknownCommandException;
 import StoredClasses.Coordinates;
 import StoredClasses.HumanBeing;
 import commands.abstraction.Command;
+import exceptions.inputExceptions.IdException;
+import exceptions.inputExceptions.InputException;
+import exceptions.inputExceptions.UnknownCommandException;
 import main.Main;
 import reading.readers.OfflineReader;
 

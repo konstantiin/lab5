@@ -1,4 +1,4 @@
-package Exceptions.fileExceptions;
+package exceptions.fileExceptions;
 
 /**
  * parent of all FIleException

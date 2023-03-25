@@ -1,7 +1,7 @@
 package commands.concreteCommands;
 
-import Exceptions.inputExceptions.IdException;
 import commands.abstraction.Command;
+import exceptions.inputExceptions.IdException;
 import reading.readers.Reader;
 
 import java.math.BigInteger;

@@ -1,4 +1,4 @@
-package Exceptions.inputExceptions;
+package exceptions.inputExceptions;
 
 /**
  * parent of all input exceptions

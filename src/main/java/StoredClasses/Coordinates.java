@@ -11,6 +11,7 @@ import reading.generators.Generator;
 public class Coordinates implements Checkable {
     private final @Boundaries(lowerBound = "-570", upperBound = "570") float x; //Максимальное значение поля: 570
     private final @Boundaries(lowerBound = "-294", upperBound = "294") long y; //Максимальное значение поля: 294
+
     /**
      * @param x - x coordinate
      * @param y - y coordinate

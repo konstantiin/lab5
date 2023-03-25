@@ -28,6 +28,7 @@ public class HumanBeing implements Comparable<HumanBeing>, Checkable {
     private @NotNull WeaponType weaponType; //Поле не может быть null
     private @NotNull Mood mood; //Поле не может быть null
     private Car car; //Поле может быть null
+
     /**
      * generates HumanBeing from HumanBeingForm
      *

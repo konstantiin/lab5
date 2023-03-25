@@ -1,4 +1,4 @@
-package Exceptions.fileExceptions;
+package exceptions.fileExceptions;
 
 /**
  * indicates that file does not exist

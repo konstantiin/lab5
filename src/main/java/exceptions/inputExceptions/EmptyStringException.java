@@ -1,4 +1,4 @@
-package Exceptions.inputExceptions;
+package exceptions.inputExceptions;
 
 /**
  * indicates that string is empty
