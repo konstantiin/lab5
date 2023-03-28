@@ -110,11 +110,10 @@ public class ParseXml {
                     }
                 }
                 System.out.println();
-                return null;
             } else {
                 System.out.println("File is not correct. Collection was left empty");
-                return null;
             }
+            return null;
         } catch (StreamException e) {
             System.out.println("File is not correct. Collection was left empty");
             return null;
