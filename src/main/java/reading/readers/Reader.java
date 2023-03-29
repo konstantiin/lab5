@@ -4,6 +4,7 @@ import commands.abstraction.Command;
 import commands.concreteCommands.*;
 import commands.launcher.CommandsLauncher;
 import exceptions.inputExceptions.*;
+import org.apache.commons.lang3.StringUtils;
 import reading.objectTree.Node;
 
 import java.io.InputStream;
@@ -19,10 +20,26 @@ public abstract class Reader {
     public static List<Class<?>> numbers = new ArrayList<>(Arrays.asList(Long.class, long.class, Integer.class, int.class,
             Float.class, float.class, Double.class, double.class,
             Short.class, short.class));
+
+    /**
+     * Hash map with commands
+     */
     protected final HashMap<String, Command> commands = new HashMap<>();
+    /**
+     * Scanner from which data will be taken
+     */
     protected final Scanner scan;
+    /**
+     * Node, which is pointing to root of Object tree
+     */
     protected final Node objectTree;
+    /**
+     * managed collection
+     */
     protected final CommandsLauncher<?> collection;
+    /**
+     * variable in which stores current depth.
+     */
     protected int tabs = 0;
 
     /**
@@ -37,6 +54,9 @@ public abstract class Reader {
         this.initCommands();
     }
 
+    /**
+     * @return next string item
+     */
     protected abstract String getNext();
 
     /**
@@ -92,10 +112,16 @@ public abstract class Reader {
      * reads boolean
      *
      * @return next boolean value
+     * @throws WrongInputException - if there is no boolean value to read
      */
     public Boolean readBool() {
         try {
-            return new Scanner(getNext()).nextBoolean();
+            String value = getNext().trim();
+            if (StringUtils.isNumeric(value)){
+                if (value.equals("0")) return false;
+                else if (value.equals("1")) return true;
+            }
+            return new Scanner(value).nextBoolean();
         } catch (NoSuchElementException e) {
             throw new WrongInputException("value should be true or false!");
         }
@@ -109,7 +135,7 @@ public abstract class Reader {
     public abstract Object readObject();
 
     /**
-     * reads Enum value
+     * reads Enum value. Enum value could be either string, or integer.
      *
      * @param type - Enum to read
      * @return next value of Enum type
@@ -117,15 +143,17 @@ public abstract class Reader {
     public Object readEnum(Class<?> type) {
         String name = getNext();
         try {
-            return type.getMethod("valueOf", String.class).invoke(null, name);
+            if (StringUtils.isNumeric(name)) {
+                return ((Object[])type.getMethod("values").invoke(null))[Integer.parseInt(name)-1];
+            }
+        } catch (Exception ignored) {}
+        try {
+            return type.getMethod("valueOf", String.class).invoke(null, name);//,tp ji
         } catch (IllegalAccessException | NoSuchMethodException e) {
             throw new RuntimeException(type.getName() + " is not Enum");
         } catch (InvocationTargetException e) {
             throw new EnumInputException(e);
         }
-        /*Enum<?> value;
-        value = Enum.valueOf(type, name); // IllegalArgumentException
-        return value;*/
     }
 
     /**
@@ -137,6 +165,9 @@ public abstract class Reader {
         return collection;
     }
 
+    /**
+     * initialize commands
+     */
     private void initCommands() {
         commands.put("help", new Help());
         commands.put("info", new Info(this));
@@ -171,10 +202,21 @@ public abstract class Reader {
     public abstract boolean hasNext();
 
 
+    /**
+     * @param v - current node of object tree
+     * @return true, if next item is null.
+     */
     protected abstract boolean readNull(Node v);
 
+    /**
+     * @return true, if next item is not null
+     */
     protected abstract boolean checkNotNullObject();
 
+    /**
+     * @param v -- current node of object tree
+     * @return read object
+     */
     protected Object readTree(Node v) {
         try {
             tabs++;
@@ -225,6 +267,9 @@ public abstract class Reader {
         }
     }
 
+    /**
+     * reads next line
+     */
     protected void readLine() {                                // мб стоит с этим что-то сделать, но пока что пусть будет так
     }
 
@@ -243,7 +288,7 @@ public abstract class Reader {
     }
 
     /**
-     * closes stream
+     * closes scanner's stream
      */
     public void closeStream() {
         scan.close();

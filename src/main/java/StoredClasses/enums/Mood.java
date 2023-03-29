@@ -8,6 +8,8 @@ public enum Mood {
     LONGING,
     GLOOM,
     CALM,
-    FRENZY
-
+    FRENZY;
+    public static Mood valueOf(int i){
+        return Mood.values()[i-1];
+    }
 }

@@ -24,6 +24,9 @@ public class CommandsLauncher<T extends Comparable<T>> {
      * scripts that are currently executing
      */
     public static ArrayList<File> currentScripts = new ArrayList<>();
+    /**
+     * managed collection
+     */
     private final TreeSet<T> collection;
 
     /**
@@ -111,6 +114,7 @@ public class CommandsLauncher<T extends Comparable<T>> {
         for (var x : collection) {
             HumanBeing human = (HumanBeing) x;
             if (human.getId() == id) {
+                HumanBeing.ids.remove(id);
                 collection.remove(x);
                 return;
             }
@@ -127,6 +131,9 @@ public class CommandsLauncher<T extends Comparable<T>> {
         T value = (T) element;
         T lower = collection.lower(value);
         while (lower != null) {
+            if (lower instanceof HumanBeing){
+                HumanBeing.ids.remove(((HumanBeing) lower).getId());
+            }
             collection.remove(lower);
             lower = collection.lower(value);
         }
@@ -141,6 +148,9 @@ public class CommandsLauncher<T extends Comparable<T>> {
         T value = (T) element;
         T greater = collection.higher(value);
         while (greater != null) {
+            if (greater instanceof HumanBeing){
+                HumanBeing.ids.remove(((HumanBeing) greater).getId());
+            }
             collection.remove(greater);
             greater = collection.higher(value);
         }
@@ -191,6 +201,7 @@ public class CommandsLauncher<T extends Comparable<T>> {
      * clears collection
      */
     public void clear() {
+        HumanBeing.ids.clear();
         collection.clear();
     }
 
@@ -221,6 +232,6 @@ public class CommandsLauncher<T extends Comparable<T>> {
      * saves collection
      */
     public void save() {
-        Main.XMLInput.writeArr(new ArrayList<>((Collection<? extends HumanBeing>) collection));
+        Main.XMLInput.writeArr(new ArrayList<>((Collection< HumanBeing>) collection));
     }
 }

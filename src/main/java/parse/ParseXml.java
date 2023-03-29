@@ -24,7 +24,13 @@ import java.util.Scanner;
  * xml parser class
  */
 public class ParseXml {
+    /**
+     * parsed file
+     */
     private final File xml;
+    /**
+     * XStream stream for parsing file
+     */
     private final XStream stream;
 
     /**

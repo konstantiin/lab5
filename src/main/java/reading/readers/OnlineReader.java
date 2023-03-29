@@ -15,12 +15,19 @@ import java.math.BigInteger;
 
 
 public class OnlineReader extends Reader {
+    /**
+     * stores last printed character. Used to control \n symbols
+     */
     private char lastPrintedChar;
 
     public OnlineReader(InputStream source, CommandsLauncher<?> col, Node tree) {
         super(source, col, tree);
     }
 
+    /**
+     * prints string to System.out stream
+     * @param s - string to be printed
+     */
     private void print(String s) {
         lastPrintedChar = s.charAt(s.length() - 1);
         System.out.print(s);
@@ -112,6 +119,7 @@ public class OnlineReader extends Reader {
         }
     }
 
+    @Override
     public boolean hasNext() {
         try {
             return scan.hasNext();

@@ -6,8 +6,6 @@ import StoredClasses.annotations.NotNull;
 import StoredClasses.enums.Mood;
 import StoredClasses.enums.WeaponType;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
-import reading.generators.Generator;
-import reading.generators.HumanBeingFormGenerator;
 
 /**
  * form of HumanBeing
@@ -33,10 +31,6 @@ public class HumanBeingForm {
         this.weaponType = weaponType;
         this.mood = mood;
         this.car = car;
-    }
-
-    public static Generator getGenerator() {
-        return new HumanBeingFormGenerator();
     }
 
     public String getName() {

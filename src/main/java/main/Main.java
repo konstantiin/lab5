@@ -12,14 +12,13 @@ import reading.readers.OnlineReader;
 import java.util.List;
 import java.util.TreeSet;
 
-/**
- * main class
- */
+
 public class Main {
     public static ParseXml XMLInput;
 
     /**
-     * return path to input/output file
+     * gets path to input/output file
+     * from the environment variable
      *
      * @return xml file path
      */
@@ -30,6 +29,7 @@ public class Main {
 
     /**
      * main method
+     * creates managed collection, parses xml file and execute commands from System.in
      */
     public static void main(String[] args) {
         XMLInput = ParseXml.getXMLInput(getPath());

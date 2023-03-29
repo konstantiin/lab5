@@ -11,8 +11,17 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class OfflineReader extends Reader {
+    /**
+     * pattern to be skipped while reading
+     */
     private final Pattern skipPattern = Pattern.compile("\\s*\\w*:");
+    /**
+     * stores next line
+     */
     private String nextLine;
+    /**
+     * Scanner of current line
+     */
     private Scanner currentLineScanner;
 
     /**
@@ -42,6 +51,10 @@ public class OfflineReader extends Reader {
         }
     }
 
+    /**
+     * applies skipPattern to certain Scanner
+     * @param s - input scanner
+     */
     private void skip(Scanner s) {
         try {
             s.skip(skipPattern);
@@ -70,6 +83,9 @@ public class OfflineReader extends Reader {
         return currentLineScanner != null;
     }
 
+    /**
+     * skips input until next command appears, or file ends
+     */
     public void skipTillNextCommand() {
         if (currentLineScanner == null) return;
         for (String c : commands.keySet()) {
