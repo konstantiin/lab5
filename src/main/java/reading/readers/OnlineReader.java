@@ -60,7 +60,7 @@ public class OnlineReader extends Reader {
                 tabs = bufTabs;
                 print(StringUtils.repeat("\t", tabs + 1) + v.getName() + ": ");
                 return super.readTree(v);
-            } catch (EmptyStringException e) {
+            } catch (InputException e) {
                 print(e.getMessage());
                 print(" Please type it again.\n");
                 scan = new Scanner(source);

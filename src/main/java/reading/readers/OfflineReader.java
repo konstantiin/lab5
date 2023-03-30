@@ -14,7 +14,7 @@ public class OfflineReader extends Reader {
     /**
      * pattern to be skipped while reading
      */
-    private final Pattern skipPattern = Pattern.compile("\\s*\\w*:");
+    private final Pattern skipPattern = Pattern.compile("\\s*[a-zA-Z_0-9ёЁа-яА-Я]*:");
     /**
      * stores next line
      */

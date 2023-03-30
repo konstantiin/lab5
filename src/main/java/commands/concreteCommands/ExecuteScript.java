@@ -36,6 +36,7 @@ public class ExecuteScript extends Command {
             collection.execute_script(offlineReader);
         } catch (FileNotFoundException e) {
             System.out.println("File " + script + " does not exist, or can't be accessed");
+            return;
         } finally {
             if (offlineReader != null) offlineReader.closeStream();
             currentScripts.remove(script);

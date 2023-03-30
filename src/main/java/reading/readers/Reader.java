@@ -257,13 +257,13 @@ public abstract class Reader {
             tabs--;
             return result;
         } catch (EmptyStringException e) {
-            throw new EmptyStringException("Field \"" + v.getName() + "\" should not be empty!");
+            throw new InputException("Field \"" + v.getName() + "\" should not be empty!");
         } catch (EnumInputException e) {
-            throw new EnumInputException("Field \"" + v.getName() + "\" should be one of " + v.getType() + " values!");
+            throw new InputException("Field \"" + v.getName() + "\" should be one of " + v.getType() + " values!");
         } catch (OutOfBoundsException e) {
-            throw new OutOfBoundsException("Field \"" + v.getName() + "\" should be between " + v.getLowerBound() + " and " + v.getUpperBound() + "!");
+            throw new InputException("Field \"" + v.getName() + "\" should be between " + v.getLowerBound() + " and " + v.getUpperBound() + "!");
         } catch (WrongInputException e) {
-            throw new WrongInputException("Field \"" + v.getName() + "\" " + e.getMessage());
+            throw new InputException("Field \"" + v.getName() + "\" " + e.getMessage());
         }
     }
 

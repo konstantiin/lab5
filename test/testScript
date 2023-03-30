@@ -80,4 +80,6 @@ HumanBeing:
 	car:
 		name:
 		cool: true
+
 execute_script recScript
+show
