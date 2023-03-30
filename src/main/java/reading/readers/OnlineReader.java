@@ -2,16 +2,15 @@ package reading.readers;
 
 import commands.abstraction.Command;
 import commands.launcher.CommandsLauncher;
-import exceptions.inputExceptions.EnumInputException;
-import exceptions.inputExceptions.OutOfBoundsException;
-import exceptions.inputExceptions.UnknownCommandException;
-import exceptions.inputExceptions.WrongInputException;
+import exceptions.inputExceptions.*;
 import org.apache.commons.lang3.StringUtils;
 import reading.objectTree.Node;
 
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
 
 
 public class OnlineReader extends Reader {
@@ -19,9 +18,10 @@ public class OnlineReader extends Reader {
      * stores last printed character. Used to control \n symbols
      */
     private char lastPrintedChar;
-
+    private final InputStream source;
     public OnlineReader(InputStream source, CommandsLauncher<?> col, Node tree) {
         super(source, col, tree);
+        this.source = source;
     }
 
     /**
@@ -54,8 +54,18 @@ public class OnlineReader extends Reader {
         if (lastPrintedChar != '\n') {
             print("\n");
         }
-        print(StringUtils.repeat("\t", tabs + 1) + v.getName() + ": ");
-        return super.readTree(v);
+        int bufTabs = tabs;
+        while (true){
+            try {
+                tabs = bufTabs;
+                print(StringUtils.repeat("\t", tabs + 1) + v.getName() + ": ");
+                return super.readTree(v);
+            } catch (EmptyStringException e) {
+                print(e.getMessage());
+                print(" Please type it again.\n");
+                scan = new Scanner(source);
+            }
+        }
     }
 
     @Override
@@ -151,7 +161,11 @@ public class OnlineReader extends Reader {
 
     @Override
     protected String getNext() {
-        return scan.next();
+        try{
+            return scan.next();
+        } catch (NoSuchElementException e){
+            return "";
+        }
     }
 }
 

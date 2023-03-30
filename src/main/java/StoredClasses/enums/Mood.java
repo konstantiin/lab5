@@ -9,6 +9,7 @@ public enum Mood {
     GLOOM,
     CALM,
     FRENZY;
+    @SuppressWarnings("unused")
     public static Mood valueOf(int i){
         return Mood.values()[i-1];
     }

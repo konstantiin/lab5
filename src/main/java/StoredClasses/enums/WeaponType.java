@@ -8,6 +8,7 @@ public enum WeaponType {
     SHOTGUN,
     RIFLE,
     MACHINE_GUN;
+    @SuppressWarnings("unused")
     public static WeaponType valueOf(int i){
         return WeaponType.values()[i-1];
     }

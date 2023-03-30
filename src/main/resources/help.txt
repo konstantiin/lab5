@@ -18,3 +18,11 @@ group_counting_by_coordinates : сгруппировать элементы ко
 filter_contains_name name : вывести элементы, значение поля name которых содержит заданную подстроку
 
 for more visit https://youtu.be/dQw4w9WgXcQ
+          ／＞　 フ
+　　　　　| 　_　 _|
+　 　　　／`ミ _x 彡
+　　 　 /　　　 　 |
+　　　 /　 ヽ　　 ﾉ
+　／￣|　　 |　|　|
+　| (￣ヽ＿_ヽ_)_)
+　＼二つ

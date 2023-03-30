@@ -41,6 +41,7 @@ public class CommandsLauncher<T extends Comparable<T>> {
      *
      * @param element - element to add
      */
+    @SuppressWarnings("unchecked")
     public void add(Object element) {
         collection.add((T) element);
     }
@@ -51,6 +52,8 @@ public class CommandsLauncher<T extends Comparable<T>> {
      * @param element - element to add
      * @return true if element was added
      */
+    @SuppressWarnings("unchecked")
+
     public boolean addIfMin(Object element) {
         T value = (T) element;
 
@@ -126,7 +129,8 @@ public class CommandsLauncher<T extends Comparable<T>> {
      * removes all the elements that are less than given element
      *
      * @param element - element to compare
-     */
+     */    @SuppressWarnings("unchecked")
+
     public void removeLower(Object element) {
         T value = (T) element;
         T lower = collection.lower(value);
@@ -143,7 +147,8 @@ public class CommandsLauncher<T extends Comparable<T>> {
      * removes all the elements that are greater than given element
      *
      * @param element - element to compare
-     */
+     */    @SuppressWarnings("unchecked")
+
     public void removeGreater(Object element) {
         T value = (T) element;
         T greater = collection.higher(value);
@@ -231,6 +236,7 @@ public class CommandsLauncher<T extends Comparable<T>> {
     /**
      * saves collection
      */
+    @SuppressWarnings("unchecked")
     public void save() {
         Main.XMLInput.writeArr(new ArrayList<>((Collection< HumanBeing>) collection));
     }

@@ -6,6 +6,7 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.converters.ConversionException;
 import com.thoughtworks.xstream.io.StreamException;
 import com.thoughtworks.xstream.security.AnyTypePermission;
+
 import exceptions.fileExceptions.FIleDoesNotExistException;
 import exceptions.fileExceptions.FileNotReadableException;
 import exceptions.fileExceptions.FileNotWritableException;
@@ -48,8 +49,7 @@ public class ParseXml {
         stream = new XStream();
 
 
-        stream.addPermission(AnyTypePermission.ANY);                                //разобраться с разрешениями
-
+        stream.addPermission(AnyTypePermission.ANY);
 
         stream.alias("elements", List.class);
     }
@@ -100,6 +100,7 @@ public class ParseXml {
      *
      * @return array of HumanBeings
      */
+    @SuppressWarnings("unchecked")
     public List<HumanBeing> getArr() {
         stream.processAnnotations(HumanBeingForm.class);
         List<HumanBeingForm> beings;

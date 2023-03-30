@@ -28,7 +28,7 @@ public abstract class Reader {
     /**
      * Scanner from which data will be taken
      */
-    protected final Scanner scan;
+    protected Scanner scan;
     /**
      * Node, which is pointing to root of Object tree
      */
@@ -257,13 +257,13 @@ public abstract class Reader {
             tabs--;
             return result;
         } catch (EmptyStringException e) {
-            throw new InputException("Field \"" + v.getName() + "\" should not be empty!");
+            throw new EmptyStringException("Field \"" + v.getName() + "\" should not be empty!");
         } catch (EnumInputException e) {
-            throw new InputException("Field \"" + v.getName() + "\" should be one of " + v.getType() + " values!");
+            throw new EnumInputException("Field \"" + v.getName() + "\" should be one of " + v.getType() + " values!");
         } catch (OutOfBoundsException e) {
-            throw new InputException("Field \"" + v.getName() + "\" should be between " + v.getLowerBound() + " and " + v.getUpperBound() + "!");
+            throw new OutOfBoundsException("Field \"" + v.getName() + "\" should be between " + v.getLowerBound() + " and " + v.getUpperBound() + "!");
         } catch (WrongInputException e) {
-            throw new InputException("Field \"" + v.getName() + "\" " + e.getMessage());
+            throw new WrongInputException("Field \"" + v.getName() + "\" " + e.getMessage());
         }
     }
 
