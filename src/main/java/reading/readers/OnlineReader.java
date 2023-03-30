@@ -63,11 +63,13 @@ public class OnlineReader extends Reader {
             } catch (InputException e) {
                 print(e.getMessage());
                 print(" Please type it again.\n");
-                scan = new Scanner(source);
+                renewScan(source);
             }
         }
     }
-
+    public void renewScan(InputStream in){
+        scan = new Scanner(in);
+    }
     @Override
     public Object readObject() {
         tabs = -1;

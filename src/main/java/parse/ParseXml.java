@@ -5,6 +5,7 @@ import StoredClasses.forms.HumanBeingForm;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.converters.ConversionException;
 import com.thoughtworks.xstream.io.StreamException;
+import com.thoughtworks.xstream.mapper.CannotResolveClassException;
 import com.thoughtworks.xstream.security.AnyTypePermission;
 
 import exceptions.fileExceptions.FIleDoesNotExistException;
@@ -121,7 +122,7 @@ public class ParseXml {
                 System.out.println("File is not correct. Collection was left empty");
             }
             return null;
-        } catch (StreamException e) {
+        } catch (StreamException | CannotResolveClassException e) {
             System.out.println("File is not correct. Collection was left empty");
             return null;
         }

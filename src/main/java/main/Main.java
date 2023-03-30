@@ -4,6 +4,7 @@ package main;
 import StoredClasses.HumanBeing;
 import commands.abstraction.Command;
 import commands.launcher.CommandsLauncher;
+import exceptions.inputExceptions.InputException;
 import exceptions.inputExceptions.UnknownCommandException;
 import parse.ParseXml;
 import reading.objectTree.Node;
@@ -48,6 +49,8 @@ public class Main {
                     met = console.readCommand();
                 } catch (UnknownCommandException e) {
                     System.out.println("Command not found, type \"help\" for more info");
+                } catch (InputException e){
+                    console.renewScan(System.in);
                 }
                 if (met != null) met.execute();
             }
