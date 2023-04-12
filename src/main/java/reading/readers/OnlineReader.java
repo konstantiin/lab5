@@ -44,7 +44,7 @@ public class OnlineReader extends Reader {
                     + upperBound + " please type it correctly\n" + StringUtils.repeat("\t", tabs));
             return this.readInt(lowerBound, upperBound);
         } catch (WrongInputException e) {
-            print(StringUtils.repeat("\t", tabs) + "Please enter decimal number\n" + StringUtils.repeat("\t", tabs));
+            print(StringUtils.repeat("\t", tabs) + "Please enter integer number\n" + StringUtils.repeat("\t", tabs));
             return this.readInt(lowerBound, upperBound);
         }
     }
@@ -68,6 +68,7 @@ public class OnlineReader extends Reader {
         }
     }
     public void renewScan(InputStream in){
+        scan.close();
         scan = new Scanner(in);
     }
     @Override

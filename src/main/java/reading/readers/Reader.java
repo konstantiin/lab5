@@ -79,8 +79,8 @@ public abstract class Reader {
     public BigInteger readInt(BigInteger lowerBound, BigInteger upperBound) throws OutOfBoundsException {
         BigInteger value;
         try {
-            value = new Scanner(getNext()).nextBigInteger();
-        } catch (NoSuchElementException e) {
+            value = new  BigInteger(getNext().trim());
+        } catch (NumberFormatException e) {
             throw new WrongInputException("value should be an integer number!");
         }
         if (value.compareTo(lowerBound) < 0 || value.compareTo(upperBound) > 0) {
@@ -98,8 +98,8 @@ public abstract class Reader {
     public BigDecimal readDec(BigDecimal lowerBound, BigDecimal upperBound) throws OutOfBoundsException {
         BigDecimal value;
         try {
-            value = new Scanner(getNext()).nextBigDecimal();
-        } catch (NoSuchElementException e) {
+            value = new  BigDecimal(getNext().trim());
+        } catch (NumberFormatException e) {
             throw new WrongInputException("value should be a decimal number!");
         }
         if (value.compareTo(lowerBound) < 0 || value.compareTo(upperBound) > 0) {
@@ -115,16 +115,10 @@ public abstract class Reader {
      * @throws WrongInputException - if there is no boolean value to read
      */
     public Boolean readBool() {
-        try {
-            String value = getNext().trim();
-            if (StringUtils.isNumeric(value)){
-                if (value.equals("0")) return false;
-                else if (value.equals("1")) return true;
-            }
-            return new Scanner(value).nextBoolean();
-        } catch (NoSuchElementException e) {
-            throw new WrongInputException("value should be true or false!");
-        }
+        String value = getNext().trim().toLowerCase();
+        if (value.equals("0") || value.equals("false")) return false;
+        else if (value.equals("1") || value.equals("true")) return true;
+        throw new WrongInputException("value should be true or false!");
     }
 
     /**
